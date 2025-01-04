@@ -10,8 +10,12 @@
 
 ## Description
 - A repository for practicing coding challenges
+- Java 21 ([openjdk-21](https://jdk.java.net/java-se-ri/21))
 
 ## Contents
 1. Two Sum
 	- [Problem](https://leetcode.com/problems/two-sum/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/TwoSum.java)
+2. Sum of Two Integers
+	- [Problem](https://leetcode.com/problems/sum-of-two-integers/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/GetSum.java)

@@ -52,3 +52,6 @@ lib/
 
 # Files created by Maven for local dependency storage
 .settings/
+
+# Binary Files
+bin/**
