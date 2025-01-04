@@ -14,4 +14,4 @@
 ## Contents
 1. Two Sum
 	- [Problem](https://leetcode.com/problems/two-sum/)
-	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/solutions/TwoSum.java)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/TwoSum.java)
