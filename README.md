@@ -13,9 +13,12 @@
 - Java 21 ([openjdk-21](https://jdk.java.net/java-se-ri/21))
 
 ## Contents
-1. Two Sum
+1. Two Sum (1)
 	- [Problem](https://leetcode.com/problems/two-sum/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/TwoSum.java)
-2. Sum of Two Integers
+2. Sum of Two Integers (371)
 	- [Problem](https://leetcode.com/problems/sum-of-two-integers/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/GetSum.java)
+3. Climbing Stairs (70)
+	- [Problem](https://leetcode.com/problems/climbing-stairs/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/ClimbingStairs.java)
