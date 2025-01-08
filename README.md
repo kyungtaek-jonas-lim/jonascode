@@ -22,3 +22,6 @@
 3. Climbing Stairs (70)
 	- [Problem](https://leetcode.com/problems/climbing-stairs/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/ClimbingStairs.java)
+4. Insert Interval (57)
+	- [Problem](https://leetcode.com/problems/insert-interval/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/InsertInterval.java)
