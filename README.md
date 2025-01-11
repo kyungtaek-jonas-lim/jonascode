@@ -25,3 +25,6 @@
 4. Insert Interval (57)
 	- [Problem](https://leetcode.com/problems/insert-interval/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/InsertInterval.java)
+5. Best Time to Buy and Sell Stock (121)
+	- [Problem](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/BestTimetoBuyandSellStock.java)
