@@ -28,3 +28,6 @@
 5. Best Time to Buy and Sell Stock (121)
 	- [Problem](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/BestTimetoBuyandSellStock.java)
+6. Maximum Subarray (53)
+	- [Problem](https://leetcode.com/problems/maximum-subarray/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/MaximumSubarray.java)
