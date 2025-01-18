@@ -31,3 +31,6 @@
 6. Maximum Subarray (53)
 	- [Problem](https://leetcode.com/problems/maximum-subarray/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/MaximumSubarray.java)
+7. MaximumProductSubarray (152)
+	- [Problem](https://leetcode.com/problems/maximum-product-subarray/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/MaximumProductSubarray.java)
