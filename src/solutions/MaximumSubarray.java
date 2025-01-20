@@ -5,8 +5,8 @@ package solutions;
  	- `Link`: https://leetcode.com/problems/maximum-subarray/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Jan 18, 2025
- 	- `Answer`: maxSubArray
+ 	- `Date`: Jan 18, 2025 (maxSubArray) / Jan 20, 2025 (maxSubArraySomeOtherWay)
+ 	- `Answer`: maxSubArray / maxSubArraySomeOtherWay
  */
 
 public class MaximumSubarray {
@@ -34,6 +34,26 @@ public class MaximumSubarray {
             if (max < pending) {
                 max = pending;
             }
+        }
+        return max;
+    }
+    
+
+	/*
+	 * Option #2
+	 * Some other way
+	 * O(n)
+	 */
+    public int maxSubArraySomeOtherWay(int[] nums) {
+        int sum = nums[0];
+        int max = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (sum + nums[i] < nums[i]) {
+                sum = nums[i];
+            } else {
+                sum += nums[i];
+            }
+            if (max < sum) max = sum;
         }
         return max;
     }
