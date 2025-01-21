@@ -34,3 +34,6 @@
 7. MaximumProductSubarray (152)
 	- [Problem](https://leetcode.com/problems/maximum-product-subarray/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/MaximumProductSubarray.java)
+8. Longest Substring Without Repeating Characters (3)
+	- [Problem](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/LongestSubstringWithoutRepeatingCharacters.java)
