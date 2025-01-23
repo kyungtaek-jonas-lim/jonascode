@@ -37,3 +37,6 @@
 8. Longest Substring Without Repeating Characters (3)
 	- [Problem](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/LongestSubstringWithoutRepeatingCharacters.java)
+9. Valid Anagram (242)
+	- [Problem](https://leetcode.com/problems/valid-anagram/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/ValidAnagram.java)
