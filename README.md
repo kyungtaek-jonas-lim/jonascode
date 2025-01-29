@@ -40,3 +40,6 @@
 9. Valid Anagram (242)
 	- [Problem](https://leetcode.com/problems/valid-anagram/)
 	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/ValidAnagram.java)
+10. Contains Duplicate (217)
+	- [Problem](https://leetcode.com/problems/contains-duplicate/)
+	- [Solution](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/ContainsDuplicate.java)
