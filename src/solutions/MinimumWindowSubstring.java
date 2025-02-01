@@ -30,6 +30,7 @@ public class MinimumWindowSubstring {
 	/**
 	 * @option 1
 	 * @description Common way
+	 * @timeComplexity O(n + m) (n: the length of s, m: the length of t)
 	 * @param s
 	 * @param t
 	 * @return
