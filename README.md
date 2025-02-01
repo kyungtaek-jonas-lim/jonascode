@@ -19,45 +19,34 @@
 ## Contents
 1. Two Sum (1)
 	- [Problem](https://leetcode.com/problems/two-sum/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/TwoSum.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/TwoSum.java))
 2. Sum of Two Integers (371)
 	- [Problem](https://leetcode.com/problems/sum-of-two-integers/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GetSum.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GetSum.java))
 3. Climbing Stairs (70)
 	- [Problem](https://leetcode.com/problems/climbing-stairs/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ClimbingStairs.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ClimbingStairs.java))
 4. Insert Interval (57)
 	- [Problem](https://leetcode.com/problems/insert-interval/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InsertInterval.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InsertInterval.java))
 5. Best Time to Buy and Sell Stock (121)
 	- [Problem](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BestTimetoBuyandSellStock.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BestTimetoBuyandSellStock.java))
 6. Maximum Subarray (53)
 	- [Problem](https://leetcode.com/problems/maximum-subarray/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumSubarray.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumSubarray.java))
 7. MaximumProductSubarray (152)
 	- [Problem](https://leetcode.com/problems/maximum-product-subarray/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumProductSubarray.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumProductSubarray.java))
 8. Longest Substring Without Repeating Characters (3)
 	- [Problem](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestSubstringWithoutRepeatingCharacters.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestSubstringWithoutRepeatingCharacters.java))
 9. Valid Anagram (242)
 	- [Problem](https://leetcode.com/problems/valid-anagram/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidAnagram.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidAnagram.java))
 10. Contains Duplicate (217)
 	- [Problem](https://leetcode.com/problems/contains-duplicate/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainsDuplicate.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainsDuplicate.java))
 11. Minimum Window Substring (76)
 	- [Problem](https://leetcode.com/problems/minimum-window-substring/)
-	- Solution
-		- [Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MinimumWindowSubstring.java)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MinimumWindowSubstring.java))
