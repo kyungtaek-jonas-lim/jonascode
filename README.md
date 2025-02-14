@@ -13,7 +13,8 @@
 - Languages
 	- Java
 		- Java 21 ([openjdk-21](https://jdk.java.net/java-se-ri/21))
-	- Python (TO-BE)
+	- Python
+		- Python 3.8.0
 	- Node.js (TO-BE)
 
 ## Contents
@@ -25,7 +26,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GetSum.java))
 3. Climbing Stairs (70)
 	- [Problem](https://leetcode.com/problems/climbing-stairs/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ClimbingStairs.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ClimbingStairs.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ClimbingStairs.py))
 4. Insert Interval (57)
 	- [Problem](https://leetcode.com/problems/insert-interval/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InsertInterval.java))
