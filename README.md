@@ -29,7 +29,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ClimbingStairs.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ClimbingStairs.py))
 4. Insert Interval (57)
 	- [Problem](https://leetcode.com/problems/insert-interval/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InsertInterval.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InsertInterval.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/InsertInterval.py))
 5. Best Time to Buy and Sell Stock (121)
 	- [Problem](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BestTimetoBuyandSellStock.java))
