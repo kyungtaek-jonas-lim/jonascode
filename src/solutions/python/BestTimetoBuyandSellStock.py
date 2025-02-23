@@ -6,19 +6,11 @@ import sys
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Feb 23, 2025
- 	- `Answer`: maxProfit / maxProfitAdvanced
+ 	- `Answer`: maxProfit
 '''
 
-class Solution:
+class Solution:    
     def maxProfit(self, prices: List[int]) -> int:
-        result = 0
-        price_min = sys.maxsize
-        for price in prices:
-            price_min = min(price, price_min)
-            result = max(result, price - price_min)
-        return result
-    
-    def maxProfitAdvanced(self, prices: List[int]) -> int:
         result = 0
         price_min = sys.maxsize
         for price in prices:
