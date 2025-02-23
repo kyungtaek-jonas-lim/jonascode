@@ -32,7 +32,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InsertInterval.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/InsertInterval.py))
 5. Best Time to Buy and Sell Stock (121)
 	- [Problem](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BestTimetoBuyandSellStock.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BestTimetoBuyandSellStock.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BestTimetoBuyandSellStock.py))
 6. Maximum Subarray (53)
 	- [Problem](https://leetcode.com/problems/maximum-subarray/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumSubarray.java))
