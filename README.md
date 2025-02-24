@@ -44,7 +44,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestSubstringWithoutRepeatingCharacters.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestSubstringWithoutRepeatingCharacters.py))
 9. Valid Anagram (242)
 	- [Problem](https://leetcode.com/problems/valid-anagram/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidAnagram.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidAnagram.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidAnagram.py))
 10. Contains Duplicate (217)
 	- [Problem](https://leetcode.com/problems/contains-duplicate/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainsDuplicate.java))
