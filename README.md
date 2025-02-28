@@ -38,7 +38,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumSubarray.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumSubarray.py))
 7. MaximumProductSubarray (152)
 	- [Problem](https://leetcode.com/problems/maximum-product-subarray/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumProductSubarray.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumProductSubarray.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumProductSubarray.py))
 8. Longest Substring Without Repeating Characters (3)
 	- [Problem](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestSubstringWithoutRepeatingCharacters.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestSubstringWithoutRepeatingCharacters.py))
