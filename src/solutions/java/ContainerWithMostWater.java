@@ -11,7 +11,7 @@ package solutions.java;
 
 public class ContainerWithMostWater {
 
-	class Solution {
+	static class Solution {
 		
 		
 		// Not efficient (Time Limit Exceeded) (O(n^2))
@@ -61,6 +61,7 @@ public class ContainerWithMostWater {
 	
 	public static void main(String[] args) {
 		Solution sol = new Solution();
-		System.out.println(sol.maxArea(new int[] {}));
+		System.out.println(sol.maxArea(new int[] {1,8,6,2,5,4,8,3,7}));
+		System.out.println(sol.maxArea(new int[] {1, 1}));
 	}
 }
