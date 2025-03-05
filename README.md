@@ -60,3 +60,6 @@
 14. Container With Most Water (11)
 	- [Problem](https://leetcode.com/problems/container-with-most-water/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainerWithMostWater.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ContainerWithMostWater.py))
+15. Find Minimum in Rotated Sorted Array (153)
+	- [Problem](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/FindMinimuminRotatedSortedArray.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/FindMinimuminRotatedSortedArray.py))
