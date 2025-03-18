@@ -36,9 +36,6 @@ public class ThreeSum {
 //
 //        return new ArrayList<>(set);
 //    }
-	
-//    public static List<L
-
 
 	
     public static List<List<Integer>> threeSum(int[] nums) {
