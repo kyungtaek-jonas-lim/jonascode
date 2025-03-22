@@ -75,3 +75,6 @@
 19. Longest Common Subsequence (1143) (*)
 	- [Problem](https://leetcode.com/problems/longest-common-subsequence/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestCommonSubsequence.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestCommonSubsequence.py))
+20. Word Break (139) (*)
+	- [Problem](https://leetcode.com/problems/word-break/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordBreak.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordBreak.py))
