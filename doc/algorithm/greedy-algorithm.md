@@ -1,4 +1,4 @@
-## ⚡ Greedy Algorithm
+# ⚡ Greedy Algorithm
 
 ## 📘 What is a Greedy Algorithm?
 
