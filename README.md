@@ -17,7 +17,12 @@
 		- Python 3.8.0
 	- Node.js (TO-BE)
 
-## Contents
+## Algorithm
+1. [Greedy Algorithm](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/algorithm/greedy-algorithm.md)
+2. [Dynamic Programming (DP)](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/algorithm/dynamic-programming.md)
+3. [Greedy Algorithm vs DP](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/algorithm/greedy-vs-dp-comparison.md)
+
+## Solution
 1. Two Sum (1)
 	- [Problem](https://leetcode.com/problems/two-sum/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/TwoSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/TwoSum.py))
