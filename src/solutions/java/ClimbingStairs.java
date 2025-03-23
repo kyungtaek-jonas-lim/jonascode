@@ -10,7 +10,7 @@ import java.util.Scanner;
  	- `Date`: Jan 5, 2025
  	- `Answer`: climbStairs / climbStairsAdvanced
  # Reference
-	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/explanation/ClimbingStairs.md
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/ClimbingStairs.md
  */
 
 public class ClimbingStairs {

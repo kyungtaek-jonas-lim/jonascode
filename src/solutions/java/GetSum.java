@@ -10,7 +10,7 @@ import java.util.Scanner;
  	- `Date`: Jan 4, 2025
  	- `Answer`: getSum / getSumAdvanced
  # Reference
-	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/reference/BitwiseOperators.md
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/reference/BitwiseOperators.md
  */
 
 public class GetSum {
@@ -52,7 +52,7 @@ public class GetSum {
      * Option #2
      * Advanced way
      * O(1)
-     * https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/explanation/GetSum.md
+     * https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/GetSum.md
      */
     public static int getSumAdvanced(int a, int b) {
     	while (b != 0) {

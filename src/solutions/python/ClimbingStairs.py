@@ -7,7 +7,7 @@
  	- `Date`: Feb 15, 2025
  	- `Answer`: climbStairs
  # Reference
-	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/explanation/ClimbingStairs.md
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/ClimbingStairs.md
 '''
 
 
