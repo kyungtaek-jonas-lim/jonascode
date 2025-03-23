@@ -6,6 +6,8 @@ from typing import List
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 17, 2025
  	- `Answer`: coinChange
+ # Reference
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/CoinChange.md
 '''
 class Solution:
     
@@ -48,15 +50,11 @@ class Solution:
     # Dynamic Programming
     # O(n * amount)
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [float('inf')] * (amount + 1) # DP array to store the minimum number 
-        dp[0] = 0 # Base case: 0 coins are needed to make an amount of 0
-
-        for coin in coins: # Iterate over each coin
-            for i in range(coin, amount + 1): # Check from the current coint value up to the target amount
-                dp[i] = min(dp[i], dp[i - coin] + 1) # Update dp[i] with the minimum number of coins required
-        
-        return dp[amount] if dp[amount] != float('inf') else -1 # If the amount can be formed, return the minimum number of coins; otherwise, return -1
-                
+        dp = [0] + [float('inf')] * amount
+        for coin in coins:
+            for target in range(coin, amount + 1):
+                dp[target] = min(dp[target], dp[target - coin] + 1)
+        return dp[amount] if dp[amount] != float('inf') else -1
 
 
 if __name__ == "__main__":

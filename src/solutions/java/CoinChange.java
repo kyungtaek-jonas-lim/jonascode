@@ -9,6 +9,8 @@ import java.util.Arrays;
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 17, 2025
  	- `Answer`: coinChange
+ # Reference
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/CoinChange.md
  */
 public class CoinChange {
 	
@@ -24,23 +26,14 @@ public class CoinChange {
     // Dynamic Programming
     // O(n * amount)
     public static int coinChange(int[] coins, int amount) {
-        // Create a dp array where dp[i] represents the minimum number of coins needed to make amount i
-    	int[] dp = new int[amount + 1];
-    	
-    	// Initialize the dp array with a large value (infinity)
-    	Arrays.fill(dp, amount + 1);
-    	dp[0] = 0; // Base case: 0 coins are needed to make an amount of 0
-    	
-    	// Iterate over all coins
-    	for (int coin: coins) {
-    		// For each coin, check all amounts from coin to the target amount
-    		for (int i = coin; i <= amount; i++) {
-    			// Update dp[i] with the minimum number of coins needed
-    			dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-    		}
-    	}
-    	
-    	// If dp[amount] is still infinity, return -1 as it is not possible to make that amount
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int coin: coins) {
+        	for (int target = coin; target <= amount; target++) {
+        		dp[target] = Math.min(dp[target], dp[target - coin] + 1);
+        	}
+        }
     	return dp[amount] > amount ? -1 : dp[amount];
     }
 }
