@@ -49,6 +49,9 @@ class Solution:
                 tails.append(num)
             else: # Otherwise, replace the element at idx with num, as it would form a smaller tail
                 tails[idx] = num
+                '''
+                As you process each number in the list, you're constantly checking where it could fit into an existing increasing subsequence. If the number can replace an existing value in the tails list (i.e. one that represents a potential subsequence ending), then you should update it — because a smaller value in that position increases the chance of building a longer subsequence later on.
+                '''
         
         # The length of the tails array represents the length of the longest increasing subsequence
         return len(tails)
