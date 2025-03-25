@@ -89,3 +89,6 @@
 22. Group Anagrams (49)
 	- [Problem](https://leetcode.com/problems/group-anagrams/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GroupAnagrams.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/GroupAnagrams.py))
+23. Valid Parentheses (20)
+	- [Problem](https://leetcode.com/problems/valid-parentheses/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidParentheses.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidParentheses.py))
