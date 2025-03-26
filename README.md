@@ -28,7 +28,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/TwoSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/TwoSum.py))
 2. Sum of Two Integers (371)
 	- [Problem](https://leetcode.com/problems/sum-of-two-integers/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GetSum.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SumofTwoIntegers.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SumofTwoIntegers.py))
 3. Climbing Stairs (70)
 	- [Problem](https://leetcode.com/problems/climbing-stairs/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ClimbingStairs.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ClimbingStairs.py))
