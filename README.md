@@ -55,7 +55,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainsDuplicate.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ContainsDuplicate.py))
 11. Minimum Window Substring (76)
 	- [Problem](https://leetcode.com/problems/minimum-window-substring/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MinimumWindowSubstring.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MinimumWindowSubstring.java)), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MinimumWindowSubstring.py))
 12. Merge Intervals (56)
 	- [Problem](https://leetcode.com/problems/merge-intervals/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MergeIntervals.java))
