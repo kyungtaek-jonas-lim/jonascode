@@ -61,7 +61,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MergeIntervals.java))
 13. Product of Array Except Self (238)
 	- [Problem](https://leetcode.com/problems/product-of-array-except-self/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ProductofArrayExceptSelf.java))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ProductofArrayExceptSelf.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ProductofArrayExceptSelf.py))
 14. Container With Most Water (11)
 	- [Problem](https://leetcode.com/problems/container-with-most-water/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainerWithMostWater.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ContainerWithMostWater.py))
