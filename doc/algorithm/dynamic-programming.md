@@ -139,6 +139,23 @@ for length in range(2, n+1):
 
 ---
 
+### 🔁 Bonus: When to Use `sum` vs `max` in DP
+
+In bottom-up DP, the update logic depends on the problem type:
+
+- Use `sum` when you're counting **how many ways** something can happen (e.g., combinations, paths, number of ways).
+- Use `max` when you're selecting the **best possible outcome** (e.g., maximum value, longest path, max score).
+
+Understanding the goal of the problem will help you choose the correct update rule.
+
+| Problem Type                  | Goal                                | DP Update Logic      | Example Problem                  |
+|------------------------------|-------------------------------------|----------------------|----------------------------------|
+| Counting combinations/paths  | Count how many ways something can be done | `dp[i] += ...`       | Coin Change, Combination Sum IV |
+| Finding maximum/minimum      | Find the best score/value           | `dp[i] = max(...)`   | Knapsack, Longest Increasing Subsequence |
+| Minimizing cost/time         | Find the least amount of something  | `dp[i] = min(...)`   | Matrix Chain Multiplication, Edit Distance |
+
+---
+
 ## 🎯 Interview Tips for DP
 
 - **Clearly define the meaning of your dp[i] or dp[i][j]**

@@ -13,7 +13,7 @@ import java.util.Scanner;
 	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/reference/BitwiseOperators.md
  */
 
-public class GetSum {
+public class SumofTwoIntegers {
 	public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
