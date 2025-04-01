@@ -27,7 +27,7 @@ public class HouseRobberII {
     public static int rob(int[] nums) {
     	int numsLen = nums.length;
     	
-    	// Edge Cases
+    	// For short lengths
         if (numsLen == 1) return nums[0];
         if (numsLen <= 3) {
         	int max = nums[0];
