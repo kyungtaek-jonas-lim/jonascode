@@ -4,9 +4,16 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 21, 2025
- 	- `Answer`: longestCommonSubsequence
+ 	- `Answer`: longestCommonSubsequence / longestCommonSubsequence2d
  '''
 class Solution:
+
+    '''
+    # Option 1
+    - Dynamic Programming
+    - 1D Array
+    - O (n * m)
+    '''
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         # Store lengths of both input strings for reuse 
         text1_length = len(text1)
@@ -47,10 +54,46 @@ class Solution:
         # The last element holds the total length of the longest common subsequence
         return prev[text2_length]
 
+    '''
+    # Option 2
+    - Dynamic Programming
+    - 2D Array
+    - O (n * m)
+    '''
+    def longestCommonSubsequence2d(self, text1: str, text2: str) -> int:
+        # Get lengths of both input strings
+        m, n = len(text1), len(text2)
+
+        # Initialize a 2D DP table with (m+1) rows and (n+1) columns
+        # dp[i][j] will represent the length of LCS between
+        # - text1[0:i] (first i characters of text1)
+        # - text2[0:j] (first j characters of text2)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+        # Build the DP table row by row
+        for i in range(m): # Loop through characters in text1
+            for j in range(n): # Loop through characters in text2
+
+                # Characters match: extend the LCS by 1
+                if text1[i] == text2[j]:
+                    # Use the value from the diagonal (previous characters)
+                    dp[i + 1][j + 1] = dp[i][j] + 1
+
+                # Chacters don't match:
+                else:
+                    # Take the maximum LCS length by either:
+                    # - Skipping current character in text1 (dp[i][j + 1])
+                    # - Skipping current character in text2 (dp[i + 1][j])
+                    dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
+        
+        # The final cell contains the length of the longest common subsequence
+        return dp[m][n]
+        
+
 if __name__ == "__main__":
     sol = Solution()
     print(sol.longestCommonSubsequence("abcde", "ace")); # 3
-    print(sol.longestCommonSubsequence(-"abc", "abc")); # 3
+    print(sol.longestCommonSubsequence("abc", "abc")); # 3
     print(sol.longestCommonSubsequence("abc", "def")); # 0
     print(sol.longestCommonSubsequence("ezupkr", "ubmrapg")); # 2
     print(sol.longestCommonSubsequence("bsbininm", "jmjkbkjkv")); # 1
@@ -58,3 +101,15 @@ if __name__ == "__main__":
     print(sol.longestCommonSubsequence("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq")); # 6 ("mhziwb")
     print(sol.longestCommonSubsequence("abc", "abbbbbc")); # 3
     print(sol.longestCommonSubsequence("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); # 210
+
+
+    print("---")
+    print(sol.longestCommonSubsequence2d("abcde", "ace")); # 3
+    print(sol.longestCommonSubsequence2d("abc", "abc")); # 3
+    print(sol.longestCommonSubsequence2d("abc", "def")); # 0
+    print(sol.longestCommonSubsequence2d("ezupkr", "ubmrapg")); # 2
+    print(sol.longestCommonSubsequence2d("bsbininm", "jmjkbkjkv")); # 1
+    print(sol.longestCommonSubsequence2d("oxcpqrsvwf", "shmtulqrypy")); # 2
+    print(sol.longestCommonSubsequence2d("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq")); # 6 ("mhziwb")
+    print(sol.longestCommonSubsequence2d("abc", "abbbbbc")); # 3
+    print(sol.longestCommonSubsequence2d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); # 210

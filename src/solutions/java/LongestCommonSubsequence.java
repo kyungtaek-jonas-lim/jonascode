@@ -6,7 +6,7 @@ package solutions.java;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 21, 2025
- 	- `Answer`: longestCommonSubsequence
+ 	- `Answer`: longestCommonSubsequence / longestCommonSubsequence2d
 */
 public class LongestCommonSubsequence {
 	
@@ -20,6 +20,17 @@ public class LongestCommonSubsequence {
 		System.out.println(longestCommonSubsequence("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq")); // 6 ("mhziwb")
 		System.out.println(longestCommonSubsequence("abc", "abbbbbc")); // 3
 		System.out.println(longestCommonSubsequence("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // 210
+
+		System.out.println("---");
+		System.out.println(longestCommonSubsequence2d("abcde", "ace")); // 3
+		System.out.println(longestCommonSubsequence2d("abc", "abc")); // 3
+		System.out.println(longestCommonSubsequence2d("abc", "def")); // 0
+		System.out.println(longestCommonSubsequence2d("ezupkr", "ubmrapg")); // 2
+		System.out.println(longestCommonSubsequence2d("bsbininm", "jmjkbkjkv")); // 1
+		System.out.println(longestCommonSubsequence2d("oxcpqrsvwf", "shmtulqrypy")); // 2
+		System.out.println(longestCommonSubsequence2d("mhunuzqrkzsnidwbun", "szulspmhwpazoxijwbq")); // 6 ("mhziwb")
+		System.out.println(longestCommonSubsequence2d("abc", "abbbbbc")); // 3
+		System.out.println(longestCommonSubsequence2d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // 210
 	}
 
     
@@ -27,6 +38,8 @@ public class LongestCommonSubsequence {
 	/*
 	 * Option #1
 	 * Dynamic Programming 
+	 * 1D Array
+	 * O (n * m)
 	 */
 	public static int longestCommonSubsequence(String text1, String text2) {
 		    // Store lengths of both input strings for reuse and efficiency
@@ -91,104 +104,38 @@ public class LongestCommonSubsequence {
 	// ====================================================================
 	/*
 	 * Option #2
-	 * Time Limit Exceeded
+	 * Dynamic Programming 
+	 * 2D Array
+	 * O (n * m)
 	 */
-//    public static int longestCommonSubsequence(String text1, String text2) {
-//
-//    	// Edge Cases
-//    	if (text1.equals(text2)) return text1.length();
-//    	if (text1.startsWith(text2)) return text2.length(); 
-//    	else if (text2.startsWith(text1)) return text1.length();
-//    	
-//    	// Process
-//        int result = process(text1, text2, 0);
-//        return result;
-//    }
-//    public static int process(String start, String target, int waitingStartIndex) {
-//        int result = 0;
-//        int startIndex = 0;
-//        do {
-//
-//            int waitingStartIndexTemp = waitingStartIndex;
-//            waitingStartIndex = 0;
-//            startIndex = 0;
-//            int max = 0;
-//            
-//	    	for (int i = waitingStartIndexTemp; i < start.length(); i++) {
-//	    		for (int j = startIndex; j < target.length(); j++) {
-//	    			if (start.charAt(i) == target.charAt(j)) {
-//	    				startIndex = j + 1;
-//	    				max++;
-//	    				
-//	    				String startTemp = start.substring(0, i) + start.substring(i + 1);
-//	    				result = Math.max(result, process(startTemp, target, waitingStartIndexTemp));
-//	    				
-//	    				if (waitingStartIndex == 0) {
-//	    					waitingStartIndex = i + 1;
-//	    				}
-//	    				break;
-//	    			}
-//	    		}
-//	    	}
-//	    	result = Math.max(result, max);
-//        } while (waitingStartIndex != 0);
-//    	return result;
-//    }
-
-	
-	// ====================================================================
-	/*
-	 * Option #3
-	 * Time Limit Exceeded
-	 */
-//    public static int longestCommonSubsequence(String text1, String text2) {
-//    	Map<String, Integer> memo = new HashMap<>();
-//    	int result = process(text1, text2, 0, 0, 0, memo);
-//        return result;
-//    }
-//    
-//    
-//    public static int process(String start, String target, int x, int y, int cnt, Map<String, Integer> memo) {
-//    	
-//    	// Memoization
-//        String key = x + "," + y + "," + cnt;
-//        if (memo.containsKey(key)) return memo.get(key);
-//    	
-//    	// Edge Cases
-//        if (x >= start.length() || y >= target.length()) return cnt;
-//        if (start.length() - x == target.length() - y && start.substring(x).equals(target.substring(y))) {
-//            return cnt + start.length() - x;
-//        }
-//    	if (start.equals(target)) return cnt + start.length();
-//    	if (start.startsWith(target) || start.endsWith(target)) return cnt + target.length();
-//    	else if (target.startsWith(start) || target.endsWith(start)) return cnt + start.length();
-//    	
-//    	// Process
-//    	int result = cnt;
-//    	for (int i = x; i < start.length(); i++) {
-//    		for (int j = y; j < target.length(); j++) {
-//    			if (start.charAt(i) == target.charAt(j)) {
-//
-//    				// For Continuous String
-//    				int iTemp = i + 1;
-//    				int jTemp = j + 1;
-//    				int cntTemp = cnt + 1;
-//    				while (iTemp < start.length() && jTemp < target.length()) {
-//    					if (start.charAt(iTemp) == target.charAt(jTemp)) {
-//    						iTemp++;
-//    						jTemp++;
-//    						cntTemp++;
-//    					} else break;
-//    				}
-//    				
-//    				int max = process(start, target, iTemp, jTemp, cntTemp, memo);
-//    				result = Math.max(result, max);
-//    				break;
-//    			}
-//    		}
-//    	}
-//        memo.put(key, result);
-//    	return result;
-//    }
+    public static int longestCommonSubsequence2d(String text1, String text2) {
+    	
+    	// Get lengths of both input strings
+    	int m = text1.length();
+    	int n = text2.length();
+    	
+    	// Initialize a 2D DP table with (m+1) rows and (n+1) columns
+    	// dp[i][j] will represent the length of LCS
+    	int[][] dp = new int[m + 1][n + 1];
+    	
+    	// Build the DP table row by row
+    	for (int i = 0; i < m; i++) { // Loop through characters in text1
+    		for (int j = 0; j < n; j++) { // Loop through characters in text2
+    			
+    			// Characters match: extend the LCS by 1
+    			// Use the value from the diagonal (previous characters)
+    			if (text1.charAt(i) == text2.charAt(j)) dp[i + 1][j + 1] = dp[i][j] + 1;
+    			
+    			// Characters don't match:
+    			// Take the maximum LCS length by either:
+    			// - Skipping current character in text1 (dp[i][j + 1])
+    			// - Skipping current character in text2 (dp[i + 1][j])
+    			else dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
+    		}
+    	}
+    	
+    	// The final cell contains the length of the longest common subsequence
+    	return dp[m][n];
+    }
     
 }
