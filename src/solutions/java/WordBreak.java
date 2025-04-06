@@ -10,8 +10,8 @@ import java.util.Set;
  	- `Link`: https://leetcode.com/problems/word-break/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Mar 22, 2025
- 	- `Answer`: wordBreak
+ 	- `Date`: Apr 6, 2025
+ 	- `Answer`: wordBreak / wordBreakAdvanced
  */
 public class WordBreak {
 
@@ -22,15 +22,68 @@ public class WordBreak {
 	    System.out.println(wordBreak("catsandog", Arrays.asList("cats","dog","sand","and","cat")) == false);
 	    System.out.println(wordBreak("cars", Arrays.asList("car","ca","rs")) == true);
 	    System.out.println(wordBreak("ccbb", Arrays.asList("bc","cb")) == false);
+	    
+	    System.out.println("---");
+	    System.out.println(wordBreakAdvanced("leetcode", Arrays.asList("leet","code")) == true);
+	    System.out.println(wordBreakAdvanced("applepenapple", Arrays.asList("apple","pen")) == true);
+	    System.out.println(wordBreakAdvanced("catsandog", Arrays.asList("cats","dog","sand","and","cat")) == false);
+	    System.out.println(wordBreakAdvanced("cars", Arrays.asList("car","ca","rs")) == true);
+	    System.out.println(wordBreakAdvanced("ccbb", Arrays.asList("bc","cb")) == false);
 	}
 	
 	/*
     # Option #1
     - Dynamic Programming
     - Optimized Bottom Up
-    - O(n * m) (m: max word Lenth)
+    - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+    - ref: Neetcode (https://www.youtube.com/watch?v=Sx9NNgInc3A)
 	 */
     public static boolean wordBreak(String s, List<String> wordDict) {
+    	/*
+        # 1
+        Starting from the last index of the string, the code checks whether any word from wordDict matches the substring.
+        
+        # 2
+        If a match is found, set the value of the boolean array with the string index to the value of 'array[index - word_length]'. (array[string_length] = True)
+
+        # 3
+        If array[index] is already True, no need to checks further for the 'index' (so break the inner loop).
+        
+        # 4
+        return array[0] (It's True if the string can be segmented using words from wordDict.)
+    	 */
+    	
+    	int sLength = s.length();
+    	boolean[] dp = new boolean[sLength + 1];
+    	dp[sLength] = true;
+    	
+    	for (int i = sLength - 1; i >= 0; i--) {
+    		for (String w: wordDict) {
+    			
+    			// # 1
+    			int wLength = w.length();
+    			if ((i + wLength) <= sLength && s.substring(i, i + wLength).equals(w)) {
+    				
+    				// # 2
+    				dp[i] = dp[i + wLength];
+    			}
+    			
+    			// # 3
+    			if (dp[i]) break;
+    		}
+    	}
+    	
+    	// # 4
+    	return dp[0];
+    }
+	
+	/*
+    # Option #2
+    - Dynamic Programming
+    - Optimized Bottom Up
+    - O(n * m) (m: max word Lenth)
+	 */
+    public static boolean wordBreakAdvanced(String s, List<String> wordDict) {
         // Convert the word list into a HashSet for fast lookup (O(1) average time)
     	Set<String> wordSet = new HashSet<>(wordDict);
     	

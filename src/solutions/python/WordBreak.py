@@ -1,22 +1,64 @@
 from typing import List
-import copy
+
 '''
  # Problem
  	- `Link`: https://leetcode.com/problems/word-break/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Mar 22, 2025
- 	- `Answer`: wordBreak
+ 	- `Date`: Apr 6, 2025
+ 	- `Answer`: wordBreak / wordBreakAdvanced
 '''
 class Solution:
-    
+
     '''
     # Option #1
     - Dynamic Programming
     - Optimized Bottom Up
-    - O(n * m) (m: max word Lenth)
+    - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+    - ref: Neetcode (https://www.youtube.com/watch?v=Sx9NNgInc3A)
     '''
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+
+        '''
+        # 1
+        Starting from the last index of the string, the code checks whether any word from wordDict matches the substring.
+        
+        # 2
+        If a match is found, set the value of the boolean array with the string index to the value of 'array[index - word_length]'. (array[string_length] = True)
+
+        # 3
+        If array[index] is already True, no need to checks further for the 'index' (so break the inner loop).
+        
+        # 4
+        return array[0] (It's True if the string can be segmented using words from wordDict.)
+        '''
+
+        len_s = len(s)
+        dp = [False] * len_s
+        dp += [True]
+
+        for i in range(len_s - 1, -1, -1):
+            for w in wordDict:
+                # 1
+                len_w = len(w)
+                if i + len(w) <= len_s and s[i:i + len_w] == w:
+                    # 2
+                    dp[i] = dp[i + len_w]
+                
+                # 3
+                if dp[i]:
+                    break
+        
+        # 4
+        return dp[0]
+
+    '''
+    # Option #2
+    - Dynamic Programming
+    - Optimized Bottom Up
+    - O(n * m) (m: max word Lenth)
+    '''
+    def wordBreakAdvanced(self, s: str, wordDict: List[str]) -> bool:
         # Convert the word list to a set for faster lookups (O(1) average case)
         word_set = set(wordDict)
 
@@ -47,38 +89,6 @@ class Solution:
         
         # The final result tells us whether the full string s[0:len(s)] is segmentable
         return dp[len(s)]
-
-    '''
-    # Option #2
-    - Brute-force approach
-        - Devide the string to substrings and put them into a string array.
-        - Check if it's possible to make the original string out of wordDict strings.
-    - O(2^n x m x k) (n: string length, m: wordDict length)
-    - Time Limit Exceeded
-    '''
-    # def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-    #     s_list = [s]
-    #     return self.process(s_list, wordDict)
-    
-    # def process(self, s_list: List[str], wordDict: List[str]) -> bool:
-    #     if not s_list:
-    #         return True
-        
-    #     for i, s in enumerate(s_list):
-    #         for word in wordDict:
-    #             if word in s:
-    #                 index = s.find(word)
-    #                 s_list_temp = copy.deepcopy(s_list)
-    #                 del s_list_temp[i]
-    #                 insert_index = i
-    #                 if s[:index]:
-    #                     s_list_temp.insert(insert_index, s[:index])
-    #                     insert_index += 1
-    #                 if s[index + len(word):]:
-    #                     s_list_temp.insert(insert_index, s[index + len(word):])
-    #                 if self.process(s_list_temp, wordDict):
-    #                     return True
-    #     return False
     
     
 if __name__ == "__main__":
@@ -88,3 +98,10 @@ if __name__ == "__main__":
     print(sol.wordBreak("catsandog", ["cats","dog","sand","and","cat"]) == False)
     print(sol.wordBreak("cars", ["car","ca","rs"]) == True)
     print(sol.wordBreak("ccbb", ["bc","cb"]) == False)
+
+    print("---")
+    print(sol.wordBreakAdvanced("leetcode", ["leet","code"]) == True)
+    print(sol.wordBreakAdvanced("applepenapple", ["apple","pen"]) == True)
+    print(sol.wordBreakAdvanced("catsandog", ["cats","dog","sand","and","cat"]) == False)
+    print(sol.wordBreakAdvanced("cars", ["car","ca","rs"]) == True)
+    print(sol.wordBreakAdvanced("ccbb", ["bc","cb"]) == False)
