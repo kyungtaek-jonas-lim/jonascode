@@ -26,22 +26,25 @@ public class HouseRobber {
     # Option #1
     - Dynamic Programming
     - O(n)
+    - ref: https://www.youtube.com/watch?v=73r3KWiEvyk
      */
     public static int rob(int[] nums) {
-    	if (nums.length == 1) return nums[0];
+    	return process(nums);
+    }
+    
+    private static int process(int[] nums) {
     	
-    	// The goal is the max value when you get to the last index.
-    	// Find all the max values for each index
-    	int prev_2steps = 0;
-    	int prev_1step = nums[0];
+    	int rob1 = 0, rob2 = 0;
     	int temp = 0;
-    	for (int i = 1; i < nums.length; i++) {
-    		temp = Math.max(prev_1step, prev_2steps + nums[i]); // compare 1 step before result + {2 steps before result + current result}
-    		prev_2steps = prev_1step;
-    		prev_1step = temp; // Now `prev_1step` becomes current
+    	
+    	// [rob1, rob2, n, n+1, ...]
+    	for (int num: nums) {
+    		temp = Math.max(rob1 + num, rob2);
+    		rob1 = rob2;
+    		rob2 = temp;
     	}
     	
-    	return prev_1step;
+    	return rob2;
     }
 	
 	/*

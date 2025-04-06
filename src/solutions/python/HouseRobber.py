@@ -14,21 +14,23 @@ class Solution:
     # Option #1
     - Dynamic Programming
     - O(n)
+    - ref: https://www.youtube.com/watch?v=73r3KWiEvyk
     '''
     def rob(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
-        
-    	# The goal is the max value when you get to the last index.
-    	# Find all the max values for each index
-        prev_2steps: int = 0
-        prev_1step: int = nums[0]
-        temp: int = 0
-        for i in range(1, len(nums)):
-            temp = max(prev_1step, prev_2steps + nums[i]) # compare 1 step before result + {2 steps before result + current result}
-            prev_2steps = prev_1step
-            prev_1step = temp # Now `prev_1step` becomes current
-        return prev_1step
+
+        def process(nums: List[int]) -> int:
+            
+            rob1, rob2 = 0, 0
+            
+            # [rob1, rob2, n, n+1, ...]
+            for num in nums:
+                temp = max(rob1 + num, rob2)
+                rob1 = rob2
+                rob2 = temp
+            
+            return rob2
+
+        return process(nums)
     
 
     '''

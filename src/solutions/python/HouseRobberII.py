@@ -5,40 +5,67 @@ from typing import List
  	- `Link`: https://leetcode.com/problems/house-robber-ii/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Mar 31, 2025
- 	- `Answer`: rob
+ 	- `Date`: Aor 6, 2025
+ 	- `Answer`: rob / robAdvanced
 '''
 class Solution:
 
     '''
     # Option #1
-    - Dynamic Programming
+    - Recursive method with Memoization
     - O(n)
     '''
     def rob(self, nums: List[int]) -> int:
-        len_nums = len(nums)
-
+        
         # For short lengths
-        if len_nums == 1:
-            return nums[0]
-        if len_nums <= 3:
+        if len(nums) <= 3:
             return max(nums)
         
+        memo = {}
+
         # [House Robber Logic](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/HouseRobber.py)
-        def process(ns: List[int]) -> int:
-            prev_2steps: int = 0
-            prev_1step: int = ns[0]
-            temp: int = 0
+        def process(index: int, sub_nums: List[int]) -> int:
 
-            for i in range(1, len(ns)):
-                temp = max(prev_1step, prev_2steps + ns[i])
-                prev_2steps = prev_1step
-                prev_1step = temp
+            if index >= len(sub_nums):
+                return 0
+            if index in memo:
+                return memo[index]
+            
+            take = sub_nums[index] + process(index + 2, sub_nums)
+            skip = process(index + 1, sub_nums)
 
-            return prev_1step
+            memo[index] = max(take, skip)
+            return memo[index]
+
+        left: int = process(0, nums[:-1])
+        memo.clear()
+        right: int = process(0, nums[1:])
+        return max(left, right)
+
+
+    '''
+    # Option #2
+    - Dynamic Programming
+    - O(n)
+    - ref: https://www.youtube.com/watch?v=rWAJCfYYOvM
+    '''
+    def robAdvanced(self, nums: List[int]) -> int:
         
-        # Devide the array into two -> (0 ~ n-2), (1 ~ n-1)
-        # And use the same logic as `House Robber`
+        if len(nums) == 1:
+            return nums[0]
+
+        def process(nums: List[int]) -> int:
+            
+            rob1, rob2 = 0, 0
+            
+            # [rob1, rob2, n, n+1, ...]
+            for num in nums:
+                temp = max(rob1 + num, rob2)
+                rob1 = rob2
+                rob2 = temp
+            
+            return rob2
+
         return max(process(nums[:-1]), process(nums[1:]))
 
 
@@ -48,3 +75,9 @@ if __name__ == '__main__':
     print(sol.rob([1,2,3,1])) # 4
     print(sol.rob([1,2,3])) # 3
     print(sol.rob([1,3,1,3,100])) # 103
+
+    print("---")
+    print(sol.robAdvanced([2,3,2])) # 3
+    print(sol.robAdvanced([1,2,3,1])) # 4
+    print(sol.robAdvanced([1,2,3])) # 3
+    print(sol.robAdvanced([1,3,1,3,100])) # 103
