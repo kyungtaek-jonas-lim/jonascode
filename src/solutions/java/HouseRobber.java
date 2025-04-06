@@ -8,7 +8,7 @@ import java.util.Map;
  	- `Link`: https://leetcode.com/problems/house-robber/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Mar 31, 2025
+ 	- `Date`: Apr 6, 2025
  	- `Answer`: rob / robAdvanced
  */
 public class HouseRobber {
@@ -16,36 +16,18 @@ public class HouseRobber {
 	public static void main(String[] args) {
 		System.out.println(rob(new int[] {1,2,3,1})); // 4
 		System.out.println(rob(new int[] {2,7,9,3,1})); // 12
+		
+		System.out.println("---");
+		System.out.println(robAdvanced(new int[] {1,2,3,1})); // 4
+		System.out.println(robAdvanced(new int[] {2,7,9,3,1})); // 12
 	}
-	
-	/*
-    # Option #1
-    - Recursive method with Memoization
-    - O(n × S): n is the number of indices, and S is the number of possible cumulative result values.
-	 */
-    public static int rob(int[] nums) {
-    	Map<String, Integer> map = new HashMap<>();
-    	return Math.max(process(nums, 0, 0, map), process(nums, 1, 0, map));
-    }
-    
-    private static int process(int[] nums, int index, int result, Map<String, Integer> map) {
-    	if (index >= nums.length) return result;
-    	String mapKey = index + "," + result;
-    	if (map.containsKey(mapKey)) return map.get(mapKey);
-    	
-    	
-    	int result1 = process(nums, index + 2, result + nums[index], map);
-    	int result2 = process(nums, index + 3, result + nums[index], map);
-    	map.put(mapKey, Math.max(result1, result2));
-    	return map.get(mapKey);
-    }
     
     /*
-    # Option #2
+    # Option #1
     - Dynamic Programming
     - O(n)
      */
-    public static int robAdvanced(int[] nums) {
+    public static int rob(int[] nums) {
     	if (nums.length == 1) return nums[0];
     	
     	// The goal is the max value when you get to the last index.
@@ -60,5 +42,31 @@ public class HouseRobber {
     	}
     	
     	return prev_1step;
+    }
+	
+	/*
+    # Option #2
+    - Recursive method with Memoization
+    - O(n)
+	 */
+    public static int robAdvanced(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+    	return process(nums, 0, map);
+    }
+    
+    private static int process(int[] nums, int index, Map<Integer, Integer> map) {
+    	// If it's eqaul or greater than the length of nums
+    	if (index >= nums.length) return 0;
+    	// Cache
+    	if (map.containsKey(index)) return map.get(index);
+    	
+    	// Take this house
+    	int take = nums[index] + process(nums, index + 2, map);
+    	// Skip this house
+    	int skip = process(nums, index + 1, map);
+    	
+    	// Get the maximum
+    	map.put(index, Math.max(take, skip));
+    	return map.get(index);
     }
 }
