@@ -104,6 +104,6 @@
 27. House Robber II (213)
 	- [Problem](https://leetcode.com/problems/house-robber-ii/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/HouseRobberII.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/HouseRobberII.py))
-28. Decode Ways (91) (*)
+28. Decode Ways (91)
 	- [Problem](https://leetcode.com/problems/decode-ways/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/DecodeWays.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/DecodeWays.py))
