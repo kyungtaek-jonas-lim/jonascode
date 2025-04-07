@@ -110,3 +110,6 @@
 29. Unique Paths (62)
 	- [Problem](https://leetcode.com/problems/unique-paths/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/UniquePaths.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/UniquePaths.py))
+30. Jump Game (55)
+	- [Problem](https://leetcode.com/problems/jump-game/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/JumpGame.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/JumpGame.py))
