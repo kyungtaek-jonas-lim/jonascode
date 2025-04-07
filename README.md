@@ -107,3 +107,6 @@
 28. Decode Ways (91)
 	- [Problem](https://leetcode.com/problems/decode-ways/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/DecodeWays.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/DecodeWays.py))
+29. Unique Paths (62)
+	- [Problem](https://leetcode.com/problems/unique-paths/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/UniquePaths.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/UniquePaths.py))
