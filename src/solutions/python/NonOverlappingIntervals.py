@@ -4,7 +4,7 @@ from typing import List
  	- `Link`: https://leetcode.com/problems/non-overlapping-intervals/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Mar 24, 2025
+ 	- `Date`: Apr 7, 2025
  	- `Answer`: eraseOverlapIntervals / eraseOverlapIntervalsAdvanced
 '''
 
@@ -15,45 +15,24 @@ class Solution:
     - O (n log n)
     '''
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-
-        # Sort in Ascending
-        intervals.sort()
-
-        # Initialize First range as a Standard range
-        start = intervals[0][0]
-        end = intervals[0][1]
         
-        # Start from 1
+        # Sort the intervals in ascending order based on the start value
+        intervals.sort(key=lambda x: x[0])
+
+        # Initialize with the end value of the first interval
+        max_value = intervals[0][1]
+
+        # Overlapping interval Count
         result = 0
-        for i in range(1, len(intervals)):
-
-            # ------------------
-            # Overlapped
-            if intervals[i][0] < end and intervals[i][1] > start:
-                
-                # If it's a overlapped range, it counts first
+        for start, end in intervals[1:]:
+            
+            # If it's overlapped, count up and reset the max variable to the min value
+            if start < max_value:
                 result += 1
+                max_value = min(max_value, end)
+            else: # If it's not overlapped, reset the max variable to the max value.
+                max_value = end
 
-                # If the start points are the same, set the minimum end point as the standard end point
-                if intervals[i][0] == start:
-                    end = min(end, intervals[i][1])
-                
-                # If the end points are the same, pass
-                elif intervals[i][1] == end:
-                    pass
-
-                # If one range includes the other range, the short range become standard range.
-                elif start < intervals[i][0] and intervals[i][1] < end:
-                    end = intervals[i][1]
-                    start = intervals[i][0]
-                            
-            # ------------------
-            # Non-Overlapped
-            else:
-                # If it's non-overlapped range, update the standard range.
-                end = intervals[i][1]
-                start = intervals[i][0]
-                
         return result
     
 

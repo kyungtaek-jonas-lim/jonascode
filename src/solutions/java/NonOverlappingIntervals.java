@@ -7,7 +7,7 @@ import java.util.Arrays;
  	- `Link`: https://leetcode.com/problems/non-overlapping-intervals/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Mar 24, 2025
+ 	- `Date`: Apr 7, 2025
  	- `Answer`: eraseOverlapIntervals / eraseOverlapIntervalsAdvanced
  */
 public class NonOverlappingIntervals {
@@ -33,48 +33,34 @@ public class NonOverlappingIntervals {
 	 # Option #1
 	 - O (n log n) 
 	 */
-	public static int eraseOverlapIntervals(int[][] intervals) {
-		
-		// Sort in Ascending
-		Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
-		
-		// Initialize First range as a Standard range
-		int start = intervals[0][0];
-		int end = intervals[0][1];
-		
-		// Start from 1
-		int result = 0;
-		for (int i = 1; i < intervals.length; i++) {
-			
-			// ------------------
-			// Overlapped
-			if (start < intervals[i][1] && end > intervals[i][0]) {
-				
-				// If it's a overlapped range, it counts first
-				result++;
-				
-				// If the start points are the same, set the minimum end point as the standard end point
-				if (start == intervals[i][0]) {
-					end = Math.min(end, intervals[i][1]);
-				
-				// // If the end points are the same, pass
-				} else if (end == intervals[i][1]) {
-				
-				// If one range includes the other range, the short range become standard range.
-				} else if (start < intervals[i][0] && intervals[i][1] < end) {
-					start = intervals[i][0];
-					end = intervals[i][1];
-				}
-			// ------------------
-			} else { // Non-verlapped
-				// If it's non-overlapped range, update the standard range.
-				start = intervals[i][0];
-				end = intervals[i][1];
-			}
-		}
-		
-		return result;
-	}
+    public static int eraseOverlapIntervals(int[][] intervals) {
+        
+    	// Sort the intervals in ascending order based on the start value
+    	Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+    	
+    	// Initialize with the end value of the first interval
+    	int max = intervals[0][1];
+    	
+    	// Overlapping interval Count
+    	int result = 0;
+    	int start = 0, end = 0;
+    	for (int i = 1; i < intervals.length; i++) {
+    		
+    		start = intervals[i][0];
+    		end = intervals[i][1];
+    		
+    		// If it's overlapped, count up and reset the max variable to the min value
+    		if (start < max) {
+    			result ++;
+    			max = Math.min(max, end);
+    			
+    		} else { // If it's not overlapped, reset the max variable to the max value.
+    			max = end;
+    		}
+    	}
+    	
+    	return result;
+    }
 	
 	/*
 	 # Option #2
