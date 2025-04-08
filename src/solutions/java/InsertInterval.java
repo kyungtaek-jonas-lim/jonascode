@@ -8,8 +8,8 @@ import java.util.List;
  	- `Link`: https://leetcode.com/problems/insert-interval/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Jan 8, 2025 (insertAdvanced) / Jan 20, 2025 (insert) 
- 	- `Answer`: insert / insertAdvanced
+ 	- `Date`: Jan 8, 2025 (insertBetter) / Jan 20, 2025 (insert)  / Apr 8, 2025 (insertAdvanced)
+ 	- `Answer`: insert / insertBetter / insertAdvanced
  */
 
 public class InsertInterval {
@@ -88,10 +88,10 @@ public class InsertInterval {
     
     /*
      * Option #2
-     * Advanced / Common way
+     * Better / Common way
      * O(n)
      */
-    public static int[][] insertAdvanced(int[][] intervals, int[] newInterval) {
+    public static int[][] insertBetter(int[][] intervals, int[] newInterval) {
     	List<int[]> result = new ArrayList<>();
     	
     	int currentIndex = 0;
@@ -127,5 +127,40 @@ public class InsertInterval {
     	
     	// Convert the list to array
     	return result.toArray(new int[result.size()][]);
+    }
+
+    
+    /*
+     * Option #3
+     * Simple way
+     * O(n)
+     * ref: https://www.youtube.com/watch?v=A8NUOmlwOlM
+     */
+    public static int[][] insertAdvanced(int[][] intervals, int[] newInterval) {
+        
+    	List<int[]> list = new ArrayList<>();
+    	
+    	for (int i = 0; i < intervals.length; i++) {
+    		
+    		int[] interval = intervals[i];
+    		
+    		if (newInterval[1] < interval[0]) {
+    			list.add(newInterval);
+    			for (int j = i; j < intervals.length; j++) {
+    				list.add(intervals[j]);
+    			}
+    			return list.toArray(new int[list.size()][]);
+    			
+    		} else if (newInterval[0] <= interval[1]) {
+    			newInterval[0] = Math.min(newInterval[0], interval[0]);
+    			newInterval[1] = Math.max(newInterval[1], interval[1]);
+    			
+    		} else {
+    			list.add(interval);
+    		}
+    	}
+    	
+    	list.add(newInterval);
+    	return list.toArray(new int[list.size()][]);
     }
 }

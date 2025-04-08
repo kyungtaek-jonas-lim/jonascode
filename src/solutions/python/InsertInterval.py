@@ -6,14 +6,15 @@ from typing import List
  	- `Link`: https://leetcode.com/problems/insert-interval/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Feb 17, 2025 (insert)
- 	- `Answer`: insert / insertAdvanced (TODO)
+ 	- `Date`: Feb 17, 2025 (insert) / Apr 8, 2025 (insertAdvanced)
+ 	- `Answer`: insert / insertAdvanced
 '''
 
 class Solution:
 
     '''
-	 * Option #1
+    # Option #1
+    - O(n)
     '''
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
 
@@ -61,11 +62,28 @@ class Solution:
 
 
     '''
-	 * Option #2
+    # Option #2
+    - Simple way
+    - O(n)
+    - ref: https://www.youtube.com/watch?v=A8NUOmlwOlM
     '''
     def insertAdvanced(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        # TODO
-        pass
+
+        result = []
+
+        for i, interval in enumerate(intervals):
+            if interval[0] > newInterval[1]:
+                result.append(newInterval)
+                return result + intervals[i:]
+            elif interval[1] >= newInterval[0]:
+                newInterval[0] = min(interval[0], newInterval[0])
+                newInterval[1] = max(interval[1], newInterval[1])
+            else:
+                result.append(interval)
+
+        result.append(newInterval)
+        return result
+
 
 
 if __name__ == '__main__':
