@@ -5,19 +5,26 @@ import sys
  	- `Link`: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Feb 23, 2025
+ 	- `Date`: Apr 8, 2025
  	- `Answer`: maxProfit
 '''
 
 class Solution:    
+
+    '''
+	 # Option #1
+	 - O(n)
+    '''
     def maxProfit(self, prices: List[int]) -> int:
         result = 0
-        price_min = sys.maxsize
-        for price in prices:
-            if price_min > price:
-                price_min = price
-                continue
-            result = max(result, price - price_min)
+        min = prices[0]
+
+        for price in prices[1:]:
+            if min > price:
+                min = price
+            elif result < price - min:
+                result = price - min
+
         return result
 
 if __name__ == "__main__":
