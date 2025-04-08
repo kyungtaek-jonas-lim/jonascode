@@ -10,6 +10,11 @@ from typing import List
 '''
 
 class Solution:
+    
+    '''
+    # Option #1
+    - O(n)
+    '''
     def maxProduct(self, nums: List[int]) -> int:
         max_val: int = nums[0]
         min_val: int = nums[0]
@@ -23,7 +28,11 @@ class Solution:
                 result = max_val
         return result
     
-    
+
+    '''
+    # Option #2
+    - O(n)
+    '''
     def maxProductAdvanced(self, nums: List[int]) -> int:
         max_val = min_val = result = nums[0]
         

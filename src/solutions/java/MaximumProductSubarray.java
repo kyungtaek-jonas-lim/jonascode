@@ -5,7 +5,7 @@ package solutions.java;
  	- `Link`: https://leetcode.com/problems/maximum-product-subarray/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Jan 17, 2025
+ 	- `Date`: Apr 8, 2025
  	- `Answer`: maxProduct
  */
 
@@ -19,26 +19,30 @@ public class MaximumProductSubarray {
 	}
 
 	/*
-	 * Option #1 
-	 * Common way
-	 * O(n^2)
+	 # Option #1 
+     - O(n)
 	 */
     public static int maxProduct(int[] nums) {
-    	int max = nums[0];
-    	int min = nums[0]; // for negative numbers (even if it's negative, still important)
-    	int result = nums[0];
+    	
+    	int maxVal = nums[0];
+    	int minVal = maxVal;
+    	int result = maxVal;
     	
     	for (int i = 1; i < nums.length; i++) {
-    		int current = nums[i]; // Using a variable like `current` reduces repeated array access, improving performance and enhancing code readability.
+    		int num = nums[i];
     		
-    		// Get the min and max value upto this `i`th item.
-    		int previousMax = max; // store the current max
-    		max = Math.max(current, Math.max(max * current, min * current)); // `min` is still important to calculate the maximum value
-    		min = Math.min(current, Math.min(previousMax * current, min * current));
+    		if (num < 0) {
+    			int temp = maxVal;
+    			maxVal = minVal;
+    			minVal = temp;
+    		}
     		
-    		// Compare current item to consider the possibility that the current element could serve as the starting point of a new subarray.
-    		if (result < max) result = max;
+    		maxVal = Math.max(num, maxVal * num);
+    		minVal = Math.min(num, minVal * num);
+    		
+    		result = Math.max(result, maxVal);
     	}
+    	
     	return result;
     }
 }
