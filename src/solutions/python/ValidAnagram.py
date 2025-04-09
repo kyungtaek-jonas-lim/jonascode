@@ -5,7 +5,7 @@ from collections import Counter
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Feb 24, 2025
- 	- `Answer`: isAnagram / isAnagramAdvanced
+ 	- `Answer`: isAnagram / isAnagramBetter / isAnagramAdvanced
  # Reference
  	- Anagrams
  		- Both strings must have the same length.
@@ -13,23 +13,47 @@ from collections import Counter
 '''
 
 class Solution:
+    
+    '''
+    # Option #1
+    - Common
+    - O(n log n)
+    '''
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-        
-        my_array = [0] * 128
-
-        for c in t:
-            my_array[ord(c)] += 1
-        
-        for c in s:
-            my_array[ord(c)] -= 1
-            if my_array[ord(c)] < 0:
-                return False
-        return True
+        return sorted(s) == sorted(t)
     
-    def isAnagramAdvanced(self, s: str, t: str) -> bool:
+    '''
+    # Option #2
+    - Simple
+    - O(n)
+    '''
+    def isAnagramBetter(self, s: str, t: str) -> bool:
         return Counter(s) == Counter(t)
+    
+    '''
+    # Option #3
+    - Best
+    - O(n)
+    '''
+    def isAnagramAdvanced(self, s: str, t: str) -> bool:
+        
+        if len(s) != len(t):
+            return False
+
+        char_s = [0] * 128
+
+        for c in s:
+            char_s[ord(c)] += 1
+        
+        for c in t:
+            index = ord(c)
+            char_s[index] -= 1
+            if char_s[index] < 0:
+                return False
+            
+        return True
 
 
 if __name__ == "__main__":

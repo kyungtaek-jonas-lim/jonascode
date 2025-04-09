@@ -1,5 +1,6 @@
 package solutions.java;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,8 +9,8 @@ import java.util.Map;
  	- `Link`: https://leetcode.com/problems/valid-anagram/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Jan 23, 2025
- 	- `Answer`: isAnagram / isAnagramBetter / isAnagramAdvanced
+ 	- `Date`: Apr 9, 2025
+ 	- `Answer`: isAnagramWorse / isAnagram / isAnagramBetter / isAnagramAdvanced / isAnagramBest
  # Reference
  	- Anagrams
  		- Both strings must have the same length.
@@ -22,9 +23,29 @@ public class ValidAnagram {
 		System.out.println(isAnagram("anagram", "nagaram"));
 	}
 
+
 	
+
 	/*
-	 * Option #1 
+	 * Option #1
+	 * Worse way
+	 * O(n log n)
+	 */
+    public boolean isAnagramWorse(String s, String t) {
+    	
+    	if (s.length() == t.length()) {
+    		char[] sCharArray = s.toCharArray();
+    		char[] tCharArray = t.toCharArray();
+    		
+    		Arrays.sort(sCharArray);
+    		Arrays.sort(tCharArray);
+    		
+    		return Arrays.equals(sCharArray, tCharArray);
+    	} else return false;
+    }
+    
+	/*
+	 * Option #2
 	 * Common way
 	 * O(n + m)
 	 */
@@ -55,7 +76,7 @@ public class ValidAnagram {
 
 	
 	/*
-	 * Option #2 
+	 * Option #3
 	 * Better way
 	 * O(n + m) => The same time complexity as the first option
 	 */
@@ -74,13 +95,34 @@ public class ValidAnagram {
     	return true;
     }
 
+	/*
+	 * Option #4
+	 * Advanced way
+	 * O(n)
+	 */
+    public boolean isAnagramAdvanced(String s, String t) {
+    	if (s.length() != t.length()) return false;
+
+    	int[] sCnt = new int[128];
+    	
+    	for (char c: s.toCharArray()) {
+    		sCnt[(int)c]++;
+    	}
+
+    	for (char c: t.toCharArray()) {
+    		sCnt[(int)c]--;
+    		if (sCnt[(int)c] < 0) return false;
+    	}
+    	return true;
+    }
+
 	
 	/*
-	 * Option #3
-	 * Advanced way
+	 * Option #5
+	 * Best way
 	 * O(n) => Because of the fixed length of array
 	 */
-    public static boolean isAnagramAdvanced(String s, String t) {
+    public static boolean isAnagramBest(String s, String t) {
     	if (s.length() != t.length()) return false;
     	
     	int[] charCount = new int[26]; // Time Complexity: O(1) => Fixed
