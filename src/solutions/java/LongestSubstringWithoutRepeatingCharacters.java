@@ -1,7 +1,10 @@
 package solutions.java;
 
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Set;
 
 /*
@@ -9,8 +12,8 @@ import java.util.Set;
  	- `Link`: https://leetcode.com/problems/longest-substring-without-repeating-characters/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Jan 21, 2025
- 	- `Answer`: lengthOfLongestSubstring / lengthOfLongestSubstringBetter / lengthOfLongestSubstringAdvanced
+ 	- `Date`: Apr 9, 2025
+ 	- `Answer`: lengthOfLongestSubstringWorst / lengthOfLongestSubstringWorse / lengthOfLongestSubstring / lengthOfLongestSubstringBetter / lengthOfLongestSubstringAdvanced / lengthOfLongestSubstringBest / lengthOfLongestSubstringBestOfBest
  */
 
 public class LongestSubstringWithoutRepeatingCharacters {
@@ -23,14 +26,13 @@ public class LongestSubstringWithoutRepeatingCharacters {
 //		System.out.println(lengthOfLongestSubstringWithComment("dvdf")); // 3 - "vdf"
 	}
 
-
 	/*
 	 * Option #1 
-	 * Common way
-	 * O(n2) - cf> String.contains(): 𝑂(𝑘)
+	 * Worst way
+	 * O(n^2) - cf> String.contains(): 𝑂(𝑘)
 	 * `String.contains()` is inefficient => HashMap/HashSet is more efficient.
 	 */
-    public static int lengthOfLongestSubstring(String s) {
+    public static int lengthOfLongestSubstringWorst(String s) {
     	
         // Edge case: If the input string is empty, return 0
         if (s.isEmpty()) return 0;
@@ -53,9 +55,67 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return max;
     }
 
+    
+    /*
+     * Option #2
+	 * Worse way
+     * deque only
+     * O(n^2)
+     */
+    public static int lengthOfLongestSubstringWorse(String s) {
+    	
+    	int result = 0;
+    	Deque<Character> deque = new LinkedList<>();
+    	
+    	for (char c: s.toCharArray()) {
+    		if (deque.contains(c)) {
+    			while (true) {
+    				if (deque.removeFirst() == c) {
+    					break;
+    				}
+    			}
+    		}
+    		
+    		deque.add(c);
+    		result = Math.max(result, deque.size());
+    	}
+    	
+    	return result;
+    }
+
+    /*
+	 * Option #3
+	 * Common way
+     * deque + set
+     * O(n)
+     */
+    public static int lengthOfLongestSubstring(String s) {
+
+    	int result = 0;
+    	Deque<Character> deque = new LinkedList<>();
+    	Set<Character> set = new HashSet<>();
+    	
+    	for (char c: s.toCharArray()) {
+    		if (set.contains(c)) {
+    			while (true) {
+    				char item = deque.removeFirst();
+    				set.remove(item);
+    				if (item == c) break;
+    			}
+    		}
+    		
+    		deque.add(c);
+    		set.add(c);
+    		result = Math.max(result, deque.size());
+    	}
+    	
+    	return result;
+    }
+
+    
 
 	/*
-	 * Option #2
+	 * Option #4
 	 * Better way
 	 * O(n) : The HashMap-based code(Opetion #3 - lengthOfLongestSubstringAdvanced) is better than the HashSet code because it directly updates the start pointer to the next valid position, avoiding redundant removals.
 	 */
@@ -91,14 +151,64 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return max;
     }
     
+    /*
+	 * Option #5
+     * Sliding Window + Index Map (dict + index)
+     * O(n)
+     */
+    public static int lengthOfLongestSubstringAdvanced(String s) {
+    	int result = 0;
+    	int sliced = 0;
+    	Map<Character, Integer> map = new HashMap<>();
+    	
+    	for (int i = 1; i <= s.length(); i++) {
+    		char c = s.charAt(i - 1);
+    		
+    		if (map.containsKey(c)) {
+    			sliced = Math.max(map.get(c), sliced);
+    		}
+    		
+    		map.put(c, i);
+    		result = Math.max(result, i - sliced);
+    	}
+    	
+    	return result;
+    }
+
+    /*
+	 * Option #6
+     * set + two pointers
+     * O(n)
+     */
+    public static int lengthOfLongestSubstringBest(String s) {
+
+    	int result = 0;
+    	int left = 0;
+    	Set<Character> set = new HashSet<>();
+    	
+    	for (int right = 0; right < s.length(); right++) {
+    		char c = s.charAt(right);
+    		
+    		while (set.contains(c)) {
+    			set.remove(s.charAt(left));
+    			left++;
+    		}
+    		
+    		set.add(c);
+    		result = Math.max(result, set.size());
+    	}
+    	
+    	return result;
+    }
+
     
 
 	/*
-	 * Option #3
-	 * Advanced way
+	 * Option #7
+	 * Best of Best
 	 * O(n) - cf> HashMap.put: O(1), HashMap.get: O(1)
 	 */
-    public static int lengthOfLongestSubstringAdvanced(String s) {
+    public static int lengthOfLongestSubstringBestOfBest(String s) {
     	
         // Edge case: If the input string is empty, return 0
         if (s.isEmpty()) return 0;
