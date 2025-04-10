@@ -3,6 +3,7 @@ package solutions.java;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /*
 # Problem
@@ -10,7 +11,7 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 10, 2025
-	- `Answer`: mergeKLists
+	- `Answer`: mergeKLists / mergeKListsBetter
  */
 public class MergekSortedLists {
 
@@ -46,18 +47,18 @@ public class MergekSortedLists {
     		
 	    	for (int i = 0; i < list.size(); i++) {
 	    		
-	    		ListNode item = list.get(i);
+	    		ListNode node = list.get(i);
 	    		
 	    		// Validation
-	    		if (item == null) {
+	    		if (node == null) {
 		    		list.remove(i);
 		    		is_continue = true;
 		    		break;
 	    		}
 	    		
 	    		// Compare
-	    		if (item.val <= minValue) {
-	    			minValue = item.val;
+	    		if (node.val <= minValue) {
+	    			minValue = node.val;
 	    			minIndex = i;
 	    		}
 	    	}
@@ -74,6 +75,36 @@ public class MergekSortedLists {
 	    	} else {
 	    		list.set(minIndex, list.get(minIndex).next);
 	    	}
+    	}
+    	
+    	return result.next;
+    }
+    
+    /*
+    # Option #2
+    - Priority Queue
+    - O(n log n)
+     */
+    public ListNode mergeKListsBetter(ListNode[] lists) {
+
+    	PriorityQueue<Integer> queue = new PriorityQueue<>((a, b) -> a - b);
+
+    	// Push node value into the priority queue
+    	for (int i = 0; i < lists.length; i++) {
+    		ListNode node = lists[i];
+    		while (node != null) {
+	    		queue.add(node.val);
+	    		node = node.next;
+    		}
+    	}
+    
+    	ListNode result = new ListNode();
+    	ListNode move = result;
+    	
+    	// Make a result node list in order
+    	while (!queue.isEmpty()) {
+    		move.next = new ListNode(queue.poll());
+    		move = move.next;
     	}
     	
     	return result.next;

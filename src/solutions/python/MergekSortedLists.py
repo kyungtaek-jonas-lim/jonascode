@@ -1,4 +1,5 @@
 from typing import List, Optional
+import heapq
 
 '''
 # Problem
@@ -6,7 +7,7 @@ from typing import List, Optional
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 10, 2025
-	- `Answer`: mergeKLists
+	- `Answer`: mergeKLists / mergeKListsBetter
 '''
 
 # Definition for singly-linked list.
@@ -30,17 +31,17 @@ class Solution:
             min_index = -1
             min_val = float('inf')
             is_continue = False
-            for i, each_list in enumerate(lists):
+            for i, node in enumerate(lists):
                 
                 # Validation
-                if not each_list:
+                if not node:
                     lists.pop(i)
                     is_continue = True
                     break
 
                 # Compare
-                if each_list.val <= min_val:
-                    min_val = each_list.val
+                if node.val <= min_val:
+                    min_val = node.val
                     min_index = i
 
             if is_continue:
@@ -56,4 +57,29 @@ class Solution:
             else:
                 lists[min_index] = lists[min_index].next
 
+        return result.next
+
+    '''
+    # Option #2
+    - Priority Queue (heapq)
+    - O(n log n)
+    '''
+    def mergeKListsBetter(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        
+        heap = []
+        
+        # Push node value into the priority queue(heapq)
+        for node in lists:
+            while node:
+                heapq.heappush(heap, node.val)
+                node = node.next
+        
+        result = ListNode()
+        move = result
+
+        # Make a result node list in order
+        while heap:
+            move.next = ListNode(heapq.heappop(heap))
+            move = move.next
+        
         return result.next
