@@ -113,3 +113,6 @@
 30. Jump Game (55)
 	- [Problem](https://leetcode.com/problems/jump-game/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/JumpGame.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/JumpGame.py))
+31. Linked List Cycle (141)
+	- [Problem](https://leetcode.com/problems/linked-list-cycle/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LinkedListCycle.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LinkedListCycle.py))
