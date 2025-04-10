@@ -116,3 +116,6 @@
 31. Linked List Cycle (141)
 	- [Problem](https://leetcode.com/problems/linked-list-cycle/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LinkedListCycle.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LinkedListCycle.py))
+32. Merge Two Sorted Lists (21)
+	- [Problem](https://leetcode.com/problems/merge-two-sorted-lists/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MergeTwoSortedLists.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MergeTwoSortedLists.py))
