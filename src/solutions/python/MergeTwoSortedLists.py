@@ -15,6 +15,11 @@ class ListNode:
         self.next = next
 
 class Solution:
+
+    '''
+	 # Option #1
+	 - O(n + m) ((n, m) == the lengths of list1 and list2)
+    '''
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         
         result = ListNode()

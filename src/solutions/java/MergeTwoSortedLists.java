@@ -21,7 +21,7 @@ public class MergeTwoSortedLists {
 	
 	/*
 	 # Option #1
-	 - 
+	 - O(n + m) ((n, m) == the lengths of list1 and list2)
 	 */
 	public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode result = new ListNode();
