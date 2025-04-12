@@ -125,3 +125,6 @@
 34. Set Matrix Zeroes (73)
 	- [Problem](https://leetcode.com/problems/set-matrix-zeroes/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SetMatrixZeroes.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SetMatrixZeroes.py))
+35. Remove Nth Node From End of List (19)
+	- [Problem](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/RemoveNthNodeFromEndofList.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/RemoveNthNodeFromEndofList.py))
