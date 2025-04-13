@@ -131,3 +131,6 @@
 36. Reorder List (143)
 	- [Problem](https://leetcode.com/problems/reorder-list/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ReorderList.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ReorderList.py))
+37. Spiral Matrix (54)
+	- [Problem](https://leetcode.com/problems/spiral-matrix/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SpiralMatrix.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SpiralMatrix.py))
