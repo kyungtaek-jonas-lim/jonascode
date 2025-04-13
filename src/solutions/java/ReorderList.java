@@ -9,7 +9,7 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 12, 2025
-	- `Answer`: reorderList
+	- `Answer`: reorderList / reorderListAdvanced
 */
 public class ReorderList {
 
@@ -51,5 +51,57 @@ public class ReorderList {
     	
     	// The last node
     	list.get(listSize / 2 + listSize % 2).next.next = null;
+    }
+	
+	/*
+    # Option #2
+    - List
+    - O(n) (n = the number of nodes)
+    - Space Complexity: O(1)
+    - Better
+    - https://www.youtube.com/watch?v=S5bfdUTrKLM
+	 */
+    public void reorderListAdvanced(ListNode head) {
+    	
+    	/*
+        1. Devide into 2 ListNodes
+        2. Make the right half ListNode reverse
+        3. Put togehter the two half ListNodes
+    	 */
+    	
+    	// 0. Edge Case
+    	if (head.next == null || head.next.next == null) return;
+    	
+    	// 1. Find middle node
+    	ListNode fast = head;
+    	ListNode slow = head;
+    	while (fast != null && fast.next != null) {
+    		slow = slow.next;
+    		fast = fast.next.next;
+    	}
+    	
+    	// 2. Reverse second half
+    	ListNode prev = null;
+    	ListNode curr = slow.next;
+    	slow.next = null; // Cut the first half
+    	while (curr != null) {
+    		ListNode tmp = curr.next;
+    		curr.next = prev;
+    		prev = curr;
+    		curr = tmp;
+    	}
+    	
+    	ListNode first = head;
+    	ListNode second = prev;
+    	while (second != null) { // The second half length will be equal or shorter than the first half
+    		ListNode tmp1 = first.next;
+    		ListNode tmp2 = second.next;
+    		
+    		first.next = second;
+    		second.next = tmp1;
+    		
+    		first = tmp1;
+    		second = tmp2;
+    	}
     }
 }
