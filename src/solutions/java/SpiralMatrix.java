@@ -9,14 +9,15 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 13, 2025
-	- `Answer`: spiralOrder
+	- `Answer`: spiralOrder / spiralOrderAdvanced
  */
 public class SpiralMatrix {
 
 	/*
     # Option #1
+    - Mark the checked cell
     - O (m * n)
-    - Space Complexity: O(m * n)
+    - Extra Space Complexity: O(m * n)
 	 */
     public List<Integer> spiralOrder(int[][] matrix) {
         
@@ -55,6 +56,53 @@ public class SpiralMatrix {
     	
     	return list;
     }
+    
+    /*
+    # Option #2
+    - Narrow the zone(matrix) to be checked
+    - O (m * n)
+    - Extra Space Complexity: O(1)
+    - ref: https://www.youtube.com/watch?v=BJnMZNwUk1M
+     */
+	public List<Integer> spiralOrderAdvanced(int[][] matrix) {
+		
+		// Set the limit
+		int top = 0, bottom = matrix.length - 1;
+		int left = 0, right = matrix[0].length - 1;
+		
+		// Move
+		List<Integer> result = new ArrayList<>();
+		while (top <= bottom && left <= right) {
+			
+			// Move Left
+			for (int i = left; i <= right; i++) {
+				result.add(matrix[top][i]);
+			}
+			top++; // Narrow the limit (Checked all the cells on the top)
+			
+			// Move Down
+			for (int i = top; i <= bottom; i++) {
+				result.add(matrix[i][right]);
+			}
+			right--; // Narrow the limit (Checked all the cells on the right)
+			
+			// Check the valid limit
+			if (!(top <= bottom && left <= right)) break;
+			
+			// Move Left
+			for (int i = right; i >= left; i--) {
+				result.add(matrix[bottom][i]);
+			}
+			bottom--; // Narrow the limit (Checked all the cells on the bottom)
+			
+			// Move Up
+			for (int i = bottom; i >= top; i--) {
+				result.add(matrix[i][left]);
+			}
+			left++; // Narrow the limit (Checked all the cells on the left)
+		}
+		return result;
+	}
     
     public static void main(String[] args) {
     	SpiralMatrix sol = new SpiralMatrix();
