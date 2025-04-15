@@ -137,3 +137,6 @@
 38. Rotate Image (48)
 	- [Problem](https://leetcode.com/problems/rotate-image/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/RotateImage.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/RotateImage.py))
+39. Word Search (79)
+	- [Problem](https://leetcode.com/problems/word-search/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordSearch.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearch.py))
