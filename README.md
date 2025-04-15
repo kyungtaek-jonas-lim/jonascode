@@ -134,3 +134,6 @@
 37. Spiral Matrix (54)
 	- [Problem](https://leetcode.com/problems/spiral-matrix/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SpiralMatrix.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SpiralMatrix.py))
+38. Rotate Image (48)
+	- [Problem](https://leetcode.com/problems/rotate-image/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/RotateImage.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/RotateImage.py))
