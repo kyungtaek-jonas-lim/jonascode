@@ -6,12 +6,13 @@ from typing import List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 15, 2025
-	- `Answer`: rotate
+	- `Answer`: rotate / rotateAdvanced
 '''
 class Solution:
 
     '''
 	# Option #1
+    - Moving one row at a time (4 rows as a pair)
 	- O(n^2)
     '''
     def rotate(self, matrix: List[List[int]]) -> None:
@@ -58,7 +59,44 @@ class Solution:
         print(matrix)
 
 
+
+    '''
+	# Option #2
+    - Moving one cell at a time (4 cells as a pair)
+	- O(n^2)
+    - ref: https://www.youtube.com/watch?v=fMSJSS7eO1w
+    '''
+    def rotateAdvanced(self, matrix: List[List[int]]) -> None:
         
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        top_left = 0
+        bottom_right = len(matrix) - 1
+
+        while top_left < bottom_right:
+            for i in range(bottom_right - top_left):
+                # i is the offset
+                # (+col from top-left, +row from top-right, -col form bottom-right, -row from bottom-left)
+            
+                # Save top-left
+                top_left_val = matrix[top_left][top_left + i]
+
+                # Move from bottom-left to top-left
+                matrix[top_left][top_left + i] = matrix[bottom_right - i][top_left]
+
+                # Move from bottom-right to bottom-left
+                matrix[bottom_right - i][top_left] = matrix[bottom_right][bottom_right - i]
+
+                # Move from top-right to bottom-right
+                matrix[bottom_right][bottom_right - i] = matrix[top_left + i][bottom_right]
+
+                # Move from top-left to top-right
+                matrix[top_left + i][bottom_right] = top_left_val
+
+            top_left += 1
+            bottom_right -= 1
+
 
 if __name__ == "__main__":
     sol = Solution()
