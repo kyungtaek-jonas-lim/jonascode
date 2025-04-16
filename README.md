@@ -143,3 +143,6 @@
 40. Meeting Rooms (252)
 	- [Problem](https://leetcode.com/problems/meeting-rooms/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MeetingRooms.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MeetingRooms.py))
+40. Meeting Rooms II (253)
+	- [Problem](https://leetcode.com/problems/meeting-rooms-ii/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MeetingRoomsII.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MeetingRoomsII.py))
