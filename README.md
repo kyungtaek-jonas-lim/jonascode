@@ -140,3 +140,6 @@
 39. Word Search (79)
 	- [Problem](https://leetcode.com/problems/word-search/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordSearch.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearch.py))
+40. Meeting Rooms (252)
+	- [Problem](https://leetcode.com/problems/meeting-rooms/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MeetingRooms.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MeetingRooms.py))
