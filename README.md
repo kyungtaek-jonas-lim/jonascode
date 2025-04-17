@@ -149,3 +149,6 @@
 41. Valid Palindrome (125)
 	- [Problem](https://leetcode.com/problems/valid-palindrome/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidPalindrome.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidPalindrome.py))
+42. Longest Palindromic Substring (5)
+	- [Problem](https://leetcode.com/problems/longest-palindromic-substring/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestPalindromicSubstring.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestPalindromicSubstring.py))
