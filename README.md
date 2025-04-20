@@ -152,3 +152,6 @@
 42. Longest Palindromic Substring (5)
 	- [Problem](https://leetcode.com/problems/longest-palindromic-substring/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestPalindromicSubstring.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestPalindromicSubstring.py))
+43. Palindromic Substrings (647)
+	- [Problem](https://leetcode.com/problems/palindromic-substrings/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/PalindromicSubstrings.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PalindromicSubstrings.py))
