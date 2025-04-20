@@ -155,3 +155,6 @@
 43. Palindromic Substrings (647)
 	- [Problem](https://leetcode.com/problems/palindromic-substrings/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/PalindromicSubstrings.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PalindromicSubstrings.py))
+44. Encode and Decode Strings (271)
+	- [Problem](https://leetcode.com/problems/encode-and-decode-strings/)
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/EncodeandDecodeStrings.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/EncodeandDecodeStrings.py))
