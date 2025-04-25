@@ -8,12 +8,13 @@ import java.util.Arrays;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 5, 2025
- 	- `Answer`: findMin / findMinAdvanced
+ 	- `Answer`: findMin / findMinAdvanced / findMinBest
 */
 public class FindMinimuminRotatedSortedArray {
 
 	/*
-	 # Option #1
+	# Option #1
+	- O(n log n)
 	 */
     public static int findMin(int[] nums) {
     	Arrays.sort(nums);
@@ -22,7 +23,8 @@ public class FindMinimuminRotatedSortedArray {
     }
 
 	/*
-	 # Option #1
+	# Option #2
+	- O(n)
 	 */
     public static int findMinAdvanced(int[] nums) {
         int prev = nums[0];
@@ -31,6 +33,35 @@ public class FindMinimuminRotatedSortedArray {
             prev = nums[i];
         }
         return nums[0];
+    }
+
+	/*
+	# Option #3
+	- Binary Search
+	- Binary Search
+	- ref: https://www.youtube.com/watch?v=nIVW4P8b1VA
+	 */
+    public static int findMinBest(int[] nums) {
+    	
+    	int result = nums[0];
+    	int left = 0, right = nums.length - 1, middle = 0;
+    	int num_left = 0, num_right = 0;
+    	
+    	while (left <= right) {
+    		num_left = nums[left];
+    		num_right = nums[right];
+    		
+    		// When it's sorted array
+    		if (num_left < num_right) return Math.min(result, num_left);
+    		
+    		// If left subarray is sorted, check right subarray and vice versa.
+    		middle = (left + right) / 2;
+    		result = Math.min(result, nums[middle]);
+    		if (num_left <= nums[middle]) left = middle + 1;
+    		else right = middle - 1;
+    	}
+    	
+    	return result;
     }
     
 	public static void main(String[] args) {
