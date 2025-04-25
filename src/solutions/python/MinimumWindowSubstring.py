@@ -1,15 +1,90 @@
+from collections import Counter
 
 '''
 # Problem
 	- `Link`: https://leetcode.com/problems/minimum-window-substring/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
-	- `Date`: Mar 25, 2025
-	- `Answer`: minWindow
+	- `Date`: Mar 25, 2025 (minWindowAdvanced) / Apr 9, 2025 (minWindow)
+	- `Answer`: minWindow / minWindowAdvanced
 '''
 
 class Solution:
+
+    '''
+    # Option #1
+    - O(n + m) (n: the length of s, m: the length of t)
+    '''
     def minWindow(self, s: str, t: str) -> str:
+        
+        # Edge Case
+        len_s = len(s)
+        len_t = len(t)
+        if len_s == len_t:
+            if sorted(s) == sorted(t):
+                return s
+            else:
+                return ""
+        
+        # Get Counts of Letters of t
+        t_cnt = [0] * 128
+        total_required_cnt = 0
+        for c in t:
+            t_cnt[ord(c)] += 1
+            total_required_cnt += 1
+
+        # Compare Counts of Letters of s
+        result = ""
+        min_length = float('inf')
+        left = -1
+        right = 0
+        s_cnt = [0] * 128 # Get Counts of Letters of s, which t has 
+        extra_cnt = [0] * 128 # Get Extra Counts to minimize the substring whenever it exceeeds the numbers of each character of t
+        matched_cnt = 0
+        for c in s:
+            index = ord(c)
+            if t_cnt[index] > 0:
+
+                # Initialize left
+                if left < 0:
+                    left = right
+
+                # If the right amount of the character is already found.
+                if s_cnt[index] == t_cnt[index]:
+                    
+                    extra_cnt[index] += 1
+                    
+                    # Narrow them down
+                    while True:
+                        temp_index = ord(s[left])
+
+                        # If t has s[left] but if there's no extra character, stop
+                        if t_cnt[temp_index] > 0:
+                            if extra_cnt[temp_index] > 0: # Remove the extra characters
+                                extra_cnt[temp_index] -= 1
+                            else:
+                                break
+                        left += 1
+
+                # For the character, it encountered not enough numbers yet.
+                else:
+                    s_cnt[index] += 1
+                    matched_cnt += 1
+
+                # Update result
+                if total_required_cnt == matched_cnt:
+                    if min_length > right - left:
+                        min_length = right - left
+                        result = s[left:right + 1]
+            right += 1
+        return result
+
+
+    '''
+    # Option #2
+    - O(n + m) (n: the length of s, m: the length of t)
+    '''
+    def minWindowAdvanced(self, s: str, t: str) -> str:
         
         # Edge Case #1: if the target string is shorter
         if len(t) > len(s):
@@ -71,6 +146,49 @@ class Solution:
         return "" if start == -1 else s[start:end + 1]
 
 
+
+    '''
+    # Option #3
+    - O(n + m) (n: the length of s, m: the length of t)
+    '''
+    def minWindowBest(self, s: str, t: str) -> str:
+        if not s or not t:
+            return ""
+
+        # Count required characters
+        t_count = Counter(t) # dict conversion (character: count)
+        required = len(t_count)
+
+        # Sliding window pointers and tracking
+        left = 0
+        formed = 0
+        window_counts = {}
+        min_len = float("inf")
+        min_window = (0, 0)
+
+        for right, c in enumerate(s):
+            # Count current character in window
+            window_counts[c] = window_counts.get(c, 0) + 1
+
+            # Check if current character's count matches t's requirement
+            if c in t_count and window_counts[c] == t_count[c]:
+                formed += 1
+
+            # Try to contract the window while it's valid
+            while formed == required:
+                if right - left + 1 < min_len:
+                    min_len = right - left + 1
+                    min_window = (left, right)
+
+                # Shrink the window
+                char_left = s[left]
+                window_counts[char_left] -= 1
+                if char_left in t_count and window_counts[char_left] < t_count[char_left]:
+                    formed -= 1
+                left += 1
+
+        l, r = min_window
+        return s[l:r+1] if min_len != float("inf") else ""
         
 
 if __name__ == '__main__':

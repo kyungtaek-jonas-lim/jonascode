@@ -1,5 +1,7 @@
 package solutions.java;
 
+import java.util.Arrays;
+
 /*
 # Problem
 	- `Link`: https://leetcode.com/problems/minimum-window-substring/
@@ -29,13 +31,100 @@ public class MinimumWindowSubstring {
 	
 	/**
 	 * @option 1
-	 * @description Common way
+	 * @description Easy way
 	 * @timeComplexity O(n + m) (n: the length of s, m: the length of t)
 	 * @param s
 	 * @param t
 	 * @return
 	 */
     public static String minWindow(String s, String t) {
+    	
+    	// Edge Case
+    	if (s.length() == t.length()) {
+    		char[] sCharArray = s.toCharArray();
+    		char[] tCharArray = t.toCharArray();
+    		Arrays.sort(sCharArray);
+    		Arrays.sort(tCharArray);
+    		
+    		if (Arrays.equals(sCharArray, tCharArray)) {
+    			return s;
+    		}
+    	}
+    	
+    	// Get Counts of Letters of t
+    	int[] tCnt = new int[128];
+    	int totalRequiredCnt = 0;
+    	for (char c: t.toCharArray()) {
+    		tCnt[(int)c]++;
+    		totalRequiredCnt++;
+    	}
+
+    	// Compare Counts of Letters of s
+    	String result = "";
+    	int resultLength = Integer.MAX_VALUE;
+    	
+    	int[] sCnt = new int[128]; // Get Counts of Letters of s, which t has 
+    	int[] extraCnt = new int[128]; // Get Extra Counts to minimize the substring whenever it exceeeds the numbers of each character of t
+    	int matchedCnt = 0;
+    	
+    	int left = -1;
+    	int right = 0;
+    	
+    	for (char c: s.toCharArray()) {
+    		int index = (int)c;
+    		
+    		if (tCnt[index] > 0) {
+    			
+    			// Initialize left
+    			if (left < 0) left = right;
+    			
+    			// If the right amount of the character is already found.
+    			if (tCnt[index] == sCnt[index]) {
+    				
+    				extraCnt[index]++;
+    				
+    				// Narrow them down
+    				while (true) {
+        				int tempIndex = (int)s.charAt(left);
+        				
+        				// If t has s[left] but if there's no extra character, stop
+    					if (tCnt[tempIndex] > 0) {
+    						if (extraCnt[tempIndex] == 0) break;
+    						extraCnt[tempIndex]--; // Remove the extra characters
+    					}
+    					left++;
+    				}
+    				
+    			} else { // For the character, it encountered not enough numbers yet.
+    				sCnt[index]++;
+    				matchedCnt++;
+    			}
+    			
+    			// Update result
+    			if (totalRequiredCnt == matchedCnt) {
+    				if (resultLength > right - left) {
+    					result = s.substring(left, right + 1);
+    					resultLength = right - left;
+    				}
+    			}
+    			
+    		}
+    		
+    		right++;
+    	}
+    	
+    	return result;
+    }
+	
+	/**
+	 * @option 2
+	 * @description Advanced way
+	 * @timeComplexity O(n + m) (n: the length of s, m: the length of t)
+	 * @param s
+	 * @param t
+	 * @return
+	 */
+    public static String minWindowAdvanced(String s, String t) {
 
 		// ------------------------------------
 		// Validation & Init Variables
@@ -110,4 +199,56 @@ public class MinimumWindowSubstring {
 		if (start == -1) return ""; // If you couldn't find the required substring.
 		return s.substring(start, end + 1);
 	}
+
+	
+	/**
+	 * @option 3
+	 * @description Best way
+	 * @timeComplexity O(n + m) (n: the length of s, m: the length of t)
+	 * @param s
+	 * @param t
+	 * @return
+	 */
+    public String minWindowBest(String s, String t) {
+        if (s.length() < t.length()) return "";
+
+        int[] tCount = new int[128];
+        for (char c : t.toCharArray()) {
+            tCount[c]++;
+        }
+
+        int[] windowCount = new int[128];
+        int required = 0;
+        for (int c : tCount) if (c > 0) required++;
+
+        int formed = 0;
+        int left = 0, right = 0;
+        int start = 0, minLen = Integer.MAX_VALUE;
+
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            windowCount[c]++;
+            if (tCount[c] > 0 && windowCount[c] == tCount[c]) {
+                formed++;
+            }
+
+            while (formed == required) {
+                if (right - left + 1 < minLen) {
+                    start = left;
+                    minLen = right - left + 1;
+                }
+
+                char leftChar = s.charAt(left);
+                windowCount[leftChar]--;
+                if (tCount[leftChar] > 0 && windowCount[leftChar] < tCount[leftChar]) {
+                    formed--;
+                }
+                left++;
+            }
+            right++;
+        }
+
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+    }
+
 }
