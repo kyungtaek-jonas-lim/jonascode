@@ -12,7 +12,7 @@ import java.util.TreeMap;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Feb 1, 2025
-	- `Answer`: merge / mergeBetter / mergeAdvanced 
+	- `Answer`: merge / mergeBetter / mergeAdvanced / mergeBest 
 */
 
 public class MergeIntervals {
@@ -208,6 +208,35 @@ public class MergeIntervals {
         }
 
         return list.toArray(new int[list.size()][]);
+    }
+
+    
+	/**
+	 * @option 4
+	 * @description Best way
+	 * @timeComplexity O(n log n)
+	 * @param intervals
+	 * @return
+	 */
+    public static int[][] mergeBest(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+        
+        List<int[]> result = new ArrayList<>();
+        int prev_end = Integer.MAX_VALUE;
+        int resultSize = 0;
+        for (int[] interval: intervals) {
+            int start = interval[0], end = interval[1];
+            if (resultSize > 0 && start <= prev_end) {
+                prev_end = Math.max(end, prev_end);
+                result.get(resultSize - 1)[1] = prev_end;
+            } else {
+                prev_end = end;
+                result.add(new int[] { start, end });
+                resultSize++;
+            }
+        }
+
+        return result.toArray(new int[result.size()][]);
     }
     
 }
