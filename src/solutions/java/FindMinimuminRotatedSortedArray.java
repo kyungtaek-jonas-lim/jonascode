@@ -12,18 +12,25 @@ import java.util.Arrays;
 */
 public class FindMinimuminRotatedSortedArray {
 
+	/*
+	 # Option #1
+	 */
     public static int findMin(int[] nums) {
     	Arrays.sort(nums);
 //    	Arrays.parallelSort(nums); // Multi-Thread
     	return nums[0];
     }
 
+	/*
+	 # Option #1
+	 */
     public static int findMinAdvanced(int[] nums) {
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            min = Math.min(nums[i], min);
+        int prev = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < prev) return nums[i];
+            prev = nums[i];
         }
-        return min;
+        return nums[0];
     }
     
 	public static void main(String[] args) {

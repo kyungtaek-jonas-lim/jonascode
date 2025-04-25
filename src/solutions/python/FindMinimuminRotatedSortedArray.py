@@ -5,12 +5,27 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 5, 2025
- 	- `Answer`: findMin
+ 	- `Answer`: findMin / findMinAdvanced
 '''
 
 class Solution:
+    
+    '''
+    # Option #1
+    '''
     def findMin(self, nums: List[int]) -> int:
         nums.sort()
+        return nums[0]
+    
+    '''
+    # Option #2
+    '''
+    def findMinAdvanced(self, nums: List[int]) -> int:
+        prev = nums[0]
+        for num in nums[1:]:
+            if num < prev:
+                return num
+            prev = num
         return nums[0]
 
 if __name__ == "__main__":
