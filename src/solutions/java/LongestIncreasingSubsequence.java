@@ -38,6 +38,7 @@ public class LongestIncreasingSubsequence {
     	// Initialize the dp array where each element is 1, since every number is at least a subsequence of length 1
     	Arrays.fill(dp, 1);
 
+    	int result = 0;
     	// Iterate over each element in the array
     	for (int i = 0; i < numsLen; i++) {
     		
@@ -51,13 +52,10 @@ public class LongestIncreasingSubsequence {
     				dp[i] = Math.max(dp[i], dp[j] + 1);
     			}
     		}
+			result = Math.max(dp[i], result);
     	}
     	
     	// The result is the maximum value in dp which gives us the length of the longest subsequence
-    	int result = 1;
-    	for (int num : dp) {
-    		result = Math.max(result, num);
-    	}
     	return result;
     }
     

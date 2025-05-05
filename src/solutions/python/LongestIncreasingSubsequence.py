@@ -21,6 +21,7 @@ class Solution:
         dp = [1] * nums_len # Initialize dp array where each element starts with 1 (minimum value).
 
         # Iterate over each element in the array.
+        result = 1
         for i in range(nums_len):
             # For each element nums[i], compare it with all previous elements nums[j] where j < i.
             for j in range(i):
@@ -28,9 +29,10 @@ class Solution:
                 if nums[j] < nums[i]:
                     # Update dp[i] to be the maximum length between the current subsequence ending at i and the one that can be extended by nums[i]
                     dp[i] = max(dp[i], dp[j] + 1)
+            result = max(dp[i], result)
         
         # The result will be the maximum value in dp because that represents the longest increasing subsequence across all indices.
-        return max(dp)
+        return result
 
 
     # Binary Search with Dynamic Programming
