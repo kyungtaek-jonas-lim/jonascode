@@ -46,15 +46,38 @@ class Solution:
     #     # 4. Call Search Function
     #     dfs(0, amount, 0) # Start DFS traversal
     #     return min_coins if min_coins != float('inf') else -1 # Return -1 if no valid combination is found
-    
-    # Dynamic Programming
-    # O(n * amount)
+
+    '''
+	# Option #1
+	- Dynamic Programming (Common)
+	- O(amount × n) (n = the number of coins)
+	- ref) https://www.youtube.com/watch?v=H9bfqozjoqs
+    '''
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [0] + [float('inf')] * amount
+        dp = [amount + 1] * (amount + 1) # The Max Coin Value + 1
+        dp[0] = 0 # Initiate the first value (when the amount is 0)
+
+        for a in range(amount + 1): # Bottom Top Depending on the Amount
+            for coin in coins:
+                key = a - coin
+                if key < 0:
+                    continue
+                dp[a] = min(dp[a], dp[key] + 1)
+        
+        return dp[amount] if dp[amount] != amount + 1 else -1
+    
+
+    '''
+	# Option #2
+	- Dynamic Programming (Advanced)
+	- O(amount × n) (n = the number of coins)
+    '''
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [0] + [amount + 1] * amount
         for coin in coins:
             for target in range(coin, amount + 1):
                 dp[target] = min(dp[target], dp[target - coin] + 1)
-        return dp[amount] if dp[amount] != float('inf') else -1
+        return dp[amount] if dp[amount] != amount + 1 else -1
 
 
 if __name__ == "__main__":
