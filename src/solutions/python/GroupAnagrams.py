@@ -1,12 +1,12 @@
 from typing import List
-
+from collections import defaultdict
 '''
 # Problem
 	- `Link`: https://leetcode.com/problems/group-anagrams/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Mar 25, 2025
-	- `Answer`: groupAnagrams / groupAnagramsAdvanced
+	- `Answer`: groupAnagrams / groupAnagramsAdvanced / groupAnagramsBest
 '''
 
 class Solution:
@@ -57,6 +57,26 @@ class Solution:
         
         # Return all grouped anagrams
         return list(anagram_map.values())
+    
+    '''
+    # Option #3
+    - O(n * m) (n = the number of strs, m = the length of average str)
+    - Counting Sort Key
+    '''
+    def groupAnagramsBest(self, strs: List[str]) -> List[List[str]]:
+
+        result = defaultdict(list) # There's a default value, in this case, list
+        
+        for s in strs:
+
+            count = [0] * 26
+
+            for c in s:
+                count[ord(c) - ord('a')] += 1
+                
+            result[tuple(count)].append(s) # Array cannot be key of dicts, so use tuples
+
+        return list(result.values())
 
 
 if __name__ == '__main__':
