@@ -11,7 +11,7 @@ import java.util.Set;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: wordBreak / wordBreakAdvanced
+ 	- `Answer`: wordBreak / wordBreakBetter / wordBreakAdvanced
  */
 public class WordBreak {
 
@@ -34,11 +34,42 @@ public class WordBreak {
 	/*
     # Option #1
     - Dynamic Programming
+    - DFS + Memoization
+    - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+	 */
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        int[] memo = new int[s.length()];
+        return dfs(s, wordDict, 0, memo);
+    }
+
+    private static boolean dfs(String s, List<String> wordDict, int index, int[] memo) {
+
+        if (s.length() == index) return true;
+        if (memo[index] != 0) return memo[index] == 1 ? true : false;
+        
+        for (String word: wordDict) {
+            int wordLength = word.length();
+            if (s.length() - index < wordLength) continue;
+            if (s.substring(index, index + wordLength).equals(word)) {
+                if (dfs(s, wordDict, index + wordLength, memo)) {
+                    memo[index] = 1;
+                    return true;
+                }
+            }
+        }
+
+        memo[index] = -1;
+        return false;
+    }
+	
+	/*
+    # Option #2
+    - Dynamic Programming
     - Optimized Bottom Up
     - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
     - ref: Neetcode (https://www.youtube.com/watch?v=Sx9NNgInc3A)
 	 */
-    public static boolean wordBreak(String s, List<String> wordDict) {
+    public static boolean wordBreakBetter(String s, List<String> wordDict) {
     	/*
         # 1
         Starting from the last index of the string, the code checks whether any word from wordDict matches the substring.
@@ -78,7 +109,7 @@ public class WordBreak {
     }
 	
 	/*
-    # Option #2
+    # Option #3
     - Dynamic Programming
     - Optimized Bottom Up
     - O(n * m) (m: max word Lenth)

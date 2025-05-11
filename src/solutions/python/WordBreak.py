@@ -6,18 +6,49 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: wordBreak / wordBreakAdvanced
+ 	- `Answer`: wordBreak / wordBreakBetter/ wordBreakAdvanced
 '''
 class Solution:
 
     '''
     # Option #1
     - Dynamic Programming
+    - DFS + Memoization
+    - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+    '''
+    class Solution:
+        def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+            
+            n = len(s)
+            memo = [0] * n
+
+            def dfs(index: int) -> bool:
+                
+                if index == n:
+                    return True
+                if memo[index] != 0:
+                    return True if memo[index] == 1 else False
+                
+                for word in wordDict:
+                    len_word = len(word)
+                    if s[index:index + len_word] == word:
+                        if dfs(index + len_word):
+                            memo[index] = 1
+                            return True
+                
+                memo[index] = -1
+                return False
+
+            return dfs(0)
+
+    '''
+    # Option #2
+    - Dynamic Programming
     - Optimized Bottom Up
     - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
     - ref: Neetcode (https://www.youtube.com/watch?v=Sx9NNgInc3A)
     '''
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreakBetter(self, s: str, wordDict: List[str]) -> bool:
 
         '''
         # 1
@@ -53,7 +84,7 @@ class Solution:
         return dp[0]
 
     '''
-    # Option #2
+    # Option #3
     - Dynamic Programming
     - Optimized Bottom Up
     - O(n * m) (m: max word Lenth)
