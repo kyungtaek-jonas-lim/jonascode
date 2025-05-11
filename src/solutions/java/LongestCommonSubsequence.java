@@ -1,12 +1,14 @@
 package solutions.java;
 
+import java.util.Arrays;
+
 /*
  # Problem
  	- `Link`: https://leetcode.com/problems/longest-common-subsequence/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 21, 2025
- 	- `Answer`: longestCommonSubsequence / longestCommonSubsequence2d
+ 	- `Answer`: longestCommonSubsequenceDfsMemo / longestCommonSubsequence2d / longestCommonSubsequence
 */
 public class LongestCommonSubsequence {
 	
@@ -32,11 +34,75 @@ public class LongestCommonSubsequence {
 		System.out.println(longestCommonSubsequence2d("abc", "abbbbbc")); // 3
 		System.out.println(longestCommonSubsequence2d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")); // 210
 	}
+	
+	// ====================================================================
+	/*
+	 * Option #1
+	 * Dynamic Programming 
+	 * DFS + Memoization
+	 * O (n * m)
+	 */
+    public static int longestCommonSubsequenceDfsMemo(String text1, String text2) {
+    	
+    	int[][] memo = new int[text1.length()][text2.length()];
+    	for (int[] row: memo) Arrays.fill(row, -1);
+    	return dfs(text1.toCharArray(), text2.toCharArray(), 0, 0, memo);
+    }
+    
+    private static int dfs(char[] text1, char[] text2, int x, int y, int[][] memo) {
+    	
+    	if (x >= text1.length || y >= text2.length) return 0;
+    	if (memo[x][y] != -1) return memo[x][y];
+    	
+    	if (text1[x] == text2[y]) {
+    		memo[x][y] = 1 + dfs(text1, text2, x + 1, y + 1, memo);
+    	} else {
+    		memo[x][y] = Math.max(dfs(text1, text2, x + 1, y, memo), dfs(text1, text2, x, y + 1, memo));
+    	}
+    	return memo[x][y];
+    }
+	
+	// ====================================================================
+	/*
+	 * Option #2
+	 * Dynamic Programming 
+	 * 2D Array
+	 * O (n * m)
+	 */
+    public static int longestCommonSubsequence2d(String text1, String text2) {
+    	
+    	// Get lengths of both input strings
+    	int m = text1.length();
+    	int n = text2.length();
+    	
+    	// Initialize a 2D DP table with (m+1) rows and (n+1) columns
+    	// dp[i][j] will represent the length of LCS
+    	int[][] dp = new int[m + 1][n + 1];
+    	
+    	// Build the DP table row by row
+    	for (int i = 0; i < m; i++) { // Loop through characters in text1
+    		for (int j = 0; j < n; j++) { // Loop through characters in text2
+    			
+    			// Characters match: extend the LCS by 1
+    			// Use the value from the diagonal (previous characters)
+    			if (text1.charAt(i) == text2.charAt(j)) dp[i + 1][j + 1] = dp[i][j] + 1;
+    			
+    			// Characters don't match:
+    			// Take the maximum LCS length by either:
+    			// - Skipping current character in text1 (dp[i][j + 1])
+    			// - Skipping current character in text2 (dp[i + 1][j])
+    			else dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
+    		}
+    	}
+    	
+    	// The final cell contains the length of the longest common subsequence
+    	return dp[m][n];
+    }
 
     
 	// ====================================================================
 	/*
-	 * Option #1
+	 * Option #3
 	 * Dynamic Programming 
 	 * 1D Array
 	 * O (n * m)
@@ -98,44 +164,4 @@ public class LongestCommonSubsequence {
 		    // because after the last iteration, 'prev' contains the last computed row.
 		    return prev[text2Length];
 		}
-
-    
-	
-	// ====================================================================
-	/*
-	 * Option #2
-	 * Dynamic Programming 
-	 * 2D Array
-	 * O (n * m)
-	 */
-    public static int longestCommonSubsequence2d(String text1, String text2) {
-    	
-    	// Get lengths of both input strings
-    	int m = text1.length();
-    	int n = text2.length();
-    	
-    	// Initialize a 2D DP table with (m+1) rows and (n+1) columns
-    	// dp[i][j] will represent the length of LCS
-    	int[][] dp = new int[m + 1][n + 1];
-    	
-    	// Build the DP table row by row
-    	for (int i = 0; i < m; i++) { // Loop through characters in text1
-    		for (int j = 0; j < n; j++) { // Loop through characters in text2
-    			
-    			// Characters match: extend the LCS by 1
-    			// Use the value from the diagonal (previous characters)
-    			if (text1.charAt(i) == text2.charAt(j)) dp[i + 1][j + 1] = dp[i][j] + 1;
-    			
-    			// Characters don't match:
-    			// Take the maximum LCS length by either:
-    			// - Skipping current character in text1 (dp[i][j + 1])
-    			// - Skipping current character in text2 (dp[i + 1][j])
-    			else dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]);
-    		}
-    	}
-    	
-    	// The final cell contains the length of the longest common subsequence
-    	return dp[m][n];
-    }
-    
 }

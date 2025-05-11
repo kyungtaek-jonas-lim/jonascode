@@ -1,15 +1,78 @@
+from typing import List
 '''
  # Problem
  	- `Link`: https://leetcode.com/problems/longest-common-subsequence/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 21, 2025
- 	- `Answer`: longestCommonSubsequence / longestCommonSubsequence2d
+ 	- `Answer`: longestCommonSubsequenceDfsMemo / longestCommonSubsequence2d / longestCommonSubsequence
  '''
 class Solution:
 
     '''
     # Option 1
+    - Dynamic Programming
+    - DFS + Memoization
+    - O (n * m)
+    '''
+    def longestCommonSubsequenceDfsMemo(self, text1: str, text2: str) -> int:
+        
+        memo = [[-1] * len(text2) for _ in range(len(text1))]
+        
+        def dfs(x: int, y: int, memo: List[List[int]]):
+            if x >= len(text1) or y >= len(text2):
+                return 0
+            if memo[x][y] != -1:
+                return memo[x][y]
+            
+            if text1[x] == text2[y]:
+                memo[x][y] = 1 + dfs(x + 1, y + 1, memo)
+            else:
+                memo[x][y] = max(dfs(x + 1, y, memo), dfs(x, y + 1, memo))
+            
+            return memo[x][y]
+
+        return dfs(0, 0, memo)
+
+
+    '''
+    # Option 2
+    - Dynamic Programming
+    - 2D Array
+    - O (n * m)
+    '''
+    def longestCommonSubsequence2d(self, text1: str, text2: str) -> int:
+        # Get lengths of both input strings
+        m, n = len(text1), len(text2)
+
+        # Initialize a 2D DP table with (m+1) rows and (n+1) columns
+        # dp[i][j] will represent the length of LCS between
+        # - text1[0:i] (first i characters of text1)
+        # - text2[0:j] (first j characters of text2)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+        # Build the DP table row by row
+        for i in range(m): # Loop through characters in text1
+            for j in range(n): # Loop through characters in text2
+
+                # Characters match: extend the LCS by 1
+                if text1[i] == text2[j]:
+                    # Use the value from the diagonal (previous characters)
+                    dp[i + 1][j + 1] = dp[i][j] + 1
+
+                # Chacters don't match:
+                else:
+                    # Take the maximum LCS length by either:
+                    # - Skipping current character in text1 (dp[i][j + 1])
+                    # - Skipping current character in text2 (dp[i + 1][j])
+                    dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
+        
+        # The final cell contains the length of the longest common subsequence
+        return dp[m][n]
+        
+
+    '''
+    # Option 3
     - Dynamic Programming
     - 1D Array
     - O (n * m)
@@ -53,42 +116,6 @@ class Solution:
         # After the last swap, 'prev' contains the final LCS lengths
         # The last element holds the total length of the longest common subsequence
         return prev[text2_length]
-
-    '''
-    # Option 2
-    - Dynamic Programming
-    - 2D Array
-    - O (n * m)
-    '''
-    def longestCommonSubsequence2d(self, text1: str, text2: str) -> int:
-        # Get lengths of both input strings
-        m, n = len(text1), len(text2)
-
-        # Initialize a 2D DP table with (m+1) rows and (n+1) columns
-        # dp[i][j] will represent the length of LCS between
-        # - text1[0:i] (first i characters of text1)
-        # - text2[0:j] (first j characters of text2)
-        dp = [[0] * (n + 1) for _ in range(m + 1)]
-
-        # Build the DP table row by row
-        for i in range(m): # Loop through characters in text1
-            for j in range(n): # Loop through characters in text2
-
-                # Characters match: extend the LCS by 1
-                if text1[i] == text2[j]:
-                    # Use the value from the diagonal (previous characters)
-                    dp[i + 1][j + 1] = dp[i][j] + 1
-
-                # Chacters don't match:
-                else:
-                    # Take the maximum LCS length by either:
-                    # - Skipping current character in text1 (dp[i][j + 1])
-                    # - Skipping current character in text2 (dp[i + 1][j])
-                    dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
-        
-        # The final cell contains the length of the longest common subsequence
-        return dp[m][n]
-        
 
 if __name__ == "__main__":
     sol = Solution()
