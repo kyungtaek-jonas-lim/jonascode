@@ -67,42 +67,35 @@ public class DecodeWays {
     /*
     # Option #2
     - Dynamic Programming
-    - Only String Comparison
+    - 3 Variables & Only String Comparison
     - O(n)
-    - ref: https://www.youtube.com/watch?v=6aEyTjOwlJU
      */
     public static int numDecodingsAdvanced(String s) {
-    	
-    	/*
-        #1
-        Start from the last character and move backward.
+        
+        int n = s.length();
+        char[] c = s.toCharArray();
+        
+        int curr = 0;
+        int next = 1;
+        int nextNext = 0;
 
-        #2
-        Add the number of ways from dp[i + 1] if the current digit is between 1 and 9 (inclusive).
+        for (int i = n - 1; i >= 0; i--) {
+            if (c[i] == '0') {
+                curr = 0;
+            } else {
+                curr = next;
+            }
 
-        #3
-        Add the number of ways from dp[i + 2] if the two-digit number formed by s[i] and s[i + 1] is valid:
-            - If s[i] is '1', s[i + 1] can be any digit (i.e., '10' to '19')
-            - If s[i] is '2', s[i + 1] must be between '0' and '6' (i.e., '20' to '26')
-    	 */
-    	int sLength = s.length();
-    	int[] dp = new int[sLength + 1];
-    	dp[sLength] = 1;
-    	
-    	for (int i = sLength - 1; i >= 0; i--) {
-    		char current = s.charAt(i);
-    		if (current == '0') continue;
-    		
-    		dp[i] += dp[i + 1];
-    		
-    		if (i + 1 < sLength) {
-                char next = s.charAt(i + 1);
-    			if (current == '1' || (current == '2' && next >= '0' && next <= '6')) {
-    				dp[i] += dp[i + 2];
-    			}
-    		}
-    	}
-    	
-    	return dp[0];
+            if (i + 1 < n) {
+                if (c[i] == '1' || (c[i] == '2' && ((int)c[i + 1] <= (int)'6' && (int)c[i+1] >= (int)'0'))) {
+                    curr += nextNext;
+                }
+            }
+
+            nextNext = next;
+            next = curr;
+        }
+
+        return curr;
     }
 }

@@ -47,39 +47,30 @@ class Solution:
     '''
     # Option #2
     - Dynamic Programming
-    - Only String Comparison
+    - 3 Variables & Only String Comparison
     - O(n)
-    - ref: https://www.youtube.com/watch?v=6aEyTjOwlJU
     '''
     def numDecodingsAdvanced(self, s: str) -> int:
-        '''
-        #1
-        Start from the last character and move backward.
+        
+        n = len(s)
+        
+        curr, next, next_next = 0, 1, 0
 
-        #2
-        Add the number of ways from dp[i + 1] if the current digit is between 1 and 9 (inclusive).
-
-        #3
-        Add the number of ways from dp[i + 2] if the two-digit number formed by s[i] and s[i + 1] is valid:
-            - If s[i] is '1', s[i + 1] can be any digit (i.e., '10' to '19')
-            - If s[i] is '2', s[i + 1] must be between '0' and '6' (i.e., '20' to '26')
-        '''
-
-        len_s = len(s)
-        dp = [0] * len_s
-        dp += [1]
-
-        for i in range(len_s - 1, -1, -1):
-            if s[i] == "0":
-               continue
-
-            dp[i] = dp[i + 1]
-
-            if i + 1 < len_s:
-                if (s[i] == "1" or (s[i] == "2" and s[i + 1] in "0123456")):
-                    dp[i] += dp[i + 2]
+        for i in range(n - 1, -1, -1):
             
-        return dp[0]
+            if s[i] == '0':
+                curr = 0
+            else:
+                curr = next
+            
+            if (i + 1 < n):
+                if (s[i] == '1' or (s[i] == '2' and s[i + 1] in "0123456")):
+                    curr += next_next
+
+            next_next = next
+            next = curr
+
+        return curr
              
 
 
