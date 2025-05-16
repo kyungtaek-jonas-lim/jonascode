@@ -6,7 +6,7 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: canJump / canJumpAdvanced
+ 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced
 '''
 class Solution:
     
@@ -39,8 +39,26 @@ class Solution:
         # If the last index is not reachable, return false
         return False
 
+
     '''
     # Option #2
+    - Greedy
+    - O(n)
+    '''
+    def canJumpBetter(self, nums: List[int]) -> bool:
+        n = len(nums)
+        max_length = 0
+
+        for i in range(n):
+            if i > max_length:
+                return False
+            max_length = max(max_length, i + nums[i])
+
+        return True
+    
+
+    '''
+    # Option #3
     - Greedy
     - O(n)
     - ref: https://www.youtube.com/watch?v=Yan0cv2cLy8

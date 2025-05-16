@@ -6,7 +6,7 @@ package solutions.java;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: canJump / canJumpAdvanced
+ 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced
  */
 public class JumpGame {
 
@@ -52,10 +52,26 @@ public class JumpGame {
     	// If the last index is not reachable, return false
     	return false;
     }
-    
 
 	/*
     # Option #2
+    - Greedy
+    - O(n)
+    */
+    public static boolean canJumpBetter(int[] nums) {
+        
+        int n = nums.length;
+        int maxLength = 0;
+        for (int i = 0; i < n; i++) {
+            if (i > maxLength) return false;
+            maxLength = Math.max(nums[i] + i, maxLength);
+        }
+
+        return true;
+    }
+
+	/*
+    # Option #3
     - Greedy
     - O(n)
     - ref: https://www.youtube.com/watch?v=Yan0cv2cLy8
