@@ -7,7 +7,7 @@ import heapq
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 10, 2025
-	- `Answer`: mergeKLists / mergeKListsBetter / mergeKListsAdvanced / mergeKListsBest
+	- `Answer`: mergeKListsEasy / mergeKLists / mergeKListsBetter / mergeKListsAdvanced / mergeKListsBest
 '''
 
 # Definition for singly-linked list.
@@ -21,6 +21,41 @@ class Solution:
     '''
 	# Option #1
 	- O(k * n) (k: The number of lists, n: The number of the total nodes)
+    '''
+    def mergeKListsEasy(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        
+        first = ListNode()
+        result = first
+
+        n = len(lists)
+
+        while True:
+            
+            min_value = float('inf')
+            min_index = -1
+
+            for i in range(n):
+                
+                if not lists[i]:
+                    continue
+                
+                if (min_value > lists[i].val):
+                    min_value = lists[i].val
+                    min_index = i
+
+            if min_index == -1:
+                break
+            
+            first.next = lists[min_index]
+            first = first.next
+            lists[min_index] = lists[min_index].next
+
+        return result.next
+
+
+    '''
+	# Option #2
+	- O(k * n^2) (k: The number of lists, n: The number of the total nodes)
     '''
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         
@@ -60,7 +95,7 @@ class Solution:
         return result.next
 
     '''
-    # Option #2
+    # Option #3
     - Priority Queue (heapq)
     - O(n log n)
     '''
@@ -87,7 +122,7 @@ class Solution:
     
     
     '''
-    # Option #3
+    # Option #4
     - Priority Queue (More efficient)
     - O(n log k) (n = the number of total nodes, k = the number of lists)
     '''
@@ -139,7 +174,7 @@ class Solution:
 
     
     '''
-    # Option #4
+    # Option #5
     - Divide and Conquer (Devide k and use the same algorithm as 'MergeTwoSortedLists')
     - MergeTwoSortedLists: https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MergeTwoSortedLists.py
     - O(n log k)

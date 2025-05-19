@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 10, 2025
-	- `Answer`: mergeKLists / mergeKListsBetter / mergeKListsAdvanced / mergeKListsBest
+	- `Answer`: mergeKListsEasy / mergeKLists / mergeKListsBetter / mergeKListsAdvanced / mergeKListsBest
  */
 public class MergekSortedLists {
 
@@ -28,6 +28,47 @@ public class MergekSortedLists {
 	/*
 	# Option #1
 	- O(k * n) (k: The number of lists, n: The number of the total nodes)
+	 */
+    public ListNode mergeKListsEasy(ListNode[] lists) {
+        
+        ListNode first = new ListNode();
+        ListNode result = first;
+
+        int n = lists.length;
+
+        int minValue = 0;
+        int minIndex = -1;
+
+        while (true) {
+            
+            minValue = Integer.MAX_VALUE;
+            minIndex = -1;
+
+            for (int i = 0; i < n; i++) {
+                if (lists[i] == null) {
+                    continue;
+                }
+                
+                if (minValue > lists[i].val) {
+                    minIndex = i;
+                    minValue = lists[i].val;
+                }
+                
+            }
+            if (minIndex == -1) break;
+
+            first.next = lists[minIndex];
+            first = first.next;
+            lists[minIndex] = lists[minIndex].next;
+        }
+
+        return result.next;
+    }
+	
+
+	/*
+	# Option #2
+	- O(k * n^2) (k: The number of lists, n: The number of the total nodes)
 	 */
     public ListNode mergeKLists(ListNode[] lists) {
     	
@@ -82,7 +123,7 @@ public class MergekSortedLists {
     }
     
     /*
-    # Option #2
+    # Option #3
     - Priority Queue
     - O(n log n)
      */
@@ -113,7 +154,7 @@ public class MergekSortedLists {
 
     
     /*
-    # Option #3
+    # Option #4
     - Priority Queue (More efficient)
     - O(n log k) (n = the number of total nodes, k = the number of lists)
      */
@@ -168,7 +209,7 @@ public class MergekSortedLists {
     
     
     /*
-    # Option #4
+    # Option #5
     - Divide and Conquer (Devide k and use the same algorithm as 'MergeTwoSortedLists')
     - MergeTwoSortedLists: https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MergeTwoSortedLists.java
     - O(n log k)
@@ -217,4 +258,47 @@ public class MergekSortedLists {
 
         return result.next;
     }
+
+	// public ListNode mergeKListsBest(ListNode[] lists) {
+        
+    //     if (lists.length < 1) return null;
+
+    //     while (lists.length > 1) {
+            
+    //         int n = lists.length;
+    //         ListNode[] mergedLists = new ListNode[n % 2 == 0 ? n / 2 : n / 2 + 1];
+
+    //         for (int i = 0; i < n; i += 2) {
+                
+    //             ListNode curr = lists[i];
+    //             ListNode next = (i + 1 == n) ? null : lists[i + 1];
+    //             mergedLists[i / 2] = mergeTwoLists(curr, next);
+    //         }
+    //         lists = mergedLists;
+    //     }
+
+    //     return lists[0];
+    // }
+
+    // private ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        
+    //     ListNode first = new ListNode();
+    //     ListNode result = first;
+
+    //     while (list1 != null && list2 != null) {
+            
+    //         if (list1.val < list2.val) {
+    //             first.next = list1;
+    //             list1 = list1.next;
+    //         } else {
+    //             first.next = list2;
+    //             list2 = list2.next;
+    //         }
+    //         first = first.next;
+    //     }
+
+    //     first.next = (list1 != null) ? list1 : list2;
+
+    //     return result.next;
+    // }
 }
