@@ -25,7 +25,7 @@
 ## Solution
 1. Two Sum (1)
 	- [Problem](https://leetcode.com/problems/two-sum/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/TwoSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/TwoSum.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/TwoSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/TwoSum.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/TwoSum.ts))
 2. Sum of Two Integers (371)
 	- [Problem](https://leetcode.com/problems/sum-of-two-integers/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SumofTwoIntegers.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SumofTwoIntegers.py))
