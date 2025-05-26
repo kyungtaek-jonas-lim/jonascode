@@ -15,7 +15,8 @@
 		- Java 21 ([openjdk-21](https://jdk.java.net/java-se-ri/21))
 	- Python
 		- Python 3.8.0
-	- Node.js (TO-BE)
+	- TypeScript
+		- TypeScript 5.7.3
 
 ## Algorithm
 1. [Greedy Algorithm](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/algorithm/greedy-algorithm.md)
