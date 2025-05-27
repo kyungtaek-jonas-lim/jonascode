@@ -2,7 +2,9 @@ from typing import List
 
 '''
 # Problem
-	- `Link`: https://leetcode.com/problems/meeting-rooms/
+	- `Link`
+        - `LeetCode`: https://leetcode.com/problems/meeting-rooms/
+        - `LintCode`: https://www.lintcode.com/problem/920/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 16, 2025

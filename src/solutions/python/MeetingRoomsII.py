@@ -3,7 +3,9 @@ import heapq
 
 '''
 # Problem
-	- `Link`: https://leetcode.com/problems/meeting-rooms-ii/
+	- `Link`
+        - `LeetCode`: https://leetcode.com/problems/meeting-rooms-ii/
+        - `LintCode`: https://www.lintcode.com/problem/919/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 16, 2025

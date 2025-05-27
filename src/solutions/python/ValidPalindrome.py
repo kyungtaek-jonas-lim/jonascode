@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 17
-	- `Answer`: isPalindrome / isPalindromeAdvanced
+	- `Answer`: isPalindrome / isPalindromeAdvanced / isPalindromeAdvanced2
 '''
 class Solution:
 
@@ -28,8 +28,12 @@ class Solution:
                 builder.append(c)
         
         # If they are the same
-        s1 = "".join(builder)
-        return s1 == s1[::-1]
+        n = len(builder)
+        for i in range(n // 2):
+            if builder[i] != builder[n - 1 - i]:
+                return False
+        
+        return True
 
     '''
 	# Option #2
@@ -63,4 +67,30 @@ class Solution:
             left += 1
             right -= 1
             
+        return True
+    
+    '''
+	# Option #3
+	- Two Pointers With Python Utility
+	- O(n)
+	- Space Complexity: O(1)
+    '''
+    def isPalindromeAdvanced2(self, s: str) -> bool:
+        
+        left, right = 0, len(s) - 1
+
+        while left < right:
+
+            while left < right and not s[left].isalnum():
+                left += 1
+            
+            while left < right and not s[right].isalnum():
+                right -= 1
+
+            if s[left].lower() != s[right].lower():
+                return False
+
+            left += 1
+            right -= 1
+        
         return True
