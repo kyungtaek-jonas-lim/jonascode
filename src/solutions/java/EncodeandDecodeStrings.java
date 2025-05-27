@@ -5,7 +5,9 @@ import java.util.List;
 
 /*
 # Problem
-	- `Link`: https://leetcode.com/problems/encode-and-decode-strings/
+	- `Link`
+        - `LeetCode`: https://leetcode.com/problems/encode-and-decode-strings/
+        - `LintCode`: https://www.lintcode.com/problem/659/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 20

@@ -1,7 +1,9 @@
 from typing import List
 '''
 # Problem
-	- `Link`: https://leetcode.com/problems/encode-and-decode-strings/
+	- `Link`
+        - `LeetCode`: https://leetcode.com/problems/encode-and-decode-strings/
+        - `LintCode`: https://www.lintcode.com/problem/659/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 20
@@ -14,30 +16,21 @@ class Solution:
     - Using Header (metadata in it)
     '''
     def encode(self, strs: List[str]) -> str:
-        encoded = ""
+        encoded = []
         for s in strs:
-            encoded += str(len(s)) + "#" + s
-        return encoded
+            encoded.append(f"{str(len(s))}#{s}")
+        return "".join(encoded)
 
 
     def decode(self, s: str) -> List[str]:
-        decoded = []
-        s_len = len(s)
-        current = 0
-        delimeter_index = 0
-        s_start = 0
-        while current < s_len:
-
-            # Last string
-            delimeter_index = s.find('#', current)
-            if delimeter_index == -1:
-                decoded.append(s[current:])
+        result = []
+        n = len(s)
+        curr, next, length = 0, 0, 0
+        while curr < n:
+            next = s.find('#', curr)
+            if next == -1:
                 break
-            
-            # The other string
-            c_len = int(s[current: delimeter_index])
-            s_start = delimeter_index + 1
-            current = s_start + c_len
-            decoded.append(s[s_start:current])
-
-        return decoded
+            length = int(s[curr:next])
+            curr = next + length + 1
+            result.append(s[next + 1:curr])
+        return result
