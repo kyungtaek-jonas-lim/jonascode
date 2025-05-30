@@ -47,7 +47,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumProductSubarray.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumProductSubarray.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/MaximumProductSubarray.ts))
 8. Longest Substring Without Repeating Characters (3)
 	- [Problem](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestSubstringWithoutRepeatingCharacters.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestSubstringWithoutRepeatingCharacters.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestSubstringWithoutRepeatingCharacters.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestSubstringWithoutRepeatingCharacters.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/LongestSubstringWithoutRepeatingCharacters.ts))
 9. Valid Anagram (242)
 	- [Problem](https://leetcode.com/problems/valid-anagram/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidAnagram.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidAnagram.py))
