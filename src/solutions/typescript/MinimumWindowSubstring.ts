@@ -82,14 +82,12 @@ function minWindow(s: string, t: string): string {
 /**
  * Option #2
  * - Time Complexity: O(n)
- * 
- */function minWindowAdvanced(s: string, t: string): string {
-    
-    let result: number[] = [-1, -1];
-    let resultLength: number = Number.MAX_VALUE;
-    let n: number = s.length, m: number = t.length;
+ * - Using index instead of actually slicing the string
+ */
+function minWindowAdvanced(s: string, t: string): string {
 
     // Edge Case
+    let n: number = s.length, m: number = t.length;
     if (n < m) return "";
     
     // Get counts for valid character
@@ -110,8 +108,9 @@ function minWindow(s: string, t: string): string {
     }
 
     // Switch Window
+    let result: number[] = [-1, -1];
+    let resultLength: number = Number.MAX_VALUE;
     const currentCnts = new Map<string, number>();
-    let currentStr: string = "";
     let currentTypeCnt: number = 0;
     let left: number = 0;
     for (let i = startIndex; i < s.length; i++) {
