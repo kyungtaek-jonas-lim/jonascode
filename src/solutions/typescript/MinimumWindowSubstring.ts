@@ -82,57 +82,69 @@ function minWindow(s: string, t: string): string {
 /**
  * Option #2
  * - Time Complexity: O(n)
- */
-function minWindowAdvanced(s: string, t: string): string {
+ * 
+ */function minWindowAdvanced(s: string, t: string): string {
+    
+    let result: number[] = [-1, -1];
+    let resultLength: number = Number.MAX_VALUE;
+    let n: number = s.length, m: number = t.length;
 
     // Edge Case
-    if  (t === "") return "";
-
-    let cnts = new Map<string, number>();
-    let window = new Map<string, number>();
-
+    if (n < m) return "";
+    
     // Get counts for valid character
+    const cnts = new Map<string, number>();
+    let typeCnt: number = 0;
     for (const c of t) {
+        if (!cnts.has(c)) {
+            typeCnt++;
+        }
         cnts.set(c, (cnts.get(c) ?? 0) + 1);
     }
 
-    let typeCnt: number = cnts.size;
-    let currentTypeCnt: number = 0;
-
-    let result: number[] = [-1, -1];
-    let resultLength: number = Number.MAX_VALUE;
-    let start: number = 0;
-
-    // Switch Window
-    for (let i = 0; i < s.length; i++) {
-        const c = s[i];
-
-        window.set(c, (window.get(c) ?? 0) + 1);
-
-        if (cnts.has(c) && window.get(c)! == cnts.get(c)!) {
-            currentTypeCnt++;
-        }
-
-        // If it meets the condition, narrow the substring down to the minimum length by moving the left index
-        while (typeCnt == currentTypeCnt) {
-            let currentLength: number = (i - start + 1);
-            if (currentLength < resultLength) {
-                result = [start, i];
-                resultLength = currentLength;
-            }
-
-            const c1 = s[start];
-            window.set(c1, (window.get(c1) ?? 0) - 1);
-            if (cnts.has(c1) && window.get(c1)! < cnts.get(c1)!) {
-                currentTypeCnt--;
-            }
-
-            start++;
-        }
+    // Find the valid start index
+    let startIndex: number = 0;
+    for (; startIndex < n; startIndex++) {
+        const c = s[startIndex];
+        if (cnts.has(c)) break;
     }
 
-    return resultLength == Number.MAX_VALUE ? "" : s.slice(result[0], result[1] + 1);
-}
+    // Switch Window
+    const currentCnts = new Map<string, number>();
+    let currentStr: string = "";
+    let currentTypeCnt: number = 0;
+    let left: number = 0;
+    for (let i = startIndex; i < s.length; i++) {
+        
+        const c = s[i];
+        if (cnts.has(c)) {
+            
+            // Mark
+            currentCnts.set(c, (currentCnts.get(c) ?? 0) + 1);
+            if (currentCnts.get(c)! === cnts.get(c)!) currentTypeCnt++;
+
+            while (typeCnt === currentTypeCnt) {
+                
+                let currentLength = (i - left + 1);
+                if (currentLength < resultLength) {
+                    resultLength = currentLength;
+                    result = [left, i];
+                }
+
+                const c1 = s[left];
+                if (cnts.has(c1)) {
+                    if (currentCnts.get(c1)! === cnts.get(c1)!) {
+                        currentTypeCnt--;
+                    }
+                    currentCnts.set(c1, currentCnts.get(c1)! - 1);
+                }
+
+                left++;
+            }
+        }
+    }
+    return resultLength === Number.MAX_VALUE ? "" : s.slice(result[0], result[1] + 1);
+};
 
 
 
