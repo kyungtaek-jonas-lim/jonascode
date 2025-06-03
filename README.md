@@ -68,7 +68,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainerWithMostWater.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ContainerWithMostWater.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ContainerWithMostWater.ts))
 15. Find Minimum in Rotated Sorted Array (153) (**)
 	- [Problem](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/FindMinimuminRotatedSortedArray.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/FindMinimuminRotatedSortedArray.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/FindMinimuminRotatedSortedArray.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/FindMinimuminRotatedSortedArray.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/FindMinimuminRotatedSortedArray.ts))
 16. 3Sum (15) (**)
 	- [Problem](https://leetcode.com/problems/3sum/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ThreeSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ThreeSum.py))

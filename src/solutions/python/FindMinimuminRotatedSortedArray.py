@@ -34,31 +34,20 @@ class Solution:
     # Option #3
     - O(log n)
 	- Binary Search
-	- ref: https://www.youtube.com/watch?v=nIVW4P8b1VA
     '''
     def findMinBest(self, nums: List[int]) -> int:
-
-        result = nums[0]
         left, right = 0, len(nums) - 1
-
-        while left <= right:
-
-            num_left = nums[left]
-            num_right = nums[right]
-
-            # When it's sorted array
-            if num_left < num_right:
-                return min(result, num_left)
+        
+        while left < right:
+            mid = (left + right) // 2
             
-            # If left subarray is sorted, check right subarray and vice versa.
-            middle = (left + right) // 2
-            result = min(result, nums[middle])
-            if num_left <= nums[middle]:
-                left = middle + 1
+            # If middle is greater than right, the right subarray has the minimum value
+            if nums[mid] > nums[right]:
+                left = mid + 1
             else:
-                right = middle - 1
-
-        return result
+                right = mid # Vice versa, but left could be the same as right, so not 'middle - 1'
+        
+        return nums[left]
     
 
 if __name__ == "__main__":
