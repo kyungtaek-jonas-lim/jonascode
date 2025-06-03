@@ -37,31 +37,23 @@ public class FindMinimuminRotatedSortedArray {
 
 	/*
 	# Option #3
+	- O(log n)
 	- Binary Search
-	- Binary Search
-	- ref: https://www.youtube.com/watch?v=nIVW4P8b1VA
 	 */
     public static int findMinBest(int[] nums) {
-    	
-    	int result = nums[0];
-    	int left = 0, right = nums.length - 1, middle = 0;
-    	int num_left = 0, num_right = 0;
-    	
-    	while (left <= right) {
-    		num_left = nums[left];
-    		num_right = nums[right];
-    		
-    		// When it's sorted array
-    		if (num_left < num_right) return Math.min(result, num_left);
-    		
-    		// If left subarray is sorted, check right subarray and vice versa.
-    		middle = (left + right) / 2;
-    		result = Math.min(result, nums[middle]);
-    		if (num_left <= nums[middle]) left = middle + 1;
-    		else right = middle - 1;
-    	}
-    	
-    	return result;
+        int left = 0, right = nums.length - 1;
+        int middle = 0;
+
+        while (left < right) {
+            middle = (left + right) / 2;
+            
+            if (nums[middle] > nums[right]) {
+                left = middle + 1; // If middle is greater than right, the right subarray has the minimum value
+            } else {
+                right = middle; // Vice versa, but left could be the same as right, so not 'middle - 1'
+            }
+        }
+        return nums[left];
     }
     
 	public static void main(String[] args) {

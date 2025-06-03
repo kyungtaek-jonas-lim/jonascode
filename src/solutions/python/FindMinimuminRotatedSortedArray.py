@@ -41,9 +41,8 @@ class Solution:
         while left < right:
             mid = (left + right) // 2
             
-            # If middle is greater than right, the right subarray has the minimum value
             if nums[mid] > nums[right]:
-                left = mid + 1
+                left = mid + 1 # If middle is greater than right, the right subarray has the minimum value
             else:
                 right = mid # Vice versa, but left could be the same as right, so not 'middle - 1'
         
