@@ -51,11 +51,20 @@ function lengthOfLISAdvanced(nums: number[]): number {
     //     }
     // }
 
-    // Way #2
-    for (let i = 1; i < n; i++) { // current target element (from the beginning)
-        for (let j = 0; j < i; j++) { // previous elements to compare with nums[i]
-            if (nums[i] > nums[j]) { // if increasing subsequence condition is met
-                dp[i] = Math.max(dp[i], dp[j] + 1); // update dp[i] based on dp[j] + 1
+    // Way #2 (FASTER)
+    // for (let i = 1; i < n; i++) { // current target element (from the beginning)
+    //     for (let j = 0; j < i; j++) { // previous elements to compare with nums[i]
+    //         if (nums[i] > nums[j]) { // if increasing subsequence condition is met
+    //             dp[i] = Math.max(dp[i], dp[j] + 1); // update dp[i] based on dp[j] + 1
+    //         }
+    //     }
+    // }
+
+    // Way #3 (FASTER)
+    for (let i = n - 2; i >= 0; i--) { // i means start index and it starts from the back (Standard)
+        for (let j = i + 1; j < n; j++) { // From the start, it goes to the back
+            if (nums[i] < nums[j]) {
+                dp[i] = Math.max(dp[i], dp[j] + 1);
             }
         }
     }
