@@ -86,7 +86,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordBreak.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordBreak.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/WordBreak.ts))
 21. Non-overlapping Intervals (435)
 	- [Problem](https://leetcode.com/problems/non-overlapping-intervals/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/NonOverlappingIntervals.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NonOverlappingIntervals.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/NonOverlappingIntervals.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NonOverlappingIntervals.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/NonOverlappingIntervals.ts))
 22. Group Anagrams (49) (*)
 	- [Problem](https://leetcode.com/problems/group-anagrams/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GroupAnagrams.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/GroupAnagrams.py))
