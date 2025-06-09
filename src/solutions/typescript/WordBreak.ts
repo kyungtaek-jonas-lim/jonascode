@@ -10,7 +10,7 @@
 
 /*
 # Option #1
-- Top-Bottom
+- Top-down
 - O(n * m * k) (k === the average length of words in wordDict)
 */
 function wordBreak_dfs(s: string, wordDict: string[]): boolean {
@@ -48,7 +48,7 @@ function wordBreak_dfs(s: string, wordDict: string[]): boolean {
 
 /*
 # Option #2
-- Bottom-Top
+- Bottom-up
 - O(n * m * k) (k === the average length of words in wordDict)
 */
 function wordBreak_dp(s: string, wordDict: string[]): boolean {
