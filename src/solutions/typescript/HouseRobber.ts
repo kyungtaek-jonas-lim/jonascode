@@ -4,7 +4,7 @@
  	- `Link`: https://leetcode.com/problems/house-robber/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Apr 6, 2025
+ 	- `Date`: June 10, 2025
  	- `Answer`: rob / robDP
  */
 
