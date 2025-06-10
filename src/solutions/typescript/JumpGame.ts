@@ -4,8 +4,8 @@
  	- `Link`: https://leetcode.com/problems/jump-game/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
- 	- `Date`: Apr 7, 2025
- 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced
+ 	- `Date`: June 10, 2025
+ 	- `Answer`: canJump
 */
 
 /*
