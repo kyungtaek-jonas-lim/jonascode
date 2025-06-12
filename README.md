@@ -128,7 +128,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SetMatrixZeroes.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SetMatrixZeroes.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/SetMatrixZeroes.ts))
 35. Remove Nth Node From End of List (19) (*)
 	- [Problem](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/RemoveNthNodeFromEndofList.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/RemoveNthNodeFromEndofList.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/RemoveNthNodeFromEndofList.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/RemoveNthNodeFromEndofList.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/RemoveNthNodeFromEndofList.ts))
 36. Reorder List (143) (**)
 	- [Problem](https://leetcode.com/problems/reorder-list/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ReorderList.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ReorderList.py))
