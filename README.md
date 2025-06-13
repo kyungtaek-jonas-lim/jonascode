@@ -155,7 +155,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestPalindromicSubstring.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestPalindromicSubstring.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/LongestPalindromicSubstring.ts))
 43. Palindromic Substrings (647)
 	- [Problem](https://leetcode.com/problems/palindromic-substrings/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/PalindromicSubstrings.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PalindromicSubstrings.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/PalindromicSubstrings.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PalindromicSubstrings.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/PalindromicSubstrings.ts))
 44. Encode and Decode Strings (271)
 	- Problem ([LeetCode](https://leetcode.com/problems/encode-and-decode-strings/), [LintCode](https://www.lintcode.com/problem/659/))
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/EncodeandDecodeStrings.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/EncodeandDecodeStrings.py))
