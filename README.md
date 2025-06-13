@@ -143,7 +143,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordSearch.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearch.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/WordSearch.ts))
 40. Meeting Rooms (252)
 	- Problem ([LeetCode](https://leetcode.com/problems/meeting-rooms/), [LintCode](https://www.lintcode.com/problem/920/))
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MeetingRooms.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MeetingRooms.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MeetingRooms.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MeetingRooms.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/MeetingRooms.ts))
 40. Meeting Rooms II (253) (**)
 	- Problem ([LeetCode](https://leetcode.com/problems/meeting-rooms-ii/), [LintCode](https://www.lintcode.com/problem/919/))
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MeetingRoomsII.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MeetingRoomsII.py))
