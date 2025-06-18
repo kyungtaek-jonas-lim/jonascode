@@ -165,3 +165,6 @@
 46. Clone Graph (133)
 	- [Problem](https://leetcode.com/problems/clone-graph/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/CloneGraph.py))
+47. Course Schedule (207)
+	- [Problem](https://leetcode.com/problems/course-schedule/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/CourseSchedule.py))

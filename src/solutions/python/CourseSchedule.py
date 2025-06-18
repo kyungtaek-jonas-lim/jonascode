@@ -1,0 +1,42 @@
+from typing import List
+
+'''
+# Problem
+	- `Link`: https://leetcode.com/problems/course-schedule/
+# Solution
+	- `Author`: Kyungtaek Lim (Jonas)
+	- `Date`: June 18
+	- `Answer`: canFinish
+'''
+
+class Solution:
+
+    '''
+    # Option #1
+    - O (n + p) (n = numCourses, p = the number of prerequisites)
+    - ref) https://www.youtube.com/watch?v=EgI5nU9etnU&t=1s
+    '''
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        pres = { i: [] for i in range(numCourses)}
+
+        for curr, pre in prerequisites:
+            pres[curr].append(pre)
+        
+        visited = set()
+        def dfs(curr: int) -> bool:
+            if curr in visited: return False
+            
+            visited.add(curr)
+
+            for pre in pres[curr]:
+                if not dfs(pre): return False
+
+            visited.remove(curr)
+
+            pres[curr].clear()
+            return True
+
+        for i in range(numCourses):
+            if not dfs(i): return False
+        return True
