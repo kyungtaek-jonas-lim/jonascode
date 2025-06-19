@@ -174,3 +174,6 @@
 49. Number of Islands (200)
 	- [Problem](https://leetcode.com/problems/number-of-islands/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofIslands.py))
+50. Longest Consecutive Sequence (128)
+	- [Problem](https://leetcode.com/problems/longest-consecutive-sequence/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestConsecutiveSequence.py))
