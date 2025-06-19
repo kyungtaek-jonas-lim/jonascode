@@ -1,4 +1,5 @@
 from typing import List
+import collections
 
 '''
 # Problem
@@ -6,7 +7,7 @@ from typing import List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 19
-	- `Answer`: numIslands / numIslandsAdvanced
+	- `Answer`: numIslands / numIslandsAdvanced / numIslandsBfs
 '''
 
 class Solution:
@@ -73,9 +74,39 @@ class Solution:
 
         return result
 
+
     '''
     # Option #3
     - O(m × n)
     - BFS (free from recursive stack call - more secure)
-    - SKIP
     '''
+    def numIslandsBfs(self, grid: List[List[str]]) -> int:
+        
+        m, n = len(grid), len(grid[0])
+
+        visited = set()
+        result = 0
+
+        def bfs(x: int, y: int):
+
+            visited.add((x, y))
+            q = collections.deque()
+            q.append((x, y))
+
+            while q:
+                qx, qy = q.popleft()                
+                for dx, dy in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
+                    x, y = qx + dx, qy + dy
+                    if (x in range(m) and y in range(n) and
+                        grid[x][y] == "1" and (x, y) not in visited):
+                        q.append((x, y))
+                        visited.add((x, y))
+
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1" and (i, j) not in visited:
+                    bfs(i, j)
+                    result += 1
+
+        return result
