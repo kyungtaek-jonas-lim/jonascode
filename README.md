@@ -177,3 +177,6 @@
 50. Longest Consecutive Sequence (128)
 	- [Problem](https://leetcode.com/problems/longest-consecutive-sequence/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestConsecutiveSequence.py))
+51. Alien Dictionary (269)
+	- Problem ([LeetCode](https://leetcode.com/problems/alien-dictionary/), [LintCode](https://www.lintcode.com/problem/892/))
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/AlienDictionary.py))
