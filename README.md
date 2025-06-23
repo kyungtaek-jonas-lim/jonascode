@@ -180,3 +180,6 @@
 51. Alien Dictionary (269)
 	- Problem ([LeetCode](https://leetcode.com/problems/alien-dictionary/), [LintCode](https://www.lintcode.com/problem/892/))
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/AlienDictionary.py))
+51. Graph Valid Tree (261)
+	- Problem ([LeetCode](https://leetcode.com/problems/graph-valid-tree/), [LintCode](https://www.lintcode.com/problem/178/))
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/GraphValidTree.py))
