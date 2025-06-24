@@ -198,3 +198,6 @@
 58. Binary Tree Maximum Path Sum (124)
 	- [Problem](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeMaximumPathSum.py))
+59. Binary Tree Level Order Traversal (102)
+	- [Problem](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeLevelOrderTraversal.py))
