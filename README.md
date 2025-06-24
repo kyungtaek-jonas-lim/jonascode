@@ -195,3 +195,6 @@
 57. Invert Binary Tree (226)
 	- [Problem](https://leetcode.com/problems/invert-binary-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/InvertBinaryTree.py))
+58. Binary Tree Maximum Path Sum (124)
+	- [Problem](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeMaximumPathSum.py))
