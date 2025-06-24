@@ -192,3 +192,6 @@
 56. Same Tree (100)
 	- [Problem](https://leetcode.com/problems/same-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SameTree.py))
+57. Invert Binary Tree (226)
+	- [Problem](https://leetcode.com/problems/invert-binary-tree/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/InvertBinaryTree.py))
