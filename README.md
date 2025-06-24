@@ -186,3 +186,6 @@
 54. Number of Connected Components in an Undirected Graph (323)
 	- Problem ([LeetCode](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/), [LintCode](https://www.lintcode.com/problem/3651/))
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofConnectedComponentsinanUndirectedGraph.py))
+55. Maximum Depth of Binary Tree (104)
+	- [Problem](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumDepthofBinaryTree.py))
