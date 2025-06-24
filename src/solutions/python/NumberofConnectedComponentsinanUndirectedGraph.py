@@ -9,7 +9,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 23
-	- `Answer`: countComponentsBfs / countComponentsDfs
+	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsAdvanced
 '''
 
 
@@ -82,4 +82,44 @@ class Solution:
         
         for i in range(n):
             result += dfs(i, -1)
+        return result
+
+    """
+    # Option #3
+    - Union-Find
+    - O(n + e)
+    - https://www.youtube.com/watch?v=8f1XPm4WOUc
+    """
+    def countComponentsAdvanced(self, n: int, edges: List[List[int]]) -> int:
+        parent = [ i for i in range(n) ] # Parent(Root) Node (parent[1] = the root node of 1)
+        rank = [1] * n # If a node merged, the root node gets +1
+
+        # Find the root node
+        def find(n):
+            res = n
+            while res != parent[res]: # If parent[n] has not itself, find the root node
+                parent[res] = parent[parent[res]] # Put the root node of the root node as a parent(root) node
+                res = parent[res]
+            return res
+        
+
+        def union(n1, n2):
+            p1, p2 = find(n1), find(n2) # Find the root nodes of each node
+
+            if p1 == p2: # If the roots are the same, don't perform union
+                return 0
+            
+            if rank[p2] > rank[p1]:
+                parent[p1] = p2
+                rank[p2] += rank[p1]
+            else:
+                parent[p2] = p1
+                rank[p1] += rank[p2]
+
+            return 1
+        
+
+        result = n
+        for n1, n2 in edges:
+            result -= union(n1, n2) # If union performed, decrement result 
         return result
