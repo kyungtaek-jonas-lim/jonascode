@@ -61,13 +61,13 @@ class Solution:
     '''    
     def isSameTreeIterativeDfs(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         
-        queue = [(p, q)]
+        stack = [(p, q)]
 
-        while queue:
-            n1, n2 = queue.pop()
+        while stack:
+            n1, n2 = stack.pop()
             if not n1 and not n2: continue
             if not n1 or not n2 or n1.val != n2.val: return False
-            queue.append((n1.left, n2.left))
-            queue.append((n1.right, n2.right))
+            stack.append((n1.left, n2.left))
+            stack.append((n1.right, n2.right))
         
         return True
