@@ -170,7 +170,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/CourseSchedule.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/CourseSchedule.py))
 49. Pacific Atlantic Water Flow (417)
 	- [Problem](https://leetcode.com/problems/pacific-atlantic-water-flow/)
-	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PacificAtlanticWaterFlow.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/PacificAtlanticWaterFlow.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PacificAtlanticWaterFlow.py))
 50. Number of Islands (200)
 	- [Problem](https://leetcode.com/problems/number-of-islands/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofIslands.py))
