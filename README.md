@@ -173,7 +173,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/PacificAtlanticWaterFlow.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/PacificAtlanticWaterFlow.py))
 50. Number of Islands (200)
 	- [Problem](https://leetcode.com/problems/number-of-islands/)
-	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofIslands.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/NumberofIslands.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofIslands.py))
 51. Longest Consecutive Sequence (128)
 	- [Problem](https://leetcode.com/problems/longest-consecutive-sequence/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestConsecutiveSequence.py))
