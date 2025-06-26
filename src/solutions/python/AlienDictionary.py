@@ -14,6 +14,10 @@ from typing import List
 class Solution:
 
     """
+	# Option #1
+	- Recursive DFS
+	- O(n * m + k + e) (n = words.length, m = the average length of words, k = total number of unique characters, e = number of edges)
+	- ref) https://www.youtube.com/watch?v=6kTZYvNNyps
     """
     def alienOrder(self, words: List[str]) -> str:
         
