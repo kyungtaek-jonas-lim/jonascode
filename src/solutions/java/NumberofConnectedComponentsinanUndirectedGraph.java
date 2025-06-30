@@ -1,6 +1,7 @@
 package solutions.java;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ import java.util.Set;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 30
-	- `Answer`: countComponentsBfs / countComponentsDfs
+	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsAdvanced
  */
 public class NumberofConnectedComponentsinanUndirectedGraph {
 	
@@ -105,6 +106,56 @@ public class NumberofConnectedComponentsinanUndirectedGraph {
             dfs(map, visited, neighbor);
         }
 
+        return 1;
+    }
+    
+
+	/*
+    # Option #3
+    - Union-Find
+    - O(n + e)
+    - https://www.youtube.com/watch?v=8f1XPm4WOUc
+	 */
+    public int countComponentsAdvanced(int n, int[][] edges) {
+        
+        // Parents
+        int[] parents = new int[n];
+        for (int i = 0; i < n; i++) {
+        	parents[i] = i;
+        }
+
+        // Ranks
+        int[] ranks = new int[n];
+        Arrays.fill(ranks, 1);
+
+        // Union
+        int result = n;
+        for (int[] edge: edges) {
+            result -= union(parents, ranks, edge[0], edge[1]);
+        }
+        return result;
+    }
+
+    private int find(int[] parents, int current) {
+        int result = current;
+        while (parents[result] != result) {
+        	parents[result] = parents[parents[result]];
+        	result = parents[result];
+        }
+        return result;
+    }
+
+    private int union(int[] parents, int[] ranks, int n1, int n2) {
+        int p1 = find(parents, n1), p2 = find(parents, n2);
+        if (p1 == p2) return 0;
+        
+        if (ranks[p1] < ranks[p2]) {
+            parents[p1] = p2;
+            ranks[p2] += ranks[p1];
+        } else {
+            parents[p2] = p1;
+            ranks[p1] += ranks[p2];
+        }
         return 1;
     }
 }
