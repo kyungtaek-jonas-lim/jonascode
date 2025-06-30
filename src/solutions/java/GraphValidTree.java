@@ -1,9 +1,9 @@
 package solutions.java;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,13 +53,13 @@ public class GraphValidTree {
     
     private boolean bfs(Map<Integer, Set<Integer>> map) {
     	
-        Deque<int[]> queue = new LinkedList<>();
+        Deque<int[]> queue = new ArrayDeque<>();
         queue.add(new int[] {0, -1});
 
         Set<Integer> visited = new HashSet<>();
         
         while (!queue.isEmpty()) {
-        	int[] item = queue.pollFirst();
+        	int[] item = queue.poll();
         	int current = item[0], prev = item[1];
 
             if (visited.contains(current)) return false; // Loop (Invalid #2)
