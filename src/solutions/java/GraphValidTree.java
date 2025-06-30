@@ -1,7 +1,9 @@
 package solutions.java;
 
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,10 +15,72 @@ import java.util.Set;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 30
-	- `Answer`: validTree
+	- `Answer`: validTreeBfs / validTreeDfs
  */
 public class GraphValidTree {
-    public boolean validTree(int n, int[][] edges) {
+
+	/*
+    # Option #1
+    - BFS
+    - O(n + e)
+	 */
+    public boolean validTreeBfs(int n, int[][] edges) {
+        
+        /*
+        1. The number of edge (n - 1)
+        2. Loop
+        3. Separate
+        */
+    	
+    	// The number of edges (Invalid #1)
+    	if (edges.length != n - 1) return false;
+
+        // Init
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(i, new HashSet<>());
+        }
+
+        // Build graph
+        for (int[] edge: edges) {
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
+        }
+
+        // Bfs
+        return bfs(map);
+    }
+    
+    private boolean bfs(Map<Integer, Set<Integer>> map) {
+    	
+        Deque<int[]> queue = new LinkedList<>();
+        queue.add(new int[] {0, -1});
+
+        Set<Integer> visited = new HashSet<>();
+        
+        while (!queue.isEmpty()) {
+        	int[] item = queue.pollFirst();
+        	int current = item[0], prev = item[1];
+
+            if (visited.contains(current)) return false; // Loop (Invalid #2)
+            visited.add(current);
+        	
+	        Set<Integer> currentEdge = map.get(current);
+	        for (int next: currentEdge) {
+	            if (next == prev) continue;
+	            queue.add(new int[] {next, current});
+	        }
+        }
+        return visited.size() == map.size(); // See if there's a separate tree (Invalid #3)
+    }
+    
+    
+    /*
+    # Option #2
+    - DFS
+    - O(n + e)
+     */
+    public boolean validTreeDfs(int n, int[][] edges) {
         
         /*
         1. The number of edge (n - 1)
@@ -66,7 +130,7 @@ public class GraphValidTree {
     
     public static void main(String[] args) {
 		GraphValidTree solution = new GraphValidTree();
-		System.out.println(solution.validTree(5, new int[][] {{0, 1}, {0, 2}, {0, 3}, {1, 4}}));
-		System.out.println(solution.validTree(5, new int[][] {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}}));
+		System.out.println(solution.validTreeDfs(5, new int[][] {{0, 1}, {0, 2}, {0, 3}, {1, 4}}));
+		System.out.println(solution.validTreeDfs(5, new int[][] {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}}));
 	}
 }
