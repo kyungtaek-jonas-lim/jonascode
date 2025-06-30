@@ -36,16 +36,15 @@ class Solution:
                 return 0
             
             deque = collections.deque()
-            deque.append((i, -1))
+            deque.append(i)
 
             while deque:
-                curr, prev = deque.popleft()
-                if curr in visited: continue
+                curr = deque.popleft()
                 visited.add(curr)
                 
                 for neighbor in memo.get(curr):
-                    if neighbor == prev: continue
-                    deque.append((neighbor, curr))
+                    if neighbor in visited: continue
+                    deque.append(neighbor)
 
             return 1
         
@@ -68,20 +67,19 @@ class Solution:
 
         visited = set()
         result = 0
-        def dfs(curr: int, prev: int) -> int:
+        def dfs(curr: int) -> int:
             if curr in visited:
                 return 0
             
             visited.add(curr)
             
             for neighbor in memo.get(curr):
-                if neighbor == prev: continue
-                dfs(neighbor, curr)
+                dfs(neighbor)
 
             return 1
         
         for i in range(n):
-            result += dfs(i, -1)
+            result += dfs(i)
         return result
 
     """
