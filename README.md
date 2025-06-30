@@ -188,7 +188,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/NumberofConnectedComponentsinanUndirectedGraph.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofConnectedComponentsinanUndirectedGraph.py))
 55. Maximum Depth of Binary Tree (104)
 	- [Problem](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
-	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumDepthofBinaryTree.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumDepthofBinaryTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumDepthofBinaryTree.py))
 56. Same Tree (100)
 	- [Problem](https://leetcode.com/problems/same-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SameTree.py))
