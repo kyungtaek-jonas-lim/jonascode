@@ -182,7 +182,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/AlienDictionary.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/AlienDictionary.py))
 53. Graph Valid Tree (261)
 	- Problem ([LeetCode](https://leetcode.com/problems/graph-valid-tree/), [LintCode](https://www.lintcode.com/problem/178/))
-	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/GraphValidTree.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/GraphValidTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/GraphValidTree.py))
 54. Number of Connected Components in an Undirected Graph (323)
 	- Problem ([LeetCode](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/), [LintCode](https://www.lintcode.com/problem/3651/))
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofConnectedComponentsinanUndirectedGraph.py))
