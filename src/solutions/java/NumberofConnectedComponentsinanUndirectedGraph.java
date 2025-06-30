@@ -1,0 +1,110 @@
+package solutions.java;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+/*
+# Problem
+	- `Link`
+        - `LeetCode`: https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
+        - `LintCode`: https://www.lintcode.com/problem/3651/
+# Solution
+	- `Author`: Kyungtaek Lim (Jonas)
+	- `Date`: June 30
+	- `Answer`: countComponentsBfs / countComponentsDfs
+ */
+public class NumberofConnectedComponentsinanUndirectedGraph {
+	
+	/*
+    # Option #1
+    - BFS
+    - O(n + e)
+	 */
+    public int countComponentsBfs(int n, int[][] edges) {
+        
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(i, new HashSet<>());
+        }
+
+        // Build graph
+        for (int[] edge: edges) {
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
+        }
+
+        int result = 0;
+        Set<Integer> visited = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            if (visited.contains(i)) continue;
+            result += bfs(map, visited, i);
+        }
+        
+        return result;
+    }
+
+    private int bfs(Map<Integer, Set<Integer>> map, Set<Integer> visited, int current) {
+        
+        Deque<Integer> deque = new ArrayDeque<>();
+        deque.add(current);
+
+        while (!deque.isEmpty()) {
+            current = deque.poll();
+            
+            visited.add(current);
+
+            Set<Integer> neighbors = map.get(current);
+            for (int neighbor: neighbors) {
+                if (visited.contains(neighbor)) continue;
+                deque.add(neighbor);
+            }
+        }
+
+        return 1;
+    }
+    
+    /*
+    # Option #2
+    - DFS
+    - O(n + e)
+     */
+    public int countComponentsDfs(int n, int[][] edges) {
+        
+        Map<Integer, Set<Integer>> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(i, new HashSet<>());
+        }
+
+        // Build graph
+        for (int[] edge: edges) {
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
+        }
+
+        int result = 0;
+        Set<Integer> visited = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            if (visited.contains(i)) continue;
+            result += dfs(map, visited, i);
+        }
+        
+        return result;
+    }
+
+    private int dfs(Map<Integer, Set<Integer>> map, Set<Integer> visited, int curr) {
+        
+        visited.add(curr);
+
+        Set<Integer> neighbors = map.get(curr);
+        for (int neighbor: neighbors) {
+            if (visited.contains(neighbor)) continue;
+            dfs(map, visited, neighbor);
+        }
+
+        return 1;
+    }
+}
