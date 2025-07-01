@@ -203,4 +203,4 @@
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeMaximumPathSum.py))
 60. Binary Tree Level Order Traversal (102)
 	- [Problem](https://leetcode.com/problems/binary-tree-level-order-traversal/)
-	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeLevelOrderTraversal.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BinaryTreeLevelOrderTraversal.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeLevelOrderTraversal.py))
