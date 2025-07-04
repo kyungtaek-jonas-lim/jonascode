@@ -213,3 +213,6 @@
 63. Construct Binary Tree from Preorder and Inorder Traversal (105)
 	- [Problem](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ConstructBinaryTreefromPreorderandInorderTraversal.py))
+64. Validate Binary Search Tree (98)
+	- [Problem](https://leetcode.com/problems/validate-binary-search-tree/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidateBinarySearchTree.py))
