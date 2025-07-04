@@ -210,3 +210,6 @@
 62. Subtree of Another Tree (572)
 	- [Problem](https://leetcode.com/problems/subtree-of-another-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SubtreeofAnotherTree.py))
+63. Construct Binary Tree from Preorder and Inorder Traversal (105)
+	- [Problem](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ConstructBinaryTreefromPreorderandInorderTraversal.py))
