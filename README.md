@@ -216,3 +216,6 @@
 64. Validate Binary Search Tree (98)
 	- [Problem](https://leetcode.com/problems/validate-binary-search-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidateBinarySearchTree.py))
+65. Kth Smallest Element in a BST (230)
+	- [Problem](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/KthSmallestElementinaBST.py))
