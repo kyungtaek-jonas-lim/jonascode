@@ -219,3 +219,6 @@
 65. Kth Smallest Element in a BST (230)
 	- [Problem](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/KthSmallestElementinaBST.py))
+66. Lowest Common Ancestor of a Binary Search Tree (235)
+	- [Problem](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LowestCommonAncestorofaBinarySearchTree.py))
