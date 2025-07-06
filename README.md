@@ -222,3 +222,6 @@
 66. Lowest Common Ancestor of a Binary Search Tree (235)
 	- [Problem](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LowestCommonAncestorofaBinarySearchTree.py))
+67. Implement Trie (Prefix Tree) (208)
+	- [Problem](https://leetcode.com/problems/implement-trie-prefix-tree/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ImplementTriePrefixTree.py))
