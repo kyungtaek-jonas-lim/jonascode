@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 6, 2025
-	- `Answer`: findWords
+	- `Answer`: Solution / SolutionPrefixNode
 '''
     
 class Solution:
@@ -68,10 +68,74 @@ class Solution:
         return list(result) # Transform return values to List
     
 
+'''
+# Option #2
+- Prefix Node (Trie)
+- O((W * L) + m * n * 4^L) (W = The length of words list, L = the longest length of all the words)
+'''
+class TreeNode:
+    def __init__(self):
+        self.children = {}
+        self.end = False
+
+class SolutionPrefixNode:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        
+        root = TreeNode()
+
+
+        # Insert Words
+        for word in words:
+            curr = root
+
+            for c in word:
+                if c not in curr.children:
+                    curr.children[c] = TreeNode()
+                curr = curr.children[c]
+            curr.end = True
+
+
+        # Search Function
+        result = set()
+        m, n = len(board), len(board[0])
+        def dfs(x: int, y: int, curr: TreeNode, visited: set, word: List[str]):
+            if x < 0 or y < 0 or x >= m or y >= n:
+                return
+            if (x, y) in visited:
+                return
+            cw: str = board[x][y]
+            if cw not in curr.children:
+                return
+
+            visited.add((x, y))
+            word.append(cw)
+            curr = curr.children[cw]
+            if curr.end:
+                result.add("".join(word))
+
+            for dx, dy in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
+                dfs(x + dx, y + dy, curr, visited, word)
+
+            visited.remove((x, y))
+            word.pop()
+            
+        
+        # Search
+        for i in range(m):
+            for j in range(n):
+                dfs(i, j, root, set(), [])
+        return list(result)
+
 
 
 if __name__ == "__main__":
     sol = Solution()
+    print(sol.findWords([["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], ["oath","pea","eat","rain"]))
+    print(sol.findWords([["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]], ["oa","oaa"]))
+    print(sol.findWords([["a","a"]], ["aaa"]))
+    print(sol.findWords([["a","b","c","e"],["x","x","c","d"],["x","x","b","a"]], ["abc","abcd"]))
+
+    sol = SolutionPrefixNode()
     print(sol.findWords([["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], ["oath","pea","eat","rain"]))
     print(sol.findWords([["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]], ["oa","oaa"]))
     print(sol.findWords([["a","a"]], ["aaa"]))
