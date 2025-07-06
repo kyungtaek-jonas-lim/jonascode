@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 6, 2025
-	- `Answer`: Trie
+	- `Answer`: Trie / TriePrefixTree
 '''
 
 
