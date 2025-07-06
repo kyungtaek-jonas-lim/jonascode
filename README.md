@@ -225,3 +225,6 @@
 67. Implement Trie (Prefix Tree) (208)
 	- [Problem](https://leetcode.com/problems/implement-trie-prefix-tree/)
 	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ImplementTriePrefixTree.py))
+68. Design Add and Search Words Data Structure (211)
+	- [Problem](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
+	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/DesignAddandSearchWordsDataStructure.py))
