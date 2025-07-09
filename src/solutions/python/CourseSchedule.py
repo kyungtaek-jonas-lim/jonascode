@@ -14,27 +14,25 @@ class Solution:
     '''
     # Option #1
     - O (n + p) (n = numCourses, p = the number of prerequisites)
-    - ref) https://www.youtube.com/watch?v=EgI5nU9etnU&t=1s
     '''
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         
-        pres = { i: [] for i in range(numCourses)}
+        pres = { i: set() for i in range(numCourses)}
 
         for curr, pre in prerequisites:
-            pres[curr].append(pre)
+            pres[curr].add(pre)
         
-        visited = set()
+        visited = {}
         def dfs(curr: int) -> bool:
-            if curr in visited: return False
+            if curr in visited: return visited[curr]
             
-            visited.add(curr)
+            visited[curr] = False
 
             for pre in pres[curr]:
                 if not dfs(pre): return False
 
-            visited.remove(curr)
+            visited[curr] = True
 
-            pres[curr].clear()
             return True
 
         for i in range(numCourses):
