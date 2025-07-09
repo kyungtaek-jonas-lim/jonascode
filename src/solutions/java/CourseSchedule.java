@@ -33,23 +33,26 @@ public class CourseSchedule {
             map.get(prerequisite[0]).add(prerequisite[1]);
         }
 
+        Map<Integer, Boolean> visited = new HashMap<>();
         for (int i = 0; i < numCourses; i++) {
-            Set<Integer> set = new HashSet<>();
-            if (!dfs(map, i, set)) return false;
+            if (!dfs(map, i, visited)) return false;
         }
 
         return true;
     }
 
-    private boolean dfs(Map<Integer, List<Integer>> map, int curr, Set<Integer> set) {
-        if (map.get(curr) == null) return true;
-        if (set.contains(curr)) return false;
-        set.add(curr);
-        for (int i: map.get(curr)) {
-            if (!dfs(map, i, set)) return false;
+    private boolean dfs(Map<Integer, List<Integer>> map, int curr, Map<Integer, Boolean> visited) {
+        
+    	if (visited.containsKey(curr)) return visited.get(curr);
+        visited.put(curr, false);
+        
+        List<Integer> pres = map.get(curr);
+        for (int i: pres) {
+            if (!dfs(map, i, visited)) return false;
         }
-        set.remove(curr);
-        map.remove(curr);
+        
+        visited.put(curr, true);
+        
         return true;
     }
 }
