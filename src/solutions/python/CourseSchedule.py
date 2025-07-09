@@ -17,10 +17,10 @@ class Solution:
     '''
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         
-        pres = { i: set() for i in range(numCourses)}
+        pres = { i: [] for i in range(numCourses)}
 
         for curr, pre in prerequisites:
-            pres[curr].add(pre)
+            pres[curr].append(pre)
         
         visited = {}
         def dfs(curr: int) -> bool:
