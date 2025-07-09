@@ -230,4 +230,4 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/DesignAddandSearchWordsDataStructure.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/DesignAddandSearchWordsDataStructure.py))
 69. Word Search II (212)
 	- [Problem](https://leetcode.com/problems/word-search-ii/)
-	- Solution ([Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearchII.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordSearchII.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearchII.py))
