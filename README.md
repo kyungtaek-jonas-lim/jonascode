@@ -176,7 +176,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/NumberofIslands.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofIslands.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/NumberofIslands.ts))
 51. Longest Consecutive Sequence (128)
 	- [Problem](https://leetcode.com/problems/longest-consecutive-sequence/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestConsecutiveSequence.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestConsecutiveSequence.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LongestConsecutiveSequence.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LongestConsecutiveSequence.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/LongestConsecutiveSequence.ts))
 52. Alien Dictionary (269) (**)
 	- Problem ([LeetCode](https://leetcode.com/problems/alien-dictionary/), [LintCode](https://www.lintcode.com/problem/892/))
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/AlienDictionary.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/AlienDictionary.py))
