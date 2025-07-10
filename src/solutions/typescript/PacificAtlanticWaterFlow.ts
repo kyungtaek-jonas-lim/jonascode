@@ -18,7 +18,7 @@ function pacificAtlantic(heights: number[][]): number[][] {
     const m: number = heights.length, n: number = heights[0].length;
     
     // From Pacific to Atlantic (Top, Left)
-    const visitedPacific = new Set<String>();
+    const visitedPacific = new Set<string>();
     for (let i = 0; i < n; i++) {
         dfs(heights, 0, i, -1, visitedPacific);
     }
@@ -27,7 +27,7 @@ function pacificAtlantic(heights: number[][]): number[][] {
     }
 
     // From Atlantic to Pacific (Bottom, Right)
-    const visitedAtlantic = new Set<String>();
+    const visitedAtlantic = new Set<string>();
     for (let i = 0; i < n; i++) {
         dfs(heights, m - 1, i, -1, visitedAtlantic);
     }
@@ -46,7 +46,7 @@ function pacificAtlantic(heights: number[][]): number[][] {
     return result;
 };
 
-function dfs(heights: number[][], x: number, y: number, prev: number, visited: Set<String>): void {
+function dfs(heights: number[][], x: number, y: number, prev: number, visited: Set<string>): void {
     // Validation
     const m: number = heights.length, n: number = heights[0].length;
     if (x < 0 || y < 0 || x >= m || y >= n) return;
