@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /*
  # Problem
- 	- `Link`: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+ 	- `Link`: https://leetcode.com/problems/number-of-provinces/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: July 1, 2025
