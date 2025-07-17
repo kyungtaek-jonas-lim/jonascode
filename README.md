@@ -203,7 +203,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BinaryTreeMaximumPathSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeMaximumPathSum.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/BinaryTreeMaximumPathSum.ts))
 60. Binary Tree Level Order Traversal (102)
 	- [Problem](https://leetcode.com/problems/binary-tree-level-order-traversal/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BinaryTreeLevelOrderTraversal.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeLevelOrderTraversal.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BinaryTreeLevelOrderTraversal.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeLevelOrderTraversal.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/BinaryTreeLevelOrderTraversal.ts))
 61. Serialize and Deserialize Binary Tree (297) (**)
 	- [Problem](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SerializeandDeserializeBinaryTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SerializeandDeserializeBinaryTree.py))
