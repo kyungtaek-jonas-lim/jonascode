@@ -191,7 +191,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/NumberofProvinces.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/NumberofProvinces.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/NumberofProvinces.ts))
 56. Maximum Depth of Binary Tree (104)
 	- [Problem](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumDepthofBinaryTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumDepthofBinaryTree.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MaximumDepthofBinaryTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MaximumDepthofBinaryTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/MaximumDepthofBinaryTree.ts))
 57. Same Tree (100)
 	- [Problem](https://leetcode.com/problems/same-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/SameTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/SameTree.py))
