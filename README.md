@@ -218,7 +218,7 @@
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidateBinarySearchTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidateBinarySearchTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ValidateBinarySearchTree.ts))
 65. Kth Smallest Element in a BST (230) (**)
 	- [Problem](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/KthSmallestElementinaBST.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/KthSmallestElementinaBST.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/KthSmallestElementinaBST.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/KthSmallestElementinaBST.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/KthSmallestElementinaBST.ts))
 66. Lowest Common Ancestor of a Binary Search Tree (235) (*)
 	- [Problem](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LowestCommonAncestorofaBinarySearchTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LowestCommonAncestorofaBinarySearchTree.py))
