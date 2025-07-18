@@ -228,6 +228,6 @@
 68. Design Add and Search Words Data Structure (211) (*)
 	- [Problem](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/DesignAddandSearchWordsDataStructure.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/DesignAddandSearchWordsDataStructure.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/DesignAddandSearchWordsDataStructure.ts))
-69. Word Search II (212)
+69. Word Search II (212) (*)
 	- [Problem](https://leetcode.com/problems/word-search-ii/)
-	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordSearchII.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearchII.py))
+	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/WordSearchII.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/WordSearchII.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/WordSearchII.ts))
