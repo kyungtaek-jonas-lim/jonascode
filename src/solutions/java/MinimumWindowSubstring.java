@@ -1,6 +1,8 @@
 package solutions.java;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 # Problem
@@ -8,7 +10,7 @@ import java.util.Arrays;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Feb 1, 2025
-	- `Answer`: minWindow
+	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest
 */
 
 public class MinimumWindowSubstring {
@@ -249,6 +251,61 @@ public class MinimumWindowSubstring {
         }
 
         return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+    }
+    
+
+
+	
+    /**
+	* @option 4
+	* @description Simple and Best way
+	* @timeComplexity O(n + m) (n: the length of s, m: the length of t)
+	* @param s
+	* @param t
+	* @return
+	*/
+    public String minWindowSimpleAndBest(String s, String t) {
+        
+        Map<Character, Integer> numberOfCharacters = new HashMap<>();
+        char[] tCharArray = t.toCharArray();
+        for (char c: tCharArray) {
+            numberOfCharacters.put(c, numberOfCharacters.getOrDefault(c, 0) + 1);
+        }
+
+        int[] result = new int[] {-1, s.length() + 1};
+        int left = 0, n = s.length();
+        int curr = 0, goal = numberOfCharacters.size();
+        char[] sCharArray = s.toCharArray();
+        Map<Character, Integer> numberOfCurrent = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            char c = sCharArray[i];
+            if (!numberOfCharacters.containsKey(c)) continue;
+
+            numberOfCurrent.put(c, numberOfCurrent.getOrDefault(c, 0) + 1);
+            
+            if (numberOfCurrent.get(c).equals(numberOfCharacters.get(c))) {
+                curr++;
+            }
+
+            while (curr == goal) {
+                if (i - left < result[1] - result[0]) {
+                    result[1] = i;
+                    result[0] = left;
+                }
+
+                char temp = sCharArray[left++];
+                if (numberOfCurrent.containsKey(temp)) {
+                    numberOfCurrent.put(temp, numberOfCurrent.get(temp) - 1);
+                    if (numberOfCurrent.get(temp) < numberOfCharacters.get(temp)) {
+                        curr--;
+                    }
+                }
+            }
+        }
+
+        if (result[0] == -1) return "";
+        return s.substring(result[0], result[1] + 1);
     }
 
 }

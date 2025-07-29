@@ -6,7 +6,7 @@ from collections import Counter
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Mar 25, 2025 (minWindowAdvanced) / Apr 9, 2025 (minWindow)
-	- `Answer`: minWindow / minWindowAdvanced
+	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest
 '''
 
 class Solution:
@@ -189,6 +189,46 @@ class Solution:
 
         l, r = min_window
         return s[l:r+1] if min_len != float("inf") else ""
+
+    '''
+    # Option #4
+    - O(n + m) (n: the length of s, m: the length of t)
+    '''
+    def minWindowSimpleAndBest(self, s: str, t: str) -> str:
+        
+        number_of_characters = {}
+        for c in t:
+            number_of_characters[c] = number_of_characters.get(c, 0) + 1
+
+        result = [-1, float('inf')]
+        left, n = 0, len(s)
+        curr_cnt, goal_cnt = 0, len(number_of_characters)
+        number_of_current = {}
+
+        for i in range(n):
+            c = s[i]
+            if c not in number_of_characters:
+                continue
+
+            number_of_current[c] = number_of_current.get(c, 0) + 1
+            if number_of_current[c] == number_of_characters[c]:
+                curr_cnt += 1
+
+            while curr_cnt == goal_cnt:
+                if i - left < result[1] - result[0]:
+                    result[1] = i
+                    result[0] = left
+                
+                c_temp = s[left]
+                left += 1
+                if c_temp in number_of_current:
+                    number_of_current[c_temp] -= 1
+                    if number_of_current[c_temp] < number_of_characters[c_temp]:
+                        curr_cnt -= 1
+
+        if result[0] < 0:
+            return ""
+        return s[result[0]:result[1] + 1]
         
 
 if __name__ == '__main__':
