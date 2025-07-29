@@ -54,7 +54,7 @@
 10. Contains Duplicate (217)
 	- [Problem](https://leetcode.com/problems/contains-duplicate/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ContainsDuplicate.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ContainsDuplicate.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ContainsDuplicate.ts))
-11. Minimum Window Substring (76) (**)
+11. Minimum Window Substring (76) (***)
 	- [Problem](https://leetcode.com/problems/minimum-window-substring/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/MinimumWindowSubstring.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/MinimumWindowSubstring.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/MinimumWindowSubstring.ts))
 12. Merge Intervals (56)
