@@ -72,7 +72,7 @@
 16. 3Sum (15) (*)
 	- [Problem](https://leetcode.com/problems/3sum/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ThreeSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ThreeSum.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ThreeSum.ts))
-17. Coin Change (322) (**)
+17. Coin Change (322) (***)
 	- [Problem](https://leetcode.com/problems/coin-change/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/CoinChange.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/CoinChange.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/CoinChange.ts))
 18. Longest Increasing Subsequence (300) (*)
