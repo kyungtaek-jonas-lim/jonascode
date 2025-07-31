@@ -11,7 +11,7 @@ import java.util.List;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 18, 2025
- 	- `Answer`: lengthOfLIS, lengthOfLISAdvanced
+ 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISSimple
  */
 public class LongestIncreasingSubsequence {
 	public static void main(String[] args) {
@@ -84,6 +84,28 @@ public class LongestIncreasingSubsequence {
     	
     	// The length of the tails list represents the length of the longest increasing subsequence
     	return tails.size();
+    }
+
+    
+    // Dynamic Programming
+    // O(n^2)
+    // https://www.youtube.com/watch?v=cjWnW0hdF1Y
+    public int lengthOfLISSimple(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+
+        int result = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            for (int j = n - 1; j > i; j--) {
+                if (nums[i] < nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            result = Math.max(result, dp[i]);
+        }
+
+        return result;
     }
     
 }

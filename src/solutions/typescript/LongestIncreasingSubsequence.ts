@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 6, 2025
- 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced
+ 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISSimple
 */
 
 /**
@@ -70,4 +70,30 @@ function lengthOfLISAdvanced(nums: number[]): number {
     }
     
     return Math.max(...dp);
+};
+
+
+
+/**
+# Option #3
+- DP Simple
+- O(n^2)
+- https://www.youtube.com/watch?v=cjWnW0hdF1Y
+ */
+function lengthOfLISSimple(nums: number[]): number {
+    
+    const n: number = nums.length;
+    const dp: number[] = new Array(n).fill(1);
+
+    let result: number = 1;
+    for (let i = n - 2; i >= 0; i--) {
+        for (let j = n - 1; j > i; j--) {
+            if (nums[i] < nums[j]) {
+                dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+        }
+        result = Math.max(result, dp[i]);
+    }
+    
+    return result;
 };

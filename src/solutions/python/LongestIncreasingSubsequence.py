@@ -7,7 +7,7 @@ import bisect
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 18, 2025
- 	- `Answer`: lengthOfLIS, lengthOfLISAdvanced
+ 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISSimple
  '''
 class Solution:
 
@@ -57,6 +57,22 @@ class Solution:
         
         # The length of the tails array represents the length of the longest increasing subsequence
         return len(tails)
+    
+
+    # Dynamic Programming
+    # O(n^2)
+    # https://www.youtube.com/watch?v=cjWnW0hdF1Y
+    def lengthOfLISSimple(self, nums: List[int]) -> int:
+        
+        n = len(nums)
+        dp = [1] * n
+
+        for i in range(n - 2, -1, -1):
+            for j in range(n - 1, i, -1):
+                if nums[i] < nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
+        
+        return max(dp)
 
 
 
