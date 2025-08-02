@@ -70,10 +70,12 @@ public class LongestCommonSubsequence {
 	 * O (n * m)
 	 */
     public static int longestCommonSubsequence2d(String text1, String text2) {
+
+        // Get Char Arrays
+        char[] c1 = text1.toCharArray(), c2 = text2.toCharArray();
     	
     	// Get lengths of both input strings
-    	int m = text1.length();
-    	int n = text2.length();
+    	int m = c1.length, n = c2.length;
     	
     	// Initialize a 2D DP table with (m+1) rows and (n+1) columns
     	// dp[i][j] will represent the length of LCS
@@ -85,7 +87,7 @@ public class LongestCommonSubsequence {
     			
     			// Characters match: extend the LCS by 1
     			// Use the value from the diagonal (previous characters)
-    			if (text1.charAt(i) == text2.charAt(j)) dp[i + 1][j + 1] = dp[i][j] + 1;
+    			if (c1[i] == c2[j]) dp[i + 1][j + 1] = dp[i][j] + 1;
     			
     			// Characters don't match:
     			// Take the maximum LCS length by either:
