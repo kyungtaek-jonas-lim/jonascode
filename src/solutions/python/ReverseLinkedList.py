@@ -22,23 +22,19 @@ class Solution:
 	 - Iterative way
     '''
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-
-        # Edge Case: Empty NodeList or only one node
+        
         if not head or not head.next:
             return head
-        
-        next_node = head.next
-        prev_node = head
-        head.next = None
 
-        while True:
-            temp_node = next_node.next
-            next_node.next = prev_node
-            if temp_node == None: # It means originally `nextNode` was the last node
-                break
-            prev_node = next_node
-            next_node = temp_node
-        return next_node # return the revised lastNode which is now the first node.
+        prev, next = None, None
+
+        while head:
+            next = head.next
+            head.next = prev
+            prev = head
+            head = next
+
+        return prev
     
     '''
 	 # Option #2

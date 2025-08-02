@@ -22,23 +22,18 @@ public class ReverseLinkedList {
 	 - Iterative way
 	 */
     public static ListNode reverseList(ListNode head) {
-        
-    	// Edge Case: Empty NodeList or only one node
-    	if (head == null || head.next == null) return head;
-    	
-    	// Move the next node
-    	ListNode nextNode = head.next;
-    	ListNode prevNode = head;
-    	head.next = null;
-    	while (true) {
-    		ListNode tempNode = nextNode.next;
-    		nextNode.next = prevNode;
-    		if (tempNode == null) // It means originally `nextNode` was the last node
-    			break;
-    		prevNode = nextNode;
-    		nextNode = tempNode;
-    	}
-    	return nextNode; // return the revised lastNode which is now the first node.
+        if (head == null || head.next == null) return head;
+
+        ListNode prev = null, next = null;
+
+        while (head != null) {
+            next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+
+        return prev;
     }
     
 
