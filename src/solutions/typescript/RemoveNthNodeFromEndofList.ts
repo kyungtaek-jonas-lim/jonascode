@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 10, 2025
-	- `Answer`: removeNthFromEnd / removeNthFromEndAdvanced
+	- `Answer`: removeNthFromEnd / removeNthFromEndDfsRecursive / removeNthFromEndTwoPointers
 */
 
 class ListNode {
@@ -21,6 +21,7 @@ class ListNode {
 # Option #1
 - Two Pass
 - O(n)
+- Space: O(n)
 */
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
     
@@ -49,11 +50,39 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
 
 /*
 # Option #2
-- One Pass
+- DFS Recursive
 - O(n)
+- Space: O(n)
+*/
+function removeNthFromEndDfsRecursive(head: ListNode | null, n: number): ListNode | null {
+
+    let next: ListNode | null = null;
+    
+    function dfs(node: ListNode | null): number {
+        if (node === null) return 0;
+        const current = 1 + dfs(node.next);
+        if (current === n - 1) {
+            next = node;
+        } else if (current === n + 1) {
+            node.next = next;
+        }
+        return current;
+    }
+
+    const headNth: number = dfs(head);
+    if (headNth === n) return head!.next;
+    return head;
+};
+
+
+/*
+# Option #3
+- One Pass with Two Pointers
+- O(n)
+- Space: O(1)
 - ref: https://www.youtube.com/watch?v=XVuQxVej6y8
 */
-function removeNthFromEndAdvanced(head: ListNode | null, n: number): ListNode | null {
+function removeNthFromEndTwoPointers(head: ListNode | null, n: number): ListNode | null {
     
     const dummy = new ListNode(0, head);
     let first: ListNode | null = head;

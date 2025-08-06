@@ -9,7 +9,7 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 12, 2025
-	- `Answer`: removeNthFromEnd / removeNthFromEndAdvanced
+	- `Answer`: removeNthFromEnd / removeNthFromEndDfsRecursive / removeNthFromEndTwoPointers
  */
 public class RemoveNthNodeFromEndofList {
 
@@ -21,6 +21,7 @@ public class RemoveNthNodeFromEndofList {
 	    ListNode(int val) { this.val = val; }
 	    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 	}
+	
 	
 	/*
     # Option #1
@@ -54,14 +55,41 @@ public class RemoveNthNodeFromEndofList {
     	
     	return head;
     }
+	
 
 	/*
-    # Option #2
+	# Option #2
+	- DFS Recursive
+    - O(n) (n = the number of nodes)
+    - Space: O(n)
+	 */
+    ListNode next = null;
+
+    public ListNode removeNthFromEndDfsRecursive(ListNode head, int n) {
+        int headNth = dfs(head, n);
+        if (headNth == n) return head.next;
+        return head;
+    }
+
+    public int dfs(ListNode node, int n) {
+        if (node == null) return 0;
+        int current = 1 + dfs(node.next, n);
+        if (current == n - 1) {
+            this.next = node;
+        } else if (current == n + 1) {
+            node.next = this.next;
+        }
+        return current;
+    }
+
+
+	/*
+    # Option #3
     - Two Pointers (Better Space Complexity)
     - O(n) (n = the number of nodes)
     - Space: O(1)
 	 */
-    public ListNode removeNthFromEndAdvanced(ListNode head, int n) {
+    public ListNode removeNthFromEndTwoPointers(ListNode head, int n) {
     	
     	ListNode dummy = new ListNode(0, head); // start from -1
     	ListNode first = dummy;
