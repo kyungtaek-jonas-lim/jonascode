@@ -5,18 +5,51 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: numDecodings / numDecodingsAdvanced
+ 	- `Answer`: numDecodingsDfs / numDecodingsDp / numDecodingsDpAdvanced
+ # Reference
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/reference/DecodeWays.png
 '''
 
 class Solution:
 
     '''
     # Option #1
+    - DFS Recursive + Memoization
+    - O(n)
+    '''
+    def numDecodingsDfs(self, s: str) -> int:
+        
+        n: int = len(s)
+        memo: dict = {}
+
+        def dfs(index: int) -> int:
+            if index >= n:
+                return 1
+            if index in memo:
+                return memo[index]
+            if s[index] == '0':
+                return 0
+            
+            res = dfs(index + 1)
+
+            if index != n - 1:
+                two_digits = int(s[index:index+2])
+                if two_digits <= 26:
+                    res += dfs(index + 2)
+            
+            memo[index] = res
+            return res
+
+        return dfs(0)
+
+
+    '''
+    # Option #2
     - Dynamic Programming
     - Integer Conversion
     - O(n)
     '''
-    def numDecodings(self, s: str) -> int:
+    def numDecodingsDp(self, s: str) -> int:
 
         # Edge Cases
         if s.startswith("0"):
@@ -45,12 +78,12 @@ class Solution:
 
 
     '''
-    # Option #2
+    # Option #3
     - Dynamic Programming
     - 3 Variables & Only String Comparison
     - O(n)
     '''
-    def numDecodingsAdvanced(self, s: str) -> int:
+    def numDecodingsDpAdvanced(self, s: str) -> int:
         
         n = len(s)
         

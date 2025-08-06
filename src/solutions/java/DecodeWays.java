@@ -1,38 +1,72 @@
 package solutions.java;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  # Problem
  	- `Link`: https://leetcode.com/problems/decode-ways/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: numDecodings / numDecodingsAdvanced
+ 	- `Answer`: numDecodingsDfs / numDecodingsDp / numDecodingsDpAdvanced
+ # Reference
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/reference/DecodeWays.png
  */
 public class DecodeWays {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(numDecodings("12")); // 2
-		System.out.println(numDecodings("226")); // 3
-		System.out.println(numDecodings("06")); // 0
-		System.out.println(numDecodings("10")); // 1
-		System.out.println(numDecodings("102")); // 2
+		System.out.println(numDecodingsDp("12")); // 2
+		System.out.println(numDecodingsDp("226")); // 3
+		System.out.println(numDecodingsDp("06")); // 0
+		System.out.println(numDecodingsDp("10")); // 1
+		System.out.println(numDecodingsDp("102")); // 2
 		
 		System.out.println("---");
-		System.out.println(numDecodingsAdvanced("12")); // 2
-		System.out.println(numDecodingsAdvanced("226")); // 3
-		System.out.println(numDecodingsAdvanced("06")); // 0
-		System.out.println(numDecodingsAdvanced("10")); // 1
-		System.out.println(numDecodingsAdvanced("102")); // 2
+		System.out.println(numDecodingsDpAdvanced("12")); // 2
+		System.out.println(numDecodingsDpAdvanced("226")); // 3
+		System.out.println(numDecodingsDpAdvanced("06")); // 0
+		System.out.println(numDecodingsDpAdvanced("10")); // 1
+		System.out.println(numDecodingsDpAdvanced("102")); // 2
 	}
 
     /*
     # Option #1
+    - DFS Recursive + Memoization
+    - O(n)
+     */
+    public int numDecodingsDfs(String s) {
+        Map<Integer, Integer> memo = new HashMap<>();
+        return dfs(s, 0, memo);
+    }
+
+    private int dfs(String s, int index, Map<Integer, Integer> memo) {
+        int n = s.length();
+        if (index == n) return 1;
+        if (s.charAt(index) == '0') return 0;
+        if (memo.containsKey(index)) return memo.get(index);
+
+        int res = dfs(s, index + 1, memo);
+
+        if (index + 1 < n) {
+            int twoDigits = Integer.parseInt(s.substring(index, index + 2));
+            if (twoDigits <= 26) {
+                res += dfs(s, index + 2, memo);
+            }
+        }
+
+        memo.put(index, res);
+        return res;
+    }
+
+    /*
+    # Option #2
     - Dynamic Programming
     - Integer Conversion
     - O(n)
      */
-    public static int numDecodings(String s) {
+    public static int numDecodingsDp(String s) {
     	
     	if (s.startsWith("0")) return 0;
     	
@@ -65,12 +99,12 @@ public class DecodeWays {
     
 
     /*
-    # Option #2
+    # Option #3
     - Dynamic Programming
     - 3 Variables & Only String Comparison
     - O(n)
      */
-    public static int numDecodingsAdvanced(String s) {
+    public static int numDecodingsDpAdvanced(String s) {
         
         int n = s.length();
         char[] c = s.toCharArray();

@@ -6,6 +6,8 @@
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 10, 2025
  	- `Answer`: numDecodings / numDecodingsDP
+ # Reference
+	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/reference/DecodeWays.png
  */
 
 
@@ -15,29 +17,31 @@
 - O(n)
 */
 function numDecodings(s: string): number {
+
     const n: number = s.length;
-    const memo = new Map<number, number>();
+    const memo: Map<number, number> = new Map();
+    
+    function dfs(index: number): number {
+        if (index >= n) return 1;
+        if (s[index] === '0') return 0;
+        if (memo.has(index)) return memo.get(index)!;
+        let result: number = 0;
 
-    function dfs(i: number): number {
-        if (i === n) return 1;
-        if (s[i] === '0') return 0;
-        if (memo.has(i)) return memo.get(i)!;
+        // Choose first one character
+        result += dfs(index + 1);
 
-        let res: number = dfs(i + 1);
-
-        if (i + 1 < n) {
-            const num: number = Number(s[i] + s[i + 1]);
-            if (num >= 10 && num <= 26) {
-                res += dfs(i + 2);
-            }
+        // Choose first two characters
+        if (index !== n - 1) {
+            const twoDigits: number = Number(s[index] + s[index + 1]);
+            if (twoDigits <= 26) result += dfs(index + 2);
         }
 
-        memo.set(i, res);
-        return res;
+        memo.set(index, result);
+        return result;
     }
-
+    
     return dfs(0);
-}
+};
 
 
 
