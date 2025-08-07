@@ -51,14 +51,17 @@ function isPalindrome(s: string): boolean {
 function isPalindromeAdvanced(s: string): boolean {
     
     const n: number = s.length;
-    const lowerA: number = 'a'.charCodeAt(0), lowerZ: number = 'z'.charCodeAt(0);
-    const upperA: number = 'A'.charCodeAt(0), upperZ: number = 'Z'.charCodeAt(0);
-    const number0: number = '0'.charCodeAt(0), number9: number = '9'.charCodeAt(0);
+    s = s.toLowerCase();
 
-    function isAlphanumericByCharCode(charCode: number): boolean {
-        if ((charCode >= lowerA && charCode <= lowerZ)
-            || (charCode >= upperA && charCode <= upperZ)
-            || (charCode >= number0 && charCode <= number9)) {
+    const numberStart: number = '0'.charCodeAt(0);
+    const numberEnd: number = '9'.charCodeAt(0);
+    const alphabetStart: number = 'a'.charCodeAt(0);
+    const alphabetEnd: number = 'z'.charCodeAt(0);
+
+    function isAlphanumeric(c: string): boolean {
+        const ascii: number = c.charCodeAt(0)
+        if ((ascii >= numberStart && ascii <= numberEnd)
+            || (ascii >= alphabetStart && ascii <= alphabetEnd)) {
                 return true;
         }
         return false;
@@ -66,20 +69,19 @@ function isPalindromeAdvanced(s: string): boolean {
 
     let left: number = 0, right: number = n - 1;
     while (left < right) {
-        const leftCharCode: number = s.charCodeAt(left);
-        if (!isAlphanumericByCharCode(leftCharCode)) {
+        if (!isAlphanumeric(s[left])) {
             left++;
             continue;
         }
-        const rightCharCode: number = s.charCodeAt(right);
-        if (!isAlphanumericByCharCode(rightCharCode)) {
+        if (!isAlphanumeric(s[right])) {
             right--;
             continue;
         }
-
-        if (s[left].toLowerCase() !== s[right].toLowerCase()) return false;
+        
+        if (s[left] !== s[right]) return false;
         left++;
         right--;
     }
+
     return true;
 };
