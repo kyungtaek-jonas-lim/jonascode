@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 12, 2025
-	- `Answer`: reorderList / reorderListAdvanced
+	- `Answer`: reorderList / reorderListAdvanced / reorderListOther
  */
 
 class ListNode {
@@ -89,4 +89,48 @@ function reorderListAdvanced(head: ListNode | null): void {
         second = secondNext;
     }
     if (first === secondLast) first!.next = null;
+};
+
+
+/*
+# Option #3
+- Other (August 10, 2025)
+- O(n)
+*/
+function reorderListOther(head: ListNode | null): void {
+
+    if (head === null || head.next === null) return;
+    
+    // Find the middle
+    let first: ListNode | null = head, second: ListNode | null = head;
+    while (first !== null && first.next !== null) {
+        first = first.next.next;
+        second = second!.next;
+    }
+    if (first === null) { // If the number of nodes is even, move the middle one
+        const next: ListNode | null = second!.next;
+        second!.next = null;
+        second = next;
+    }
+
+    // Reverse the right sub list
+    let prev: ListNode | null = null;
+    while (second !== null) {
+        const next: ListNode | null = second.next;
+        second.next = prev;
+        prev = second;
+        second = next;
+    }
+    second = prev;
+
+    // Reorder
+    first = head;
+    while (second !== null) {
+        const firstNext: ListNode | null = first!.next, secondNext: ListNode | null = second.next;
+        first!.next = second;
+        second.next = firstNext;
+        first = firstNext;
+        second = secondNext;
+    }
+
 };

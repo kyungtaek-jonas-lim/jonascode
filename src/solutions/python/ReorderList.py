@@ -6,7 +6,7 @@ from typing import Optional
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 12, 2025
-	- `Answer`: reorderList / reorderListAdvanced
+	- `Answer`: reorderList / reorderListAdvanced / reorderListOther
 '''
 
 # Definition for singly-linked list.
@@ -87,3 +87,45 @@ class Solution:
             first.next = second
             second.next = tmp1
             first, second = tmp1, tmp2
+
+
+
+    '''
+    # Option #3
+    - Other (August 10, 2025)
+    - O(n)
+    '''
+    def reorderListOther(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        
+        if not head or not head.next:
+            return
+
+        # Find middle node
+        first, second = head, head
+        while first and first.next:
+            first = first.next.next
+            second = second.next
+        if not first:
+            next = second.next
+            second.next = None
+            second = next
+
+        # Reverse the right sub list
+        prev = None
+        while second:
+            next = second.next
+            second.next = prev
+            prev = second
+            second = next
+        second = prev
+
+        # Reorder
+        first = head
+        while second:
+            first_next, second_next = first.next, second.next
+            first.next = second
+            second.next = first_next
+            first, second = first_next, second_next

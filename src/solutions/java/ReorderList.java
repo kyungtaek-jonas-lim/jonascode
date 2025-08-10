@@ -9,7 +9,7 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 12, 2025
-	- `Answer`: reorderList / reorderListAdvanced
+	- `Answer`: reorderList / reorderListAdvanced / reorderListOther
 */
 public class ReorderList {
 
@@ -103,5 +103,47 @@ public class ReorderList {
     		first = tmp1;
     		second = tmp2;
     	}
+    }
+
+	/*
+    # Option #3
+    - Other (August 10, 2025)
+    - O(n)
+	 */
+    public void reorderListOther(ListNode head) {
+        
+        if (head == null || head.next == null) return;
+
+        // Find Middle Node
+        ListNode first = head, second = head;
+        while (first != null && first.next != null) {
+            first = first.next.next;
+            second = second.next;
+        }
+        if (first == null) {
+            ListNode next = second.next;
+            second.next = null;
+            second = next;
+        }
+
+        // Reverse the right sub list
+        ListNode prev = null;
+        while (second != null) {
+            ListNode next = second.next;
+            second.next = prev;
+            prev = second;
+            second = next;
+        }
+        second = prev;
+
+        // Reorder
+        first = head;
+        while (second != null) {
+            ListNode firstNext = first.next, secondNext = second.next;
+            first.next = second;
+            second.next = firstNext;
+            first = firstNext;
+            second = secondNext;
+        }
     }
 }
