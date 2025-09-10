@@ -55,8 +55,6 @@ public class PacificAtlanticWaterFlow {
             if (dfs(heights, x + d[0], y + d[1], heights[x][y], visited, oceans)) return true;
         }
 
-        // visited.remove(key);
-
         return false;
     }
     

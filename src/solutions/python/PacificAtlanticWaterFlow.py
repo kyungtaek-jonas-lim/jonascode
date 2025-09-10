@@ -6,7 +6,7 @@ from typing import List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 18
-	- `Answer`: pacificAtlantic
+	- `Answer`: pacificAtlantic / pacificAtlanticAdvanced
 '''
 
 class Solution:
@@ -18,40 +18,35 @@ class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
         
         m, n = len(heights), len(heights[0])
-        visited = set()
-        ocean = [False, False]
+        move: List[List[int]] = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        visited: List[List[bool]] = None
+        pac, atl = False, False
+        result: List[List[int]] = []
+        
+        def dfs(x: int, y: int, prev: int) -> bool:
+            nonlocal pac, atl
+            if x < 0 or y < 0 or x >= m or y >= n: return False
+            if prev < heights[x][y]: return False
+            if visited[x][y]: return False
+            visited[x][y] = True
 
-        def dfs(x: int, y: int, height: int) -> bool:
-            if (x < 0 or y < 0 or x >= m or y >= n): return False
-            if (heights[x][y] > height): return False
+            if x == 0 or y == 0: pac = True
+            if x == m - 1 or y == n - 1: atl = True
+            if pac and atl: return True
 
-            if ((x, y) in visited): return False
-            visited.add((x, y))
-
-            if (x == 0 or y == 0): ocean[0] = True
-            if (x == m - 1 or y == n - 1): ocean[1] = True
-
-            if ocean[0] and ocean[1]: return True
-
-            height = heights[x][y]
-            if (dfs(x + 1, y, height)
-                or dfs(x - 1, y, height)
-                or dfs(x, y + 1, height)
-                or dfs(x, y - 1, height)):
-                return True
+            for dx, dy in move:
+                if dfs(x + dx, y + dy, heights[x][y]):
+                    return True
             
-            visited.remove((x, y))
-
             return False
 
-        result = []
         for i in range(m):
             for j in range(n):
-                if dfs(i, j, heights[i][j]):
+                pac, atl = False, False
+                visited = [[False] * n for _ in range(m)]
+                if dfs(i, j, float('inf')):
                     result.append([i, j])
-                ocean[0] = False
-                ocean[1] = False
-                visited.clear()
+        
         return result
     
 
@@ -62,37 +57,31 @@ class Solution:
     '''    
     def pacificAtlanticAdvanced(self, heights: List[List[int]]) -> List[List[int]]:
         m, n = len(heights), len(heights[0])
-        p, a = set(), set()
 
-        def dfs(x, y, visited, h):
-            if ((x, y) in visited or
-                x < 0 or y < 0 or x == m or y == n or
-                heights[x][y] < h):
-                return
+        def dfs(x: int, y: int, prev: int, visited: List[List[bool]]):
+            if x < 0 or y < 0 or x >= m or y >= n: return
+            if prev > heights[x][y]: return
+            if visited[x][y]: return
+            visited[x][y] = True
 
-            visited.add((x, y))
-            h = heights[x][y]
-            for dx, dy in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
-                dfs(x + dx, y + dy, visited, h)
+            dfs(x - 1, y, heights[x][y], visited)
+            dfs(x + 1, y, heights[x][y], visited)
+            dfs(x, y - 1, heights[x][y], visited)
+            dfs(x, y + 1, heights[x][y], visited)
         
+        pac, atl = [[False] * n for _ in range(m)], [[False] * n for _ in range(m)]
+        for i in range(m):
+            dfs(i, 0, 0, pac)
+        for i in range(n):
+            dfs(0, i, 0, pac)
+        for i in range(m):
+            dfs(i, n - 1, 0, atl)
+        for i in range(n):
+            dfs(m - 1, i, 0, atl)
         
-        # Pacific (top, left)
-        for j in range(n):
-            dfs(0, j, p, heights[0][j])
+        result: List[List[int]] = []
         for i in range(m):
-            dfs(i, 0, p, heights[i][0])
-
-        # Atlantic (bottom, right)
-        for j in range(n):
-            dfs(m - 1, j, a, heights[m - 1][j])
-        for i in range(m):
-            dfs(i, n - 1, a, heights[i][n - 1])
-
-        # Sum
-        result = list(p & a)
-        # result = []
-        # for i in range(m):
-        #     for j in range(n):
-        #         if (i, j) in p and (i, j) in a:
-        #             result.append([i, j])
+            for j in range(n):
+                if pac[i][j] and atl[i][j]:
+                    result.append([i, j])
         return result

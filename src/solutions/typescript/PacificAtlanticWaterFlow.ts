@@ -5,64 +5,87 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 10, 2025
-	- `Answer`: pacificAtlantic
+	- `Answer`: pacificAtlantic / pacificAtlanticAdvanced
 */
 
 /*
 # Option #1
-- O(m * n)
-- Start from ocean (Move from one ocean to the other ocean if the previous height is not taller)
+- Recursive DFS
+- O((m * n) ^ 2)
+- Start from each grid cell
 */
 function pacificAtlantic(heights: number[][]): number[][] {
-
+    
     const m: number = heights.length, n: number = heights[0].length;
-    
-    // From Pacific to Atlantic (Top, Left)
-    const visitedPacific = new Set<string>();
-    for (let i = 0; i < n; i++) {
-        dfs(heights, 0, i, -1, visitedPacific);
-    }
-    for (let i = 0; i < m; i++) {
-        dfs(heights, i, 0, -1, visitedPacific);
+    const move: number[][] = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+    const result: number[][] = [];
+
+    function dfs(x: number, y: number, prev: number, ocean: boolean[], visited: boolean[][]): boolean {
+        if (x < 0 || y < 0 || x >= m || y >= n) return false;
+        if (prev < heights[x][y]) return false;
+        if (visited[x][y]) return false;
+        visited[x][y] = true;
+
+        if (x === 0 || y === 0) ocean[0] = true;
+        if (x === m - 1 || y === n - 1) ocean[1] = true;
+        if (ocean[0] && ocean[1]) return true;
+
+        let res: boolean = false;
+        for (const d of move) {
+            if (dfs(x + d[0], y + d[1], heights[x][y], ocean, visited)) {
+                res = true;
+                break;
+            } 
+        }
+        return res;
     }
 
-    // From Atlantic to Pacific (Bottom, Right)
-    const visitedAtlantic = new Set<string>();
-    for (let i = 0; i < n; i++) {
-        dfs(heights, m - 1, i, -1, visitedAtlantic);
-    }
-    for (let i = 0; i < m; i++) {
-        dfs(heights, i, n - 1, -1, visitedAtlantic);
-    }
-    
-    const result: number[][] = [];
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
-            const key = `${i},${j}`;
-            if (visitedPacific.has(key) && visitedAtlantic.has(key)) result.push([i, j]);
+            const ocean: boolean[] = new Array(2).fill(false);
+            const visited: boolean[][] = Array.from({length: m}, () => Array(n).fill(false));
+            if (dfs(i, j, Number.MAX_VALUE, ocean, visited)) {
+                result.push([i, j]);
+            }
         }
     }
 
     return result;
 };
 
-function dfs(heights: number[][], x: number, y: number, prev: number, visited: Set<string>): void {
-    // Validation
+/*
+# Option #2
+- O(m * n)
+- Start from ocean (Move from one ocean to the other ocean if the previous height is not taller)
+*/
+function pacificAtlanticAdvanced(heights: number[][]): number[][] {
+    
     const m: number = heights.length, n: number = heights[0].length;
-    if (x < 0 || y < 0 || x >= m || y >= n) return;
-    
-    // Memoization
-    const key = `${x},${y}`;
-    if (visited.has(key)) return;
-    
-    // Compare to the previous value
-    const curr = heights[x][y];
-    if (prev > curr) return;
+    const pac: boolean[][] = Array.from({length: m}, () => Array(n).fill(false));
+    for (let i = 0; i < m; i++) dfs(i, 0, 0, pac);
+    for (let i = 0; i < n; i++) dfs(0, i, 0, pac);
 
-    visited.add(key);
+    const atl: boolean[][] = Array.from({length: m}, () => Array(n).fill(false));
+    for (let i = 0; i < m; i++) dfs(i, n - 1, 0, atl);
+    for (let i = 0; i < n; i++) dfs(m - 1, i, 0, atl);
 
-    dfs(heights, x + 1, y, curr, visited)
-    dfs(heights, x - 1, y, curr, visited)
-    dfs(heights, x, y + 1, curr, visited)
-    dfs(heights, x, y - 1, curr, visited)
-}
+    function dfs(x: number, y: number, prev: number, visited: boolean[][]): void {
+        if (x < 0 || y < 0 || x >= m || y >= n) return;
+        if (prev > heights[x][y]) return;
+        if (visited[x][y]) return;
+        visited[x][y] = true;
+
+        dfs(x - 1, y, heights[x][y], visited);
+        dfs(x + 1, y, heights[x][y], visited);
+        dfs(x, y - 1, heights[x][y], visited);
+        dfs(x, y + 1, heights[x][y], visited);
+    }
+
+    const result: number[][] = [];
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (pac[i][j] && atl[i][j]) result.push([i, j]);
+        }
+    }
+    return result;
+};
