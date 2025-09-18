@@ -116,7 +116,7 @@ function countComponentsAdvanced(n: number, edges: number[][]): number {
 	
 	// Put every number
 	const parents: number[] = [];
-	const ranks: number[] = new Array<number>().fill(1);
+	const size: number[] = new Array<number>().fill(1);
 	for (let i = 0; i < n; i++) {
 		parents[i] = i;
 	}
@@ -124,24 +124,24 @@ function countComponentsAdvanced(n: number, edges: number[][]): number {
 	// Union-Find
 	let result: number = n;
 	for (const edge of edges) {
-		result -= union(parents, ranks, edge[0], edge[1]);
+		result -= union(parents, size, edge[0], edge[1]);
 	}
 	return result;
 }
 
 
-function union(parents: number[], ranks: number[], n1: number, n2: number): number { // Return 1 if there's union else return 0
+function union(parents: number[], size: number[], n1: number, n2: number): number { // Return 1 if there's union else return 0
 	// Find parents of each
 	const p1: number = find(parents, n1), p2: number = find(parents, n2);
 
 	if (p1 === p2) return 0; // If it's already merged, return 0
 
-	if (ranks[p1] >= ranks[p2]) { // The less score number is merged into the bigger one ("rank" is for this condition)
+	if (size[p1] >= size[p2]) { // The less score number is merged into the bigger one ("rank" is for this condition)
 		parents[p2] = p1;
-		ranks[p1] += ranks[p2];
+		size[p1] += size[p2];
 	} else {
 		parents[p1] = p2;
-		ranks[p2] += ranks[p1];
+		size[p2] += size[p1];
 	}
 
 	return 1;

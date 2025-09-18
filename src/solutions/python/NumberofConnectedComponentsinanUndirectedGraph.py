@@ -90,7 +90,7 @@ class Solution:
     """
     def countComponentsAdvanced(self, n: int, edges: List[List[int]]) -> int:
         parent = [ i for i in range(n) ] # Parent(Root) Node (parent[1] = the root node of 1)
-        rank = [1] * n # If a node merged, the root node gets +1
+        size = [1] * n # If a node merged, the root node gets +1
 
         # Find the root node
         def find(n):
@@ -107,12 +107,12 @@ class Solution:
             if p1 == p2: # If the roots are the same, don't perform union
                 return 0
             
-            if rank[p2] > rank[p1]:
+            if size[p2] > size[p1]:
                 parent[p1] = p2
-                rank[p2] += rank[p1]
+                size[p2] += size[p1]
             else:
                 parent[p2] = p1
-                rank[p1] += rank[p2]
+                size[p1] += size[p2]
 
             return 1
         

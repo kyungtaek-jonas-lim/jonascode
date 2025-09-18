@@ -124,14 +124,14 @@ public class NumberofConnectedComponentsinanUndirectedGraph {
         	parents[i] = i;
         }
 
-        // Ranks
-        int[] ranks = new int[n];
-        Arrays.fill(ranks, 1);
+        // Size
+        int[] size = new int[n];
+        Arrays.fill(size, 1);
 
         // Union
         int result = n;
         for (int[] edge: edges) {
-            result -= union(parents, ranks, edge[0], edge[1]);
+            result -= union(parents, size, edge[0], edge[1]);
         }
         return result;
     }
@@ -145,16 +145,16 @@ public class NumberofConnectedComponentsinanUndirectedGraph {
         return result;
     }
 
-    private int union(int[] parents, int[] ranks, int n1, int n2) {
+    private int union(int[] parents, int[] size, int n1, int n2) {
         int p1 = find(parents, n1), p2 = find(parents, n2);
         if (p1 == p2) return 0;
         
-        if (ranks[p1] < ranks[p2]) {
+        if (size[p1] < size[p2]) {
             parents[p1] = p2;
-            ranks[p2] += ranks[p1];
+            size[p2] += size[p1];
         } else {
             parents[p2] = p1;
-            ranks[p1] += ranks[p2];
+            size[p1] += size[p2];
         }
         return 1;
     }
