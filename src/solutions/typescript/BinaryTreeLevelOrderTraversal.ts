@@ -25,31 +25,29 @@ class TreeNode {
 - O(n)
 */
 function levelOrder(root: TreeNode | null): number[][] {
+
+    if (root === null) return [];
     
+    const deque: Array<TreeNode | null> = [root];
     const result: number[][] = [];
-    if (root === null) return result;
+    let pointer: number = 0;
     
-    const deque: TreeNode[] = [];
-    deque.push(root);
+    while (deque.length - pointer !== 0) {
 
-    while (deque.length !== 0) {
-        
-        const end: number = deque.length;
-        const item: number[] = [];
+        const existingSize = deque.length;
+        const item: number[] = []
 
-        for (let i = 0; i < end; i++) {
-            const node: TreeNode = deque.shift()!;
+        while (existingSize - pointer !== 0) {
+
+            const node: TreeNode | null = deque[pointer++];
+            if (node === null) continue;
             item.push(node.val);
-            if (node.left !== null) {
-                deque.push(node.left);
-            }
-            if (node.right !== null) {
-                deque.push(node.right);
-            }
+            
+            deque.push(node.left);
+            deque.push(node.right);
         }
 
-        result.push(item);
+        if (item.length !== 0) result.push(item);
     }
-
     return result;
 };

@@ -24,26 +24,21 @@ class Solution:
     - O(n)
     '''
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-
+        
         if not root: return []
-        
-        result: list = []
         deque = collections.deque([root])
-        cnt: int = 1
-        
+        result = []
         while deque:
-            temp, cnt = cnt, 0
-            res: list = []
-            for _ in range(temp):
+            
+            size = len(deque)
+            item = []
+            for _ in range(size):
                 node = deque.popleft()
-                res.append(node.val)
-                left, right = node.left, node.right
-                if left:
-                    deque.append(left)
-                    cnt += 1
-                if right:
-                    deque.append(right)
-                    cnt += 1
-            result.append(res)
+                item.append(node.val)
+                if node.left: deque.append(node.left)
+                if node.right: deque.append(node.right)
+
+            if item:
+                result.append(item)
 
         return result

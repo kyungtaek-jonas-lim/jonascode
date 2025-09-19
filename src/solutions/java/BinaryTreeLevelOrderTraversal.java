@@ -68,33 +68,24 @@ public class BinaryTreeLevelOrderTraversal {
         
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
-
+        
         Deque<TreeNode> deque = new ArrayDeque<>();
         deque.offer(root);
-        int index = 0, cnt = 1;
-
         while (!deque.isEmpty()) {
 
-            result.add(new ArrayList<>());
-            int temp = cnt;
-            cnt = 0;
+            int size = deque.size();
+            List<Integer> item = new ArrayList<>();
 
-            for (int i = 0; i < temp; i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode node = deque.pollFirst();
-                result.get(index).add(node.val);
-                if (node.left != null) {
-                    deque.offer(node.left);
-                    cnt++;
-                }
-                if (node.right != null) {
-                    deque.offer(node.right);
-                    cnt++;
-                }
+                if (node == null) continue;
+                item.add(node.val);
+                if (node.left != null) deque.offer(node.left);
+                if (node.right != null) deque.offer(node.right);
             }
 
-            index++;
+            if (!item.isEmpty()) result.add(item);
         }
-
         return result;
     }
     
