@@ -9,16 +9,34 @@
  # Reference
 	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/ClimbingStairs.md
  */
-
-function climbStairs(n: number): number {
     
-    if (n <= 2) return n;
 
-    let prev: number = 1, curr: number = 2;
-    let temp: number = 0;
+/*
+# Option #1
+- DFS with Memoization
+- O(n)
+*/
+function climbStairsAdvanced(n: number): number {
+    if (n < 3) return n;
+    const result: number[] = new Array(n + 1).fill(0);
+    result[n] = 1;
+    result[n - 1] = 1;
+    for (let i = n - 2; i >= 0; i--) {
+        result[i] = result[i + 1] + result[i + 2];
+    }
+    return result[0];
+}
 
-    for (let i: number = 3; i <= n; i++) {
-        temp = curr;
+
+/*
+# Option #2
+- DFS with Memoization & Space Optimization
+- O(n)
+*/
+function climbStairsBest(n: number): number {
+    let prev: number = 1, curr: number = 1;
+    for (let i = n - 2; i >= 0; i--) {
+        const temp = curr;
         curr += prev;
         prev = temp;
     }

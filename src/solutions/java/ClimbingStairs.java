@@ -53,10 +53,10 @@ public class ClimbingStairs {
 
 	/*
 	 * Option #2
-	 * Advanced way
+	 * Fibonacci
 	 * O(n)
 	 */
-    public static int climbStairsAdvanced(int n) {
+    public static int climbStairsFibonacci(int n) {
 
         // Base cases:
         // If there is only 1 step, there's only 1 way to climb it (just take 1 step).
@@ -94,6 +94,40 @@ public class ClimbingStairs {
 
     }
         
+
+	/*
+    # Option #3
+    - DFS with Memoization
+    - O(n)
+	 */
+    public static int climbStairsAdvanced(int n) {        
+        if (n < 3) return n;
+        int[] result = new int[n + 1];
+        result[n] = 1;
+        result[n - 1] = 1;
+
+        for (int i = n - 2; i >= 0; i--) {
+            result[i] = result[i + 1] + result[i + 2];
+        }
+
+        return result[0];
+    }
+
+    
+	/*
+    # Option #4
+    - DFS with Memoization & Space Optimization
+    - O(n)
+	 */
+    public static int climbStairsBest(int n) {
+        int one = 1, two = 1;
+        for (int i = n - 2; i >= 0; i--) {
+            int temp = one;
+            one = two + one;
+            two = temp;
+        }
+        return one;
+    }
 }
 
 
