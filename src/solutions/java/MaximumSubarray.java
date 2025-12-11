@@ -6,7 +6,7 @@ package solutions.java;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Jan 18, 2025 (maxSubArray) / Apr 8, 2025 (maxSubArraySomeOtherWay)
- 	- `Answer`: maxSubArray / maxSubArraySomeOtherWay
+ 	- `Answer`: maxSubArray / maxSubArray2 / maxSubArray3
  */
 
 public class MaximumSubarray {
@@ -41,10 +41,9 @@ public class MaximumSubarray {
 
 	/*
 	 * Option #2
-	 * Some other way
 	 * O(n)
 	 */
-    public int maxSubArraySomeOtherWay(int[] nums) {
+    public int maxSubArray2(int[] nums) {
         
     	int sum = nums[0];
     	int result = sum;
@@ -61,5 +60,20 @@ public class MaximumSubarray {
     	}
     	
     	return result;
+    }
+    
+
+	/*
+	 * Option #3
+	 * O(n)
+	 */
+    public int maxSubArray3(int[] nums) {
+        int currSum = 0, result = nums[0];
+        for (int num: nums) {
+            if (currSum < 0) currSum = 0;
+            currSum += num;
+            result = Math.max(result, currSum);
+        }
+        return result;
     }
 }

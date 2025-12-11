@@ -5,19 +5,50 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 8, 2025
- 	- `Answer`: maxSubArray
+ 	- `Answer`: maxSubArray / maxSubArray2 / maxSubArray3
 '''
 
 class Solution:
+
+    '''
+    # Option #1
+    - O(n)
+	'''
     def maxSubArray(self, nums: List[int]) -> int:
-        sum = nums[0]
-        result = sum
+        curr_max, global_max = nums[0], nums[0]
         for num in nums[1:]:
-            if num > sum + num:
-                sum = num
+            curr_max = max(curr_max + num, num)
+            global_max = max(curr_max, global_max)
+        return global_max
+
+
+    '''
+    # Option #2
+    - O(n)
+	'''
+    def maxSubArray2(self, nums: List[int]) -> int:
+        curr_sum = nums[0]
+        result = curr_sum
+        for num in nums[1:]:
+            if num > curr_sum + num:
+                curr_sum = num
             else:
-                sum += num
-            result = max(result, sum)
+                curr_sum += num
+            result = max(result, curr_sum)
+        return result
+    
+
+    '''
+    # Option #3
+    - O(n)
+	'''
+    def maxSubArray3(self, nums: List[int]) -> int:
+        curr_sum, result = 0, nums[0]
+        for num in nums:
+            if curr_sum < 0:
+                curr_sum = 0
+            curr_sum += num
+            result = max(result, curr_sum)
         return result
 
 if __name__ == "__main__":
