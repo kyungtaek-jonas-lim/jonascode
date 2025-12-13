@@ -4,7 +4,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: May 28, 2025
- 	- `Answer`: maxProduct / maxProductAdvanced
+ 	- `Answer`: maxProduct / maxProductAdvanced / maxProduct3
 */
 
 
@@ -45,3 +45,22 @@ function maxProductAdvanced(nums: number[]): number {
     }
     return result;
 }
+
+
+/*
+    # Option #3
+    - O(n)
+*/
+function maxProduct3(nums: number[]): number {
+    let currMin: number = 1, currMax: number = 1;
+    let result: number = nums[0];
+
+    for (const num of nums) {
+        const temp1: number = currMax * num, temp2: number = currMin * num;
+        currMin = Math.min(temp1, temp2, num);
+        currMax = Math.max(temp1, temp2, num);
+        result = Math.max(result, currMax);
+    }
+
+    return result;
+};

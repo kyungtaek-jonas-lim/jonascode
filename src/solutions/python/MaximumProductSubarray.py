@@ -6,7 +6,7 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Feb 28, 2025
- 	- `Answer`: maxProduct / maxProductAdvanced
+ 	- `Answer`: maxProduct / maxProductAdvanced / maxProduct3
 '''
 
 class Solution:
@@ -44,6 +44,23 @@ class Solution:
             min_val = min(num, num * min_val)
 
             result = max(result, max_val)
+        return result
+    
+
+    '''
+    # Option #3
+    - O(n)
+    '''
+    def maxProduct3(self, nums: List[int]) -> int:
+        curr_min, curr_max = 1, 1
+        result = nums[0]
+
+        for num in nums:
+            temp1, temp2 = curr_min * num, curr_max * num
+            curr_min = min(temp1, temp2, num)
+            curr_max = max(temp1, temp2, num)
+            result = max(result, curr_max)
+            
         return result
 
 

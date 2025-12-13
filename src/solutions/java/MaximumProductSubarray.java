@@ -6,7 +6,7 @@ package solutions.java;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 8, 2025
- 	- `Answer`: maxProduct
+ 	- `Answer`: maxProduct / maxProduct2
  */
 
 public class MaximumProductSubarray {
@@ -44,5 +44,20 @@ public class MaximumProductSubarray {
     	}
     	
     	return result;
+    }
+
+	/*
+	 # Option #2
+     - O(n)
+	 */
+    public int maxProduct2(int[] nums) {
+        int currMin = 1, currMax = 1, result = nums[0];
+        for (int num: nums) {
+            int temp1 = currMin * num, temp2 = currMax * num;
+            currMin = Math.min(num, Math.min(temp1, temp2));
+            currMax = Math.max(num, Math.max(temp1, temp2));
+            result = Math.max(result, currMax);
+        }
+        return result;
     }
 }
