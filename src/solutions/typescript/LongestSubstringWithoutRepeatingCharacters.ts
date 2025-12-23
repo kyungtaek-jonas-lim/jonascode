@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: May 30, 2025
- 	- `Answer`: lengthOfLongestSubstring / lengthOfLongestSubstringAdvanced
+ 	- `Answer`: lengthOfLongestSubstring / lengthOfLongestSubstringAdvanced / lengthOfLongestSubstringSetTwoPointers
 */
 
 
@@ -53,3 +53,26 @@ function lengthOfLongestSubstringAdvanced(s: string): number {
     }
     return Math.max(result, n - start);
 };
+
+/*
+    # Option #3
+    - set + two pointers
+    - O(n)
+*/
+function lengthOfLongestSubstringSetTwoPointers(s: string): number {
+    
+    const set: Set<string> = new Set();
+    let left: number = 0;
+    let result: number = 0;
+    const n: number = s.length;
+
+    for (let right = 0; right < n; right++) {
+        while (set.has(s.charAt(right))) {
+            set.delete(s.charAt(left++));
+        }
+        set.add(s.charAt(right));
+        result = Math.max(result, right - left + 1);
+    }
+
+    return result;
+}
