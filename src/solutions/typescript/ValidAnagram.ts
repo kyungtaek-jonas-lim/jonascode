@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: May 30, 2025
- 	- `Answer`: isAnagram
+ 	- `Answer`: isAnagram / isAnagramSimple
  # Reference
  	- Anagrams
  		- Both strings must have the same length.
@@ -27,5 +27,24 @@ function isAnagram(s: string, t: string): boolean {
         if (cnt[c.charCodeAt(0)] < 0) return false;
     }
 
+    return true;
+};
+
+
+function isAnagramSimple(s: string, t: string): boolean {
+    const n: number = s.length, m: number = t.length;
+    if (n !== m) return false;
+    const map: Map<string, number> = new Map();
+    for (let i = 0; i < n; i++) {
+        const c: string = s.charAt(i);
+        map.set(c, (map.get(c) ?? 0) + 1);
+    }
+    for (let i = 0; i < n; i++) {
+        const c: string = t.charAt(i);
+        if ((map.get(c) ?? 0) === 0) {
+            return false;
+        }
+        map.set(c, map.get(c)! - 1);
+    }
     return true;
 };

@@ -5,7 +5,7 @@ from collections import Counter
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Feb 24, 2025
- 	- `Answer`: isAnagram / isAnagramBetter / isAnagramAdvanced
+ 	- `Answer`: isAnagram / isAnagramBetter / isAnagramAdvanced / isAnagramSimple
  # Reference
  	- Anagrams
  		- Both strings must have the same length.
@@ -53,6 +53,28 @@ class Solution:
             if char_s[index] < 0:
                 return False
             
+        return True
+    
+    '''
+    # Option #4
+    - Simple
+    - O(n)
+    '''
+    def isAnagramSimple(self, s: str, t: str) -> bool:
+        
+        n, m = len(s), len(t)
+        if n != m: return False
+
+        my_dict = {}
+
+        for i in range(n):
+            my_dict[s[i]] = my_dict.get(s[i], 0) + 1
+
+        for i in range(n):
+            if my_dict.get(t[i], 0) == 0:
+                return False
+            my_dict[t[i]] -= 1
+        
         return True
 
 
