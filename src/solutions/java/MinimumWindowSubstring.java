@@ -10,7 +10,7 @@ import java.util.Map;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Feb 1, 2025
-	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest
+	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest / minWindowAdditional
 */
 
 public class MinimumWindowSubstring {
@@ -306,6 +306,86 @@ public class MinimumWindowSubstring {
 
         if (result[0] == -1) return "";
         return s.substring(result[0], result[1] + 1);
+    }
+    
+
+	
+    /**
+	* @option 5
+	* @description Additional way
+	* @timeComplexity O(n + m)
+	* @date Jan 2, 2026
+	* @param s
+	* @param t
+	* @return
+	*/
+    public String minWindowAdditional(String s, String t) {
+        int n = s.length(), m = t.length();
+        if (n < m) return "";
+        else if (n == m) {
+            char[] sChars = s.toCharArray();
+            char[] tChars = t.toCharArray();
+            Arrays.sort(sChars);
+            Arrays.sort(tChars);
+            if (!Arrays.equals(sChars, tChars)) return "";
+            return s;
+        }
+
+        Map<Character, Integer> validCnt = new HashMap<>();
+        int validTotalCnt = 0;
+        Map<Character, Integer> currValidCnt = new HashMap<>();
+        int currValidTotalCnt = 0;
+        char[] sChars = s.toCharArray();
+        char[] tChars = t.toCharArray();
+
+        for (char c: tChars) {
+            if (validCnt.containsKey(c)) {
+                validCnt.put(c, validCnt.get(c) + 1);
+            } else {
+                validCnt.put(c, 1);
+                currValidCnt.put(c, 0);
+                validTotalCnt++;
+            }
+        }
+
+        int left = 0;
+        for (int i = 0; i < n; i++) {
+            if (validCnt.containsKey(sChars[i])) {
+                left = i;
+                break;
+            }
+        }
+
+        String result = s + t;
+        for (int i = left; i < n; i++) {
+            char c = sChars[i];
+            if (validCnt.containsKey(c)) {
+                currValidCnt.put(c, currValidCnt.get(c) + 1);
+                int goalCnt = validCnt.get(c), currCnt = currValidCnt.get(c);
+
+                if (goalCnt == currCnt) {
+                    currValidTotalCnt++;
+
+                } else if (goalCnt < currCnt) {
+                    int tobeLeft = left;
+                    char tobeLeftChar = sChars[tobeLeft];
+                    while (!validCnt.containsKey(tobeLeftChar) || (validCnt.get(tobeLeftChar) < currValidCnt.get(tobeLeftChar))) {
+                        if (currValidCnt.containsKey(tobeLeftChar)) {
+                            currValidCnt.put(tobeLeftChar, currValidCnt.get(tobeLeftChar) - 1);
+                        }
+                        tobeLeftChar = sChars[++tobeLeft];
+                    }
+
+                    left = tobeLeft;
+                }
+
+                if (currValidTotalCnt == validTotalCnt && result.length() > (i - left + 1)) {
+                    result = s.substring(left, i + 1);
+                }
+            }
+        }
+
+        return result.equals(s + t) ? "" : result;
     }
 
 }

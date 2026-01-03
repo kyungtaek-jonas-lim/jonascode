@@ -6,7 +6,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 2, 2025
-	- `Answer`: minWindow / minWindowAdvanced / minWindowSimpleAndBest
+	- `Answer`: minWindow / minWindowAdvanced / minWindowSimpleAndBest / minWindowAdditional
 */
 
 /**
@@ -195,4 +195,92 @@ function minWindowSimpleAndBest(s: string, t: string): string {
 
     if (result[0] === -1) return "";
     return s.substring(result[0], result[1] + 1);
+};
+
+
+
+
+/**
+ * Option #4
+ * - Time Complexity: O(n + m)
+ * - Complicated
+ * - Jan 2, 2026
+ */
+function minWindowAdditional(s: string, t: string): string {
+
+    // Validation
+    const n: number = s.length, m: number = t.length;
+    if (n < m) return "";
+    if (n === m) {
+        if ((s.split('').sort((a, b) => a.localeCompare(b)).join('')) !== (t.split('').sort((a, b) => a.localeCompare(b)).join(''))) return "";
+        return s;
+    }
+    
+    // Initialization
+    const validCharCnts: Map<string, number> = new Map();
+    const currValidCharCnts: Map<string, number> = new Map();
+    let totalValidCharCnts: number = 0;
+    let currTotalValidCharCnts: number = 0;
+
+    for (const t1 of t) {
+        if (validCharCnts.has(t1)) {
+            validCharCnts.set(t1, validCharCnts.get(t1)! + 1);
+        } else {
+            totalValidCharCnts++;
+            validCharCnts.set(t1, 1);
+            currValidCharCnts.set(t1, 0);
+        }
+    }
+
+    // ----------------------
+    // Count Start
+    let result: string = s + t;
+    let left: number = 0;
+
+    // Set The first index
+    for (let i = 0; i < n; i++) {
+        const c: string = s.charAt(i);
+        if (validCharCnts.has(c)) {
+            left = i;
+            break;
+        }
+    }
+
+    // Search
+    for (let i = left; i < n; i++) {
+
+        const c: string = s.charAt(i);
+
+        if (validCharCnts.has(c)) {
+            const targetCnt: number = validCharCnts.get(c)!;
+            currValidCharCnts.set(c, currValidCharCnts.get(c)! + 1);
+            const currCnt: number = currValidCharCnts.get(c)!;
+
+            if (targetCnt === currCnt) {
+                currTotalValidCharCnts++;
+            } else if (targetCnt < currCnt) {
+                let tobeLeft: number = left;
+                let tobeLeftChar: string = s.charAt(tobeLeft);
+
+                while (!currValidCharCnts.has(tobeLeftChar) || (currValidCharCnts.get(tobeLeftChar)! > validCharCnts.get(tobeLeftChar)!)) {
+                    if (currValidCharCnts.has(tobeLeftChar)) {
+                        currValidCharCnts.set(tobeLeftChar, currValidCharCnts.get(tobeLeftChar)! - 1);
+                    }
+                    if (tobeLeft === i) break;
+                    tobeLeftChar = s.charAt(++tobeLeft);
+                }
+                left = tobeLeft;
+            }
+
+            if (currTotalValidCharCnts === totalValidCharCnts) {
+                if (result.length > (i - left + 1)) {
+                    result = s.substring(left, i + 1);
+                }
+            }
+
+        }
+    }
+
+
+    return result === s + t ? "" : result;
 };

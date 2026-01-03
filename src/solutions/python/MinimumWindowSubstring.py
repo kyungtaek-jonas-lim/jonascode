@@ -6,7 +6,7 @@ from collections import Counter
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Mar 25, 2025 (minWindowAdvanced) / Apr 9, 2025 (minWindow)
-	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest
+	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest / minWindowAdditional
 '''
 
 class Solution:
@@ -229,6 +229,69 @@ class Solution:
         if result[0] < 0:
             return ""
         return s[result[0]:result[1] + 1]
+
+    '''
+    # Option #5
+    - O(n + m)
+    - Complicated
+    - Jan 2, 2026
+    '''
+    def minWindowAdditional(self, s: str, t: str) -> str:
+        
+        n, m = len(s), len(t)
+        if n < m: return ""
+        if n == m:
+            if sorted(s) != sorted(t):
+                return ""
+            return s
+        
+        valid_char_cnts = {}
+        valid_char_total_cnt = 0
+
+        curr_valid_char_cnt = {}
+        curr_valid_char_total_cnt = 0
+
+        for c in t:
+            if c in valid_char_cnts:
+                valid_char_cnts[c] = valid_char_cnts[c] + 1
+            else:
+                valid_char_total_cnt += 1
+                valid_char_cnts[c] = 1
+                curr_valid_char_cnt[c] = 0
+
+        left = 0
+        result = s + t
+        for i in range(n):
+            if s[i] in valid_char_cnts:
+                left = i
+                break
+        
+        for i in range(left, n):
+            c = s[i]
+            if c in valid_char_cnts:
+                curr_valid_char_cnt[c] = curr_valid_char_cnt[c] + 1
+                goal_cnt, curr_cnt = valid_char_cnts[c], curr_valid_char_cnt[c]
+
+                if goal_cnt == curr_cnt:
+                    curr_valid_char_total_cnt += 1
+                elif goal_cnt < curr_cnt:
+                    tobe_left = left
+                    tobe_left_char = s[tobe_left]
+                    while (not tobe_left_char in valid_char_cnts) or (curr_valid_char_cnt[tobe_left_char] > valid_char_cnts[tobe_left_char]):
+                        if tobe_left_char in valid_char_cnts:
+                            curr_valid_char_cnt[tobe_left_char] = curr_valid_char_cnt[tobe_left_char] - 1
+                        tobe_left += 1
+                        tobe_left_char = s[tobe_left]
+
+                    left = tobe_left
+
+                if curr_valid_char_total_cnt == valid_char_total_cnt and len(result) > (i - left + 1):
+                    result = s[left:i + 1]
+                
+
+        if result == s + t:
+            return ""
+        return result
         
 
 if __name__ == '__main__':
