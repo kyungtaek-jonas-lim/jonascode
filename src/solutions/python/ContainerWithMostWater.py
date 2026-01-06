@@ -6,7 +6,7 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 3, 2025
- 	- `Answer`: maxArea
+ 	- `Answer`: maxArea / maxAreaSimple
 '''
 
 class Solution:
@@ -43,6 +43,27 @@ class Solution:
                 right -= 1
             result = max(result, area)
 
+        return result
+    
+
+    '''
+    - Option #2
+    - Simple way
+	- O(n)
+    - Jan 5, 2026
+    '''
+    def maxAreaSimple(self, height: List[int]) -> int:
+        n = len(height)
+        l, r = 0, n - 1
+        result = 0
+
+        while (l < r):
+            result = max(result, (r - l) * min(height[l], height[r]))
+            if height[l] < height[r]:
+                l += 1
+            else:
+                r -= 1
+        
         return result
     
 

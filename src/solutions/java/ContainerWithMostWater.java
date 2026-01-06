@@ -6,7 +6,7 @@ package solutions.java;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 3, 2025
- 	- `Answer`: maxArea
+ 	- `Answer`: maxArea / maxAreaSimple
 */
 
 public class ContainerWithMostWater {
@@ -53,6 +53,28 @@ public class ContainerWithMostWater {
     		result = result < area ? area : result;
     	}
     	return result;
+    }
+
+	/*
+	 * Option #2
+	 * Simple way
+	 * O(n)
+	 */
+    public static int maxAreaSimple(int[] height) {
+        final int n = height.length;
+        int l = 0, r = n - 1;
+        int result = 0;
+
+        while (l < r) {
+            result = Math.max(result, (r - l) * Math.min(height[l], height[r]));
+            if (height[l] < height[r]) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+
+        return result;
     }
 	
 	public static void main(String[] args) {
