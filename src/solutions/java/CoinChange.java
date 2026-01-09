@@ -1,6 +1,12 @@
 package solutions.java;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /*
  # Problem
@@ -8,7 +14,7 @@ import java.util.Arrays;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 17, 2025
- 	- `Answer`: coinChange / coinChangeAdvanced
+ 	- `Answer`: coinChange / coinChangeAdvanced / coinChangeDfs / coinChangeBfs
  # Reference
 	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/CoinChange.md
  */
@@ -27,7 +33,7 @@ public class CoinChange {
 
 	/*
 	# Option #1
-	- Dynamic Programming (Common)
+	- Dynamic Programming (Common) (Bottom-Up)
 	- O(amount × n) (n = the number of coins)
 	- ref) https://www.youtube.com/watch?v=H9bfqozjoqs
 	 */
@@ -63,5 +69,78 @@ public class CoinChange {
         	}
         }
     	return dp[amount] > amount ? -1 : dp[amount];
+    }
+
+	
+	/*
+	# Option #3
+	- DFS + Memoization
+    - O(amount × n)
+	 */
+    public int coinChangeDfs(int[] coins, int amount) {
+        if (amount == 0) return 0;
+        Arrays.sort(coins);
+        Map<Integer, Integer> memo = new HashMap<>();
+        int result = dfs(coins, amount, memo);
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+
+    private int dfs(int[] coins, int goal, Map<Integer, Integer> memo) {
+        if (goal == 0) return 0;
+        if (memo.containsKey(goal)) return memo.get(goal);
+        int result = Integer.MAX_VALUE;
+        for (int i = coins.length - 1; i >= 0; i--) {
+            int diff = goal - coins[i];
+            if (diff < 0) continue;
+            else {
+                int temp = dfs(coins, diff, memo);
+                if (temp == Integer.MAX_VALUE) continue;
+                result = Math.min(result, temp + 1);
+            }
+        }
+        memo.put(goal, result);
+        return result;
+    }
+
+
+	/*
+	# Option #4
+	- BFS + Memoization
+    - O(amount × n)
+	 */
+    public int coinChangeBfs(int[] coins, int amount) {
+
+        if (amount == 0) return 0;
+        int n = coins.length;
+        Arrays.sort(coins);
+
+        Deque<int[]> deque = new ArrayDeque<>();
+        for (int i = n - 1; i >= 0; i--) {
+            int coin = coins[i];
+            if (amount == coin) return 1;
+            if (amount < coin) continue;
+            deque.offer(new int[] {amount - coin, 2});
+        }
+
+        Set<Integer> memo = new HashSet<>();
+        while (!deque.isEmpty()) {
+            int[] item = deque.pollFirst();
+            int goal = item[0], cnt = item[1];
+            if (memo.contains(goal)) continue;
+            memo.add(goal);
+
+            for (int i = n - 1; i >= 0; i--) {
+                int coin = coins[i];
+                int diff = goal - coin;
+                if (diff < 0) continue;
+                if (diff == 0) {
+                    return cnt;
+                }
+                deque.offer(new int[] {diff, cnt + 1});
+            }
+
+        }
+
+        return -1;
     }
 }

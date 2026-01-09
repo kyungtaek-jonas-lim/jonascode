@@ -1,11 +1,12 @@
 from typing import List
+import collections
 '''
  # Problem
  	- `Link`: https://leetcode.com/problems/coin-change/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 17, 2025
- 	- `Answer`: coinChange
+ 	- `Answer`: coinChange / coinChangeAdvanced / coinChangeBfs / coinChangeDfs
  # Reference
 	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/CoinChange.md
 '''
@@ -72,12 +73,76 @@ class Solution:
 	- Dynamic Programming (Advanced)
 	- O(amount × n) (n = the number of coins)
     '''
-    def coinChange(self, coins: List[int], amount: int) -> int:
+    def coinChangeAdvanced(self, coins: List[int], amount: int) -> int:
         dp = [0] + [amount + 1] * amount
         for coin in coins:
             for target in range(coin, amount + 1):
                 dp[target] = min(dp[target], dp[target - coin] + 1)
         return dp[amount] if dp[amount] != amount + 1 else -1
+    
+    
+    '''
+	# Option #3
+	- BFS + Memoization
+    - O(amount × n)
+    '''
+    def coinChangeBfs(self, coins: List[int], amount: int) -> int:
+        
+        if amount == 0: return 0
+        coins.sort(reverse=True)
+
+        deque = collections.deque()
+        for coin in coins:
+            diff = amount - coin
+            if diff < 0: continue
+            if diff == 0: return 1
+            deque.append((diff, 2))
+
+        memo = set()
+        while deque:
+            goal, cnt = deque.popleft()
+            if goal in memo:
+                continue
+            memo.add(goal)
+            for coin in coins:
+                diff = goal - coin
+                if diff < 0: continue
+                if diff == 0: return cnt
+                deque.append((diff, cnt + 1))
+        return -1
+
+        
+    '''
+	# Option #4
+	- DFS + Memoization
+    - O(amount × n)
+    '''
+    def coinChangeDfs(self, coins: List[int], amount: int) -> int:
+        
+        memo = {}
+        coins.sort(reverse=True)
+        _MAX_NUMBER = float('inf')
+
+        def dfs(goal: int) -> int:
+            if goal == 0:
+                return 0
+            if goal in memo:
+                return memo[goal]
+            
+            res = _MAX_NUMBER
+            if goal < 0:
+                return res
+            
+            for coin in coins:
+                tmp = dfs(goal - coin)
+                if tmp + 1 >= res: continue
+                res = tmp + 1
+            
+            memo[goal] = res
+            return res
+        
+        result = dfs(amount)
+        return -1 if result == _MAX_NUMBER else result
 
 
 if __name__ == "__main__":
