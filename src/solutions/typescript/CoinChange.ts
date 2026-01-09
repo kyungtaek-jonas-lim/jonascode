@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 17, 2025
- 	- `Answer`: coinChange / coinChangeAdvanced / coinChangeDfs / coinChangeBfs
+ 	- `Answer`: coinChange / coinChangeDp1 / coinChangeDp2 / coinChangeDfs / coinChangeBfs
  # Reference
 	- https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/doc/explanation/CoinChange.md
  */
@@ -46,10 +46,11 @@ function coinChange(coins: number[], amount: number): number {
 
 /**
 # Option #2
-- Dynamic Programming (Advanced)
+- Dynamic Programming #1
 - O(amount × n)
+- ref) https://www.youtube.com/watch?v=H9bfqozjoqs
  */
-function coinChangeAdvanced(coins: number[], amount: number): number {
+function coinChangeDp1(coins: number[], amount: number): number {
     
     const dp: number[] = new Array(amount + 1).fill(amount + 1);
     dp[0] = 0;
@@ -67,6 +68,24 @@ function coinChangeAdvanced(coins: number[], amount: number): number {
 
 /**
 # Option #3
+- Dynamic Programming #2
+- O(amount × n)
+- https://www.youtube.com/watch?v=KnWorqyDSLA
+ */
+function coinChangeDp2(coins: number[], amount: number): number {
+    const dp: Array<number> = new Array(amount + 1).fill(amount + 1);
+    dp[0] = 0;
+    for (const coin of coins) {
+        for (let i = coin; i <= amount; i++) {
+            dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+        }
+    }
+    return dp[amount] == amount + 1 ? -1 : dp[amount];
+};
+
+
+/**
+# Option #4
 - DFS + Memoization
 - O(amount × n)
  */
@@ -96,7 +115,7 @@ function coinChangeDfs(coins: number[], amount: number): number {
 
 
 /**
-# Option #4
+# Option #5
 - BFS + Memoization
 - O(amount × n)
  */

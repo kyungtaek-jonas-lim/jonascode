@@ -72,13 +72,15 @@ class Solution:
 	# Option #2
 	- Dynamic Programming (Advanced)
 	- O(amount × n) (n = the number of coins)
+	- ref)  https://www.youtube.com/watch?v=KnWorqyDSLA
     '''
     def coinChangeAdvanced(self, coins: List[int], amount: int) -> int:
-        dp = [0] + [amount + 1] * amount
+        dp = [float('inf')] * (amount + 1)
+        dp[0] = 0
         for coin in coins:
-            for target in range(coin, amount + 1):
-                dp[target] = min(dp[target], dp[target - coin] + 1)
-        return dp[amount] if dp[amount] != amount + 1 else -1
+            for i in range(coin, amount + 1):
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+        return -1 if dp[amount] == float('inf') else dp[amount]
     
     
     '''

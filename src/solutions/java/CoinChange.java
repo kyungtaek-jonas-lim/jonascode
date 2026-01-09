@@ -58,6 +58,7 @@ public class CoinChange {
 	# Option #2
 	- Dynamic Programming (Advanced)
 	- O(amount × n) (n = the number of coins)
+    - https://www.youtube.com/watch?v=KnWorqyDSLA
 	 */
     public static int coinChangeAdvanced(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
@@ -68,7 +69,7 @@ public class CoinChange {
         		dp[target] = Math.min(dp[target], dp[target - coin] + 1);
         	}
         }
-    	return dp[amount] > amount ? -1 : dp[amount];
+    	return dp[amount] == amount + 1 ? -1 : dp[amount];
     }
 
 	
