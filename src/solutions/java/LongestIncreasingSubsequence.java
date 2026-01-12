@@ -3,7 +3,9 @@ package solutions.java;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  # Problem
@@ -11,7 +13,7 @@ import java.util.List;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 18, 2025
- 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISSimple
+ 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISMap / lengthOfLISDp
  */
 public class LongestIncreasingSubsequence {
 	public static void main(String[] args) {
@@ -87,24 +89,52 @@ public class LongestIncreasingSubsequence {
     }
 
     
+    // Map
+    // O(n^2)
+	// Jan 12, 2026
+    public int lengthOfLISMap(int[] nums) {
+        
+        Map<Integer, Integer> memo = new HashMap<>();
+        int result = 0;
+
+        for (int num: nums) {
+            List<Integer> keys = new ArrayList<>(memo.keySet());
+            for (int n: keys) { // Use 'list' to prevent from changing the size of the dictionary during iteration such as 'ConcurrentModificationException'
+                if (n >= num) continue;
+                int currCnt = memo.get(n), existingCnt = memo.getOrDefault(num, 0);
+                result = Math.max(currCnt + 1, result);
+                if (currCnt >= existingCnt) {
+                    memo.put(num, currCnt + 1);
+                }
+            }
+            if (!memo.containsKey(num)) {
+                memo.put(num, 1);
+            }
+        }
+
+        return result == 0 ? 1 : result;
+    }
+
+    
     // Dynamic Programming
     // O(n^2)
-    // https://www.youtube.com/watch?v=cjWnW0hdF1Y
-    public int lengthOfLISSimple(int[] nums) {
-        int n = nums.length;
+	// Jan 12, 2026
+    public int lengthOfLISDp(int[] nums) {
+        final int n = nums.length;
         int[] dp = new int[n];
         Arrays.fill(dp, 1);
 
-        int result = 1;
-        for (int i = n - 2; i >= 0; i--) {
-            for (int j = n - 1; j > i; j--) {
-                if (nums[i] < nums[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                }
+        for (int i = n - 1; i >= 1; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (nums[j] >= nums[i]) continue;
+                dp[j] = Math.max(dp[j], dp[i] + 1);
             }
-            result = Math.max(result, dp[i]);
         }
 
+        int result = 1;
+        for (int num: dp) {
+            result = Math.max(num, result);
+        }
         return result;
     }
     

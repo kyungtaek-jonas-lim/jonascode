@@ -7,7 +7,7 @@ import bisect
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Mar 18, 2025
- 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISSimple
+ 	- `Answer`: lengthOfLIS / lengthOfLISAdvanced / lengthOfLISMap / lengthOfLISDp
  '''
 class Solution:
 
@@ -57,21 +57,45 @@ class Solution:
         
         # The length of the tails array represents the length of the longest increasing subsequence
         return len(tails)
+
+
+    # Map
+    # O(n^2)
+    # Jan 12, 2026
+    def lengthOfLISMap(self, nums: List[int]) -> int:
+        
+        memo = {} # Key: past numbers, Value: Count from the past
+        result = 0
+
+        for num in nums:
+            for n in list(memo.keys()): # Use 'list' to prevent from changing the size of the dictionary during iteration.
+                if n >= num: continue
+                currCnt = memo[n]
+                result = max(currCnt + 1, result)
+                
+                existingCnt = memo.get(num, 0)
+                if existingCnt <= currCnt:
+                    memo[num] = currCnt + 1
+                    
+            if num not in memo:
+                memo[num] = 1
+                
+
+        return result if result != 0 else 1
     
 
     # Dynamic Programming
     # O(n^2)
-    # https://www.youtube.com/watch?v=cjWnW0hdF1Y
-    def lengthOfLISSimple(self, nums: List[int]) -> int:
-        
+    # Jan 12, 2026
+    def lengthOfLISDp(self, nums: List[int]) -> int:
         n = len(nums)
         dp = [1] * n
 
-        for i in range(n - 2, -1, -1):
-            for j in range(n - 1, i, -1):
-                if nums[i] < nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
-        
+        for i in range(n - 1, 0, -1): # Standard
+            for j in range(i - 1, -1, -1): # To the left
+                if nums[j] >= nums[i]: continue
+                dp[j] = max(dp[j], dp[i] + 1)
+
         return max(dp)
 
 
