@@ -6,7 +6,7 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: wordBreak / wordBreakBetter/ wordBreakAdvanced
+ 	- `Answer`: wordBreak / wordBreakBetter/ wordBreakAdvanced / wordBreakDp
 '''
 class Solution:
 
@@ -120,6 +120,31 @@ class Solution:
         
         # The final result tells us whether the full string s[0:len(s)] is segmentable
         return dp[len(s)]
+
+    '''
+    # Option #4
+    - Dynamic Programming
+    - O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+    - Jan 13, 2026
+    '''
+    def wordBreakDp(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[0] = True
+
+        i = 0
+        while i < n:
+            if not dp[i]:
+                i += 1
+                continue
+            for word in wordDict:
+                m = len(word)
+                if s[i:i + m] == word:
+                    dp[i + m] = True
+
+            i += 1
+
+        return dp[n]
     
     
 if __name__ == "__main__":

@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 8, 2025
- 	- `Answer`: wordBreak_dfs / wordBreak_dp
+ 	- `Answer`: wordBreak_dfs / wordBreak_dp / wordBreakDp
 */
 
 /*
@@ -68,5 +68,36 @@ function wordBreak_dp(s: string, wordDict: string[]): boolean {
             }
         }
     }
+    return dp[n];
+};
+
+
+/*
+# Option #3
+- Dynamic Programming
+- O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+- Jan 13, 2026
+*/
+function wordBreakDp(s: string, wordDict: string[]): boolean {
+    
+    const n: number = s.length, m: number = wordDict.length;
+    const dp: Array<boolean> = new Array(n + 1).fill(false);
+    dp[0] = true;
+
+    let i: number = 0;
+    while (i < n) {
+        if (!dp[i]) {
+            i++;
+            continue;
+        }
+        for (const word of wordDict) {
+            const m: number = word.length;
+            if (s.substring(i, i + m) === word) {
+                dp[i + m] = true;
+            }
+        }
+        i++;
+    }
+
     return dp[n];
 };

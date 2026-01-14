@@ -11,7 +11,7 @@ import java.util.Set;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: wordBreak / wordBreakBetter / wordBreakAdvanced
+ 	- `Answer`: wordBreak / wordBreakBetter / wordBreakAdvanced / wordBreakDp
  */
 public class WordBreak {
 
@@ -147,5 +147,36 @@ public class WordBreak {
     	
     	// The final value tells us if the entire string can be segmented
     	return dp[s.length()];
+    }
+	
+	/*
+	# Option #4
+	- Dynamic Programming
+	- O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+	- Jan 13, 2026
+	 */
+    public boolean wordBreakDp(String s, List<String> wordDict) {
+        final int n = s.length();
+        boolean[] dp = new boolean[n + 1];
+        dp[0] = true;
+        
+        int i = 0;
+        while (i < n) {
+            if (!dp[i]) {
+                i++;
+                continue;
+            }
+
+            for (String word: wordDict) {
+                int m = word.length();
+                if (n >= i + m && s.substring(i, i + m).equals(word)) {
+                    dp[i + m] = true;
+                }
+            }
+
+            i++;
+        }
+
+        return dp[n];
     }
 }
