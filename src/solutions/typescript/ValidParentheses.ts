@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 8, 2025
-	- `Answer`: isValid
+	- `Answer`: isValid / isValidIf
  */
 
 
@@ -29,4 +29,27 @@ function isValid(s: string): boolean {
         }
     }
     return result.length === 0;
+};
+
+/*
+# Option #2
+- O(n)
+*/
+function isValidIf(s: string): boolean {
+
+    const stack: string[] = [];
+
+    for (const c of s) {
+        if (c === "(" || c === "{" || c === "[") { // Open
+            stack.push(c);
+        } else { // Close
+            if (stack.length === 0) return false;
+            const last: string = stack.pop()!;
+            if (last === "(" && c !== ")") return false;
+            else if (last === "{" && c !== "}") return false;
+            else if (last === "[" && c !== "]") return false;
+        }
+    }
+
+    return stack.length === 0;
 };
