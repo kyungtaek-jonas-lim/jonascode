@@ -12,7 +12,7 @@ import java.util.Map;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Mar 25, 2025
-	- `Answer`: groupAnagrams / groupAnagramsAdvanced / groupAnagramsBest
+	- `Answer`: groupAnagrams / groupAnagramsAdvanced / groupAnagramsBest / groupAnagramsSimple
 */
 public class GroupAnagrams {
 
@@ -90,33 +90,62 @@ public class GroupAnagrams {
     - O(n * m) (n = the number of strs, m = the length of average str)
     - Counting Sort Key
      */
-    public static List<List<String>> groupAnagramsBest(String[] strs) {
-    	
-    	Map<String, List<String>> map = new HashMap<>();
-    	
-    	for (String s: strs) {
-    		
-    		int[] count = new int[26];
-    		
-    		for (char c: s.toCharArray()) {
-    			count[(int)c - (int)'a']++;
-    		}
-    		
-    		StringBuilder stringBuilder = new StringBuilder();
-    		for (int i: count) {
-    			stringBuilder.append(i).append('#');
-    		}
-    		
-    		String key = stringBuilder.toString();
-    		if (map.containsKey(key)) {
-    			map.get(key).add(s);
-    		} else {
-    			List<String> item = new ArrayList<>();
-    			item.add(s);
-    			map.put(key, item);
-    		}
-    	}
-    	
-    	return new ArrayList<>(map.values());
+    public List<List<String>> groupAnagramsBest(String[] strs) {
+
+        Map<String, List<String>> memo = new HashMap<>();
+
+        for (String str: strs) {
+            
+            char[] chars = str.toCharArray();
+            int[] counts = new int[26];
+            for (char c: chars) {
+                counts[c - 'a']++;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int c: counts) {
+                sb.append(c).append("#");
+            }
+
+            String key = sb.toString();
+            if (memo.containsKey(key)) {
+                memo.get(key).add(str);
+            } else {
+                List<String> item = new ArrayList<>();
+                item.add(str);
+                memo.put(key, item);
+            }
+        }
+
+        return new ArrayList<>(memo.values());
+    }
+    
+    /*
+    # Option #4
+    - O(n * k * log k)
+	- Simple
+	- Jan 19, 2026
+     */
+    public List<List<String>> groupAnagramsSimple(String[] strs) {
+        
+        Map<String, Integer> memo = new HashMap<>();
+        List<List<String>> result = new ArrayList<>();
+        
+        for (String str: strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String sortedStr = new String(chars);
+
+            if (memo.containsKey(sortedStr)) {
+                result.get(memo.get(sortedStr)).add(str);
+            } else {
+                memo.put(sortedStr, result.size());
+                List<String> newItem = new ArrayList<>();
+                newItem.add(str);
+                result.add(newItem);
+            }
+        }
+
+        return result;
     }
 }

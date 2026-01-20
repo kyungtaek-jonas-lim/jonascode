@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 8, 2025
-	- `Answer`: groupAnagrams / groupAnagramsDifferent
+	- `Answer`: groupAnagrams / groupAnagramsBest / groupAnagramsSimple
  */
 
 
@@ -36,21 +36,48 @@ function groupAnagrams(strs: string[]): string[][] {
 # Option #2
 - O(n * k)
 */
-function groupAnagramsDifferent(strs: string[]): string[][] {
+function groupAnagramsBest(strs: string[]): string[][] {
     
-    const map = new Map<string, string[]>();
-    const codeAta = 'a'.charCodeAt(0);
-    for (let i = 0; i < strs.length; i++) {
-        const counts = new Array(26).fill(0);
-        const cArray: string[] = strs[i].split('');
-        for (const c of cArray) {
-            counts[c.charCodeAt(0) - codeAta]++;
+    const map: Map<string, Array<string>> = new Map();
+
+    for (const str of strs) {
+        const count: number[] = new Array(26).fill(0); // Needed to be initialized as '0'
+        
+        for (const c of str) {
+            count[c.charCodeAt(0) - 'a'.charCodeAt(0)]++;
         }
-        const key = counts.join('#');
-        if (!map.has(key)) {
-            map.set(key, []);
+
+        const key = count.join("#");
+        if (map.has(key)) {
+            map.get(key)!.push(str);
+        } else {
+            map.set(key, [str]);
         }
-        map.get(key)!.push(strs[i]);
     }
+
     return Array.from(map.values());
+};
+
+
+/*
+# Option #3
+- O(n * k log k) (n = strs.length, k = The average length of strs => split + sort + join = O(k log k))
+- Simple (Simliar to Option #1)
+- Jan 19, 2026
+*/
+function groupAnagramsSimple(strs: string[]): string[][] {
+    const result: string[][] = [];
+    const memo: Map<string, number> = new Map();
+
+    for (const str of strs) {
+        const sortedStr: string = str.split("").sort().join("");
+        if (memo.has(sortedStr)) {
+            result[memo.get(sortedStr)!].push(str);
+        } else {
+            memo.set(sortedStr, result.length);
+            result.push([str]);
+        }
+    }
+
+    return result;
 };

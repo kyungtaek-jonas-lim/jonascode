@@ -6,7 +6,7 @@ from collections import defaultdict
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Mar 25, 2025
-	- `Answer`: groupAnagrams / groupAnagramsAdvanced / groupAnagramsBest
+	- `Answer`: groupAnagrams / groupAnagramsAdvanced / groupAnagramsBest / groupAnagramsSimple / groupAnagramsBest2
 '''
 
 class Solution:
@@ -77,6 +77,52 @@ class Solution:
             result[tuple(count)].append(s) # Array cannot be key of dicts, so use tuples
 
         return list(result.values())
+    
+    '''
+    # Option #4
+    - O(n * k * log k)
+    - Simple
+    - Jan 19, 2026
+    '''
+    def groupAnagramsSimple(self, strs: List[str]) -> List[List[str]]:
+        
+        memo = {}
+        result = []
+
+        for str in strs:
+            sortedStr = "".join(sorted(str))
+            if sortedStr in memo:
+                result[memo[sortedStr]].append(str)
+            else:
+                memo[sortedStr] = len(result)
+                result.append([str])
+
+        return result
+    
+    '''
+    # Option #5
+    - O(n * m) (n = the number of strs, m = the length of average str)
+    - Counting Sort Key (Similar to Option #3)
+    - Jan 19, 2026
+    '''
+    def groupAnagramsBest2(self, strs: List[str]) -> List[List[str]]:
+
+        memo = {}
+        
+        for s in strs:
+            count = [0] * 26
+            
+            for c in s:
+                count[ord(c) - ord('a')] += 1
+            
+            # key = "#".join(map(str, count)) # Slow
+            key = tuple(count) # Faster by using tuple as a key
+            if key in memo:
+                memo[key].append(s)
+            else:
+                memo[key] = [s]
+        
+        return list(memo.values())
 
 
 if __name__ == '__main__':
