@@ -6,7 +6,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 8, 2025
- 	- `Answer`: eraseOverlapIntervals
+ 	- `Answer`: eraseOverlapIntervals / eraseOverlapIntervalsAdvanced
  */
 
 /*
@@ -31,4 +31,23 @@ function eraseOverlapIntervals(intervals: number[][]): number {
         
     }
     return result;
+};
+
+
+/*
+# Option #2
+- O(n log n)
+*/
+function eraseOverlapIntervalsAdvanced(intervals: number[][]): number {
+    intervals.sort((a, b) => a[1] - b[1]);
+    let end: number = -Infinity, count: number = 0;
+
+    for (const interval of intervals) {
+        if (interval[0] >= end) {
+            end = interval[1];
+            count++;
+        }
+    }
+
+    return intervals.length - count;
 };
