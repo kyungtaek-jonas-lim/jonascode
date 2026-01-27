@@ -97,7 +97,7 @@
 24. Reverse Linked List (206) (*)
 	- [Problem](https://leetcode.com/problems/reverse-linked-list/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ReverseLinkedList.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ReverseLinkedList.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ReverseLinkedList.ts))
-25. Combination Sum IV (377) (***)
+25. Combination Sum IV (377) (**)
 	- [Problem](https://leetcode.com/problems/combination-sum-iv/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/CombinationSumIV.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/CombinationSumIV.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/CombinationSumIV.ts))
 26. House Robber (198) (*)
