@@ -6,17 +6,18 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: rob / robAdvanced
+ 	- `Answer`: robDpWithConstantSpace / robRecursiveMemoization / robDpArray
 '''
 class Solution:
     
     '''
     # Option #1
-    - Dynamic Programming
+    - DP with Constant Space
     - O(n)
+    - Space Complexity: O(1)
     - ref: https://www.youtube.com/watch?v=73r3KWiEvyk
     '''
-    def rob(self, nums: List[int]) -> int:
+    def robDpWithConstantSpace(self, nums: List[int]) -> int:
 
         def process(nums: List[int]) -> int:
             
@@ -35,36 +36,44 @@ class Solution:
 
     '''
     # Option #2
-    - Recursive method with Memoization
+    - Recursive + Memoization
     - O(n)
+    - Space Complexity: O(n)
     '''
-    def robAdvanced(self, nums: List[int]) -> int:
+    def robRecursiveMemoization(self, nums: List[int]) -> int:
         
-        memo = {}
-
-        def process(index: int) -> int:
-
-            # If it's eqaul or greater than the length of nums
-            if index >= len(nums):
+        n, memo = len(nums), {}
+        def dfs(x: int):
+            if x >= n:
                 return 0
+            if x in memo:
+                return memo[x]
             
-            # Cache
-            if index in memo:
-                return memo[index]
-            
-            # Take this house
-            take = nums[index] + process(index + 2)
-            
-            # Skip this house
-            skip = process(index + 1)
-
-            # Get the maximum
-            memo[index] = max(take, skip)
-            return memo[index]
-
-        return process(0)
+            res = max(dfs(x + 2) + nums[x], dfs(x + 1))
+            memo[x] = res
+            return res
+        
+        return dfs(0)
     
 
+    '''
+    # Option #3
+    - DP Array
+    - Common
+    - O(n)
+    - Space Complexity: O(n)
+	- Jan 27, 2026
+    '''
+    def robDpArray(self, nums: List[int]) -> int:
+        
+        n = len(nums)
+        dp = [0] * (n + 1)
+        dp[1] = nums[0]
+
+        for i in range(1, n):
+            dp[i + 1] = max(dp[i - 1] + nums[i], dp[i])
+        
+        return dp[n]
 if __name__ == '__main__':
     sol = Solution()
     print(sol.rob([1,2,3,1])) # 4

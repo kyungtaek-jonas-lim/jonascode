@@ -9,30 +9,27 @@ import java.util.Map;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: rob / robAdvanced
+ 	- `Answer`: robDpWithConstantSpace / robRecursiveMemoization / robDpArray
  */
 public class HouseRobber {
 
 	public static void main(String[] args) {
-		System.out.println(rob(new int[] {1,2,3,1})); // 4
-		System.out.println(rob(new int[] {2,7,9,3,1})); // 12
+		System.out.println(robDpWithConstantSpace(new int[] {1,2,3,1})); // 4
+		System.out.println(robDpWithConstantSpace(new int[] {2,7,9,3,1})); // 12
 		
 		System.out.println("---");
-		System.out.println(robAdvanced(new int[] {1,2,3,1})); // 4
-		System.out.println(robAdvanced(new int[] {2,7,9,3,1})); // 12
+		System.out.println(robRecursiveMemoization(new int[] {1,2,3,1})); // 4
+		System.out.println(robRecursiveMemoization(new int[] {2,7,9,3,1})); // 12
 	}
-    
+
     /*
-    # Option #1
-    - Dynamic Programming
-    - O(n)
-    - ref: https://www.youtube.com/watch?v=73r3KWiEvyk
-     */
-    public static int rob(int[] nums) {
-    	return process(nums);
-    }
-    
-    private static int process(int[] nums) {
+	# Option #1
+	- DP with Constant Space
+	- O(n)
+	- Space Complexity: O(1)
+	- ref: https://www.youtube.com/watch?v=73r3KWiEvyk
+	*/
+    public static int robDpWithConstantSpace(int[] nums) {
     	
     	int rob1 = 0, rob2 = 0;
     	int temp = 0;
@@ -48,28 +45,43 @@ public class HouseRobber {
     }
 	
 	/*
-    # Option #2
-    - Recursive method with Memoization
-    - O(n)
-	 */
-    public static int robAdvanced(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
-    	return process(nums, 0, map);
+	# Option #2
+	- Recursive + Memoization
+	- O(n)
+	- Space Complexity: O(n)
+	*/
+    public static int robRecursiveMemoization(int[] nums) {
+        Map<Integer, Integer> memo = new HashMap<>();
+        return dfs(nums, 0, memo);
     }
     
-    private static int process(int[] nums, int index, Map<Integer, Integer> map) {
-    	// If it's eqaul or greater than the length of nums
-    	if (index >= nums.length) return 0;
-    	// Cache
-    	if (map.containsKey(index)) return map.get(index);
-    	
-    	// Take this house
-    	int take = nums[index] + process(nums, index + 2, map);
-    	// Skip this house
-    	int skip = process(nums, index + 1, map);
-    	
-    	// Get the maximum
-    	map.put(index, Math.max(take, skip));
-    	return map.get(index);
+    private static int dfs(int[] nums, int x, Map<Integer, Integer> memo) {
+        if (x >= nums.length) return 0;
+        if (memo.containsKey(x)) return memo.get(x);
+
+        int res = Math.max(dfs(nums, x + 1, memo), dfs(nums, x + 2, memo) + nums[x]);
+        memo.put(x, res);
+        return res;
+    }
+
+	/*
+	# Option #3
+	- DP Array
+	- Common
+	- O(n)
+	- Space Complexity: O(n)
+	- Jan 27, 2026
+	*/
+    public int robDpArray(int[] nums) {
+        
+        final int n = nums.length;
+        int[] dp = new int[n + 1];
+        dp[1] = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            dp[i + 1] = Math.max(dp[i - 1] + nums[i], dp[i]);
+        }
+
+        return dp[n];
     }
 }

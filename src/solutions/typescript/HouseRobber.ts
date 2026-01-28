@@ -5,15 +5,17 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 10, 2025
- 	- `Answer`: rob / robDP
+ 	- `Answer`: robRecursiveMemoization / robDpWithConstantSpace / robDpArray
  */
 
 /*
 # Option #1
-- Top-down
+- DP with Constant Space
 - O(n)
+- Space Complexity: O(1)
+- ref: https://www.youtube.com/watch?v=73r3KWiEvyk
 */
-function rob(nums: number[]): number {
+function robRecursiveMemoization(nums: number[]): number {
     const n: number = nums.length;
     const map = new Map<number, number>();
     function dfs(index: number): number {
@@ -28,10 +30,11 @@ function rob(nums: number[]): number {
 
 /*
 # Option #2
-- Bottom-Up
+- Recursive + Memoization
 - O(n)
+- Space Complexity: O(n)
 */
-function robDP(nums: number[]): number {
+function robDpWithConstantSpace(nums: number[]): number {
     
     const n: number = nums.length;
     let rob1: number = 0, rob2: number = 0;
@@ -42,4 +45,24 @@ function robDP(nums: number[]): number {
         rob2 = temp;
     }
     return rob2;
+};
+
+/*
+# Option #3
+- DP Array
+- Common
+- O(n)
+- Space Complexity: O(n)
+- Jan 27, 2026
+*/
+function robDpArray(nums: number[]): number {
+    const n: number = nums.length;
+    const dp: number[] = new Array(n + 1).fill(0);
+    dp[1] = nums[0];
+
+    for (let i = 1; i < n; i++) {
+        dp[i + 1] = Math.max(dp[i - 1] + nums[i], dp[i]);
+    }
+
+    return dp[n];
 };
