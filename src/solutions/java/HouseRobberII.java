@@ -10,7 +10,7 @@ import java.util.Map;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Aor 6, 2025
- 	- `Answer`: rob / robAdvanced
+ 	- `Answer`: rob / robDp / robDp2
  */
 public class HouseRobberII {
 	
@@ -21,9 +21,9 @@ public class HouseRobberII {
 		System.out.println(rob(new int[] {1,2,3})); // 3
 		
 		System.out.println("---");
-		System.out.println(robAdvanced(new int[] {2,3,2})); // 3
-		System.out.println(robAdvanced(new int[] {1,2,3,1})); // 4
-		System.out.println(robAdvanced(new int[] {1,2,3})); // 3
+		System.out.println(robDp(new int[] {2,3,2})); // 3
+		System.out.println(robDp(new int[] {1,2,3,1})); // 4
+		System.out.println(robDp(new int[] {1,2,3})); // 3
 	}
 	
 
@@ -66,9 +66,10 @@ public class HouseRobberII {
 	 # Option #2
 	 - Dynamic Programming
 	 - O(n)
+	 - Space Complexity: O(1)
      - ref: https://www.youtube.com/watch?v=rWAJCfYYOvM
 	 */
-    public static int robAdvanced(int[] nums) {
+    public static int robDp(int[] nums) {
     	if (nums.length == 1) return nums[0];
     	return Math.max(process(Arrays.copyOfRange(nums, 0, nums.length - 1)), process(Arrays.copyOfRange(nums, 1, nums.length)));
     }
@@ -86,5 +87,25 @@ public class HouseRobberII {
     	}
     	
     	return rob2;
+    }
+	
+	/*
+	 # Option #3
+	 - Dynamic Programming
+	 - O(n)
+	 - Space Complexity: O(n)
+	 */
+    public int robDp2(int[] nums) {
+        final int n = nums.length;
+        if (n == 1) return nums[0];
+        return Math.max(process(nums, 0, n - 1), process(nums, 1, n));
+    }
+
+    private int process(int[] nums, int start, int end) {
+        int[] dp = new int[end - start + 2];
+        for (int i = start; i < end; i++) {
+            dp[i - start + 2] = Math.max(dp[i - start + 1], dp[i - start] + nums[i]);
+        }
+        return dp[end - start + 1];
     }
 }

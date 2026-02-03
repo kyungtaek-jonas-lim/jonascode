@@ -6,7 +6,7 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Aor 6, 2025
- 	- `Answer`: rob / robAdvanced
+ 	- `Answer`: rob / robDp / robDp2
 '''
 class Solution:
 
@@ -47,9 +47,10 @@ class Solution:
     # Option #2
     - Dynamic Programming
     - O(n)
+    - Space Complexity: O(1)
     - ref: https://www.youtube.com/watch?v=rWAJCfYYOvM
     '''
-    def robAdvanced(self, nums: List[int]) -> int:
+    def robDp(self, nums: List[int]) -> int:
         
         if len(nums) == 1:
             return nums[0]
@@ -67,6 +68,27 @@ class Solution:
             return rob2
 
         return max(process(nums[:-1]), process(nums[1:]))
+    
+    '''
+    # Option #3
+    - Dynamic Programming
+    - O(n)
+    - Space Complexity: O(n)
+    '''
+    def robDp2(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n <= 2:
+            return max(nums)
+
+        def process(start: int, end: int) -> int:
+            dp = [0] * (end - start + 2)
+            
+            for i in range(start, end):
+                dp[i - start + 2] = max(nums[i] + dp[i - start], dp[i - start + 1])
+            
+            return dp[end - start + 1]
+
+        return max(process(0, n - 1), process(1, n))
 
 
 if __name__ == '__main__':
@@ -77,7 +99,7 @@ if __name__ == '__main__':
     print(sol.rob([1,3,1,3,100])) # 103
 
     print("---")
-    print(sol.robAdvanced([2,3,2])) # 3
-    print(sol.robAdvanced([1,2,3,1])) # 4
-    print(sol.robAdvanced([1,2,3])) # 3
-    print(sol.robAdvanced([1,3,1,3,100])) # 103
+    print(sol.robDp([2,3,2])) # 3
+    print(sol.robDp([1,2,3,1])) # 4
+    print(sol.robDp([1,2,3])) # 3
+    print(sol.robDp([1,3,1,3,100])) # 103

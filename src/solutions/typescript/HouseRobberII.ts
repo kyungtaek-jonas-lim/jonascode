@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 10, 2025
- 	- `Answer`: rob / robDP
+ 	- `Answer`: rob / robDP / robDp2
  */
 
 /*
@@ -41,6 +41,7 @@ function rob(nums: number[]): number {
 # Option #2
 - Bottom-up
 - O(n)
+- Space Complexity: O(1)
 */
 function robDP(nums: number[]): number {
     
@@ -58,4 +59,26 @@ function robDP(nums: number[]): number {
     }
 
     return Math.max(dp(0, n - 1), dp(1, n));
+};
+
+
+/*
+# Option #3
+- Bottom-up
+- O(n)
+- Space Complexity: O(n)
+*/
+function robDp2(nums: number[]): number {
+    const n: number = nums.length;
+    if (n <= 2) return Math.max(...nums);
+    
+    function process(start: number, end: number): number {
+        const dp: number[] = new Array(end - start + 2).fill(0);
+        for (let i = start; i < end; i++) {
+            dp[i - start + 2] = Math.max(dp[i - start] + nums[i], dp[i - start + 1]);
+        }
+        return dp[end - start + 1];
+    }
+
+    return Math.max(process(0, n - 1), process(1, n));
 };
