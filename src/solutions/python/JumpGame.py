@@ -6,7 +6,7 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced
+ 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced / canJumpDfs
 '''
 class Solution:
     
@@ -77,6 +77,30 @@ class Solution:
         
         # If the goal went all the way to the first, it means the first index can reach the last index.
         return goal == 0
+    
+
+    '''
+    # Option #4
+    - DFS + Memoization
+    - O(n^2)
+    '''
+    def canJumpDfs(self, nums: List[int]) -> bool:
+        
+        n, memo = len(nums), {}
+
+        def dfs(index: int) -> bool:
+            if index + nums[index] >= n - 1:
+                return True
+            if index in memo:
+                return memo[index]
+
+            for i in range(index + 1, index + nums[index] + 1):
+                if dfs(i):
+                    return True
+            memo[index] = False
+            return False
+
+        return dfs(0)
 
 if __name__ == '__main__':
     sol = Solution()

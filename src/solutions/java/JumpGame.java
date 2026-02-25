@@ -1,12 +1,15 @@
 package solutions.java;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  # Problem
  	- `Link`: https://leetcode.com/problems/jump-game/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced
+ 	- `Answer`: canJump / canJumpBetter / canJumpAdvanced / canJumpDfs
  */
 public class JumpGame {
 
@@ -91,5 +94,26 @@ public class JumpGame {
     	
     	// If the goal went all the way to the first, it means the first index can reach the last index.
     	return goal == 0;
+    }
+
+	/*
+    # Option #4
+    - Dfs
+    - O(n^2)
+	 */
+    public boolean canJumpDfs(int[] nums) {
+        Map<Integer, Boolean> memo = new HashMap<>();
+        return dfs(nums, 0, memo);
+    }
+    
+    private boolean dfs(int[] nums, int index, Map<Integer, Boolean> memo) {
+        if (nums.length - 1 <= index + nums[index]) return true;
+        if (memo.containsKey(index)) return memo.get(index);
+        
+        for (int i = index + 1; i <= index + nums[index]; i++) {
+            if (dfs(nums, i, memo)) return true;
+        }
+        memo.put(index, false);
+        return false;
     }
 }
