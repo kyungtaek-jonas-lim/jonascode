@@ -5,7 +5,7 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: uniquePaths / uniquePathsAdvanced
+ 	- `Answer`: uniquePaths / uniquePathsAdvanced / uniquePathsDfs
 '''
 
 class Solution:
@@ -53,6 +53,30 @@ class Solution:
 
         # The number of ways to bottom right corner
         return dp[n - 1]
+    
+
+    '''
+    # Option #3
+    - O (m * n)
+    - DFS + Memoization
+    '''
+    def uniquePathsDfs(self, m: int, n: int) -> int:
+        
+        memo = {}
+
+        def dfs(x: int, y: int) -> int:
+            if x >= m or y >= n:
+                return 0
+            if x == m - 1 and y == n - 1:
+                return 1
+            if (x, y) in memo:
+                return memo[(x, y)]
+            
+            res = dfs(x + 1, y) + dfs(x, y + 1)
+            memo[(x, y)] = res
+            return res
+                
+        return dfs(0, 0)
 
                  
 if __name__ == '__main__':

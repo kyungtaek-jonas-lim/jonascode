@@ -5,11 +5,12 @@
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: June 10, 2025
- 	- `Answer`: uniquePaths / uniquePaths1dArray
+ 	- `Answer`: uniquePaths / uniquePaths1dArray / uniquePathsDfs
  */
 
 /*
 # Option #1
+- O (m * n)
 - 2D Array
 */
 function uniquePaths(m: number, n: number): number {
@@ -33,6 +34,7 @@ function uniquePaths(m: number, n: number): number {
 
 /*
 # Option #2
+- O (m * n)
 - 1D Array
 */
 function uniquePaths1dArray(m: number, n: number): number {
@@ -45,4 +47,28 @@ function uniquePaths1dArray(m: number, n: number): number {
         }
     }
     return dp[n - 1];
+};
+
+
+
+/*
+# Option #3
+- O (m * n)
+- DFS + Memoization
+*/
+function uniquePathsDfs(m: number, n: number): number {
+    
+    const memo: number[][] = Array.from({length: m}, () => Array(n).fill(-1));
+
+    function dfs(x: number, y: number): number {
+        if (x >= m || y >= n) return 0;
+        if (x == m - 1 && y == n - 1) return 1;
+        if (memo[x][y] !== -1) return memo[x][y];
+
+        let res = dfs(x + 1, y) + dfs(x, y + 1);
+        memo[x][y] = res;
+        return res;
+    }
+
+    return dfs(0, 0);
 };

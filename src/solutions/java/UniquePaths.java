@@ -8,7 +8,7 @@ import java.util.Arrays;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 7, 2025
- 	- `Answer`: uniquePaths / uniquePathsAdvanced
+ 	- `Answer`: uniquePaths / uniquePathsAdvanced / uniquePathsDfs
  */
 public class UniquePaths {
 	
@@ -72,5 +72,27 @@ public class UniquePaths {
     	
     	// The number of ways to bottom right corner
     	return dp[n - 1];
+    }
+    
+    /*
+    # Option #3
+    - O (m * n)
+    - DFS + Memoization
+     */
+    public int uniquePathsDfs(int m, int n) {
+        int[][] memo = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            Arrays.fill(memo[i], -1);
+        }
+        return dfs(m, n, 0, 0, memo);    
+    }
+
+    private int dfs(int m, int n, int x, int y, int[][] memo) {
+        if (x >= m || y >= n) return 0;
+        if (x == m - 1 && y == n - 1) return 1;
+        if (memo[x][y] != -1) return memo[x][y];
+        int res = dfs(m, n, x + 1, y, memo) + dfs(m, n, x, y + 1, memo);
+        memo[x][y] = res;
+        return res;
     }
 }
