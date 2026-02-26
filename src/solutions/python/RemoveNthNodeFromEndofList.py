@@ -6,7 +6,7 @@ from typing import Optional, List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 12, 2025
-	- `Answer`: removeNthFromEnd / removeNthFromEndDfsRecursive / removeNthFromEndTwoPointers
+	- `Answer`: removeNthFromEnd / removeNthFromEndDfs / removeNthFromEndTwoPointers / removeNthFromEndTotalCount
 '''
 
 # Definition for singly-linked list.
@@ -54,26 +54,27 @@ class Solution:
     - O(n) (n = the number of nodes)
     - Space: O(n)
     '''
-    def removeNthFromEndDfsRecursive(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+    def removeNthFromEndDfs(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         
-        next: Optional[ListNode] = None
-
-        def dfs(node: Optional[ListNode]) -> int:
-            nonlocal next
-            
-            if not node:
+        nthNode: ListNode = None
+        result: ListNode = ListNode(next=head)
+        
+        def dfs(node: ListNode) -> int:
+            nonlocal nthNode
+            if node == None:
                 return 0
-            current = 1 + dfs(node.next)
-            if current == n - 1:
-                next = node
-            elif current == n + 1:
-                node.next = next
-            return current
+            
+            next = dfs(node.next)
+            if next == n:
+                nthNode = node
+            return next + 1
+        
+        dfs(result)
+        if nthNode:
+            nthNode.next = nthNode.next.next
 
-        headNth: int = dfs(head)
-        if headNth == n:
-            return head.next
-        return head
+        return result.next
+        
         
 
     '''
@@ -83,19 +84,53 @@ class Solution:
     - Space: O(1)
     '''
     def removeNthFromEndTwoPointers(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        dummy = ListNode(0, head) # start from -1
-        first = second = dummy
+        result = ListNode(next=head)
+        curr = end = result
+
+        # Have the n long distance
+        for _ in range(n):
+            end = end.next
         
-        # Advance 'first' by n+1 steps
-        for _ in range(n + 1): # (n + 1)th node cause it starts from -1
-            first = first.next
+        # Find the nth node with the distance
+        while end.next:
+            curr = curr.next
+            end = end.next
+
+        # Remove the node
+        curr.next = curr.next.next
+
+        return result.next
         
-        # Move both pointers until 'first' reaches the end
-        while first:
-            first = first.next
-            second = second.next
         
-        # Remove the nth node from end
-        second.next = second.next.next
+
+    '''
+    # Option #4
+    - Total Count (Better Space Complexity)
+    - O(n) (n = the number of nodes)
+    - Space: O(1)
+    '''
+    def removeNthFromEndTotalCount(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         
-        return dummy.next
+        result = ListNode(next=head)
+
+        # Find total count
+        curr = result
+        total = 0
+        while curr and curr.next:
+            curr = curr.next.next
+            total += 2
+        if not curr:
+            total -= 1
+
+        # Find the nth Node from the first node
+        goal, cnt = total - n, 0
+        curr = result
+        while goal != cnt:
+            curr = curr.next
+            cnt += 1
+
+        # Remove the node
+        curr.next = curr.next.next
+
+        return result.next
+        

@@ -9,7 +9,7 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 12, 2025
-	- `Answer`: removeNthFromEnd / removeNthFromEndDfsRecursive / removeNthFromEndTwoPointers
+	- `Answer`: removeNthFromEnd / removeNthFromEndDfs / removeNthFromEndTwoPointers / removeNthFromEndTotalCount
  */
 public class RemoveNthNodeFromEndofList {
 
@@ -63,23 +63,20 @@ public class RemoveNthNodeFromEndofList {
     - O(n) (n = the number of nodes)
     - Space: O(n)
 	 */
-    ListNode next = null;
+    private ListNode nthNode;
 
-    public ListNode removeNthFromEndDfsRecursive(ListNode head, int n) {
-        int headNth = dfs(head, n);
-        if (headNth == n) return head.next;
-        return head;
+    public ListNode removeNthFromEndDfs(ListNode head, int n) {
+        ListNode result = new ListNode(0, head);
+        dfs(result, n);
+        if (nthNode != null) nthNode.next = nthNode.next.next;
+        return result.next;
     }
 
-    public int dfs(ListNode node, int n) {
+    private int dfs(ListNode node, int n) {
         if (node == null) return 0;
-        int current = 1 + dfs(node.next, n);
-        if (current == n - 1) {
-            this.next = node;
-        } else if (current == n + 1) {
-            node.next = this.next;
-        }
-        return current;
+        int next = dfs(node.next, n);
+        if (next == n) nthNode = node;
+        return next + 1;
     }
 
 
@@ -90,25 +87,56 @@ public class RemoveNthNodeFromEndofList {
     - Space: O(1)
 	 */
     public ListNode removeNthFromEndTwoPointers(ListNode head, int n) {
-    	
-    	ListNode dummy = new ListNode(0, head); // start from -1
-    	ListNode first = dummy;
-    	ListNode second = dummy;
-    	
-    	// Advance 'first' by n+1 steps
-    	for (int i = 0; i <= n; i++) { // (n + 1)th node cause it starts from -1
-    		first = first.next;
-    	}
-    	
-    	// Move both pointers until 'first' reaches the end
-    	while (first != null) {
-    		first = first.next;
-    		second = second.next;
-    	}
-    	
-    	// Move both pointers until 'first' reaches the end
-    	second.next = second.next.next;
-    	
-    	return dummy.next;
+        ListNode result = new ListNode(0, head);
+        ListNode curr = result, end = result;
+        
+        // Have the n long distance
+        for (int i = 0; i < n; i++) {
+            end = end.next;
+        }
+
+        // Move to the nth node with the distance
+        while (end.next != null) {
+            curr = curr.next;
+            end = end.next;
+        }
+
+        // Remove the node
+        curr.next = curr.next.next;
+
+        return result.next;
+    }
+
+
+	/*
+    # Option #4
+    - Total Count (Better Space Complexity)
+    - O(n) (n = the number of nodes)
+    - Space: O(1)
+	 */
+    public ListNode removeNthFromEndTotalCount(ListNode head, int n) {
+        ListNode result = new ListNode(0, head);
+        ListNode curr = result;
+        
+        // Find the total count
+        int total = 0;
+        while (curr != null && curr.next != null ){
+            curr = curr.next.next;
+            total += 2;
+        }
+        if (curr == null) total--;
+
+        // Find nth Node from the first
+        curr = result;
+        int cnt = 0, goal = total - n;
+        while (cnt != goal) {
+            curr = curr.next;
+            cnt++;
+        }
+
+        // Remove the node
+        curr.next = curr.next.next;
+
+        return result.next;
     }
 }
