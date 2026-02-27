@@ -5,7 +5,7 @@ from typing import List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 13, 2025
-	- `Answer`: spiralOrder / spiralOrderAdvanced
+	- `Answer`: spiralOrder / spiralOrderAdvanced / spiralOrderDfs
 '''
 
 class Solution:
@@ -92,6 +92,42 @@ class Solution:
                 result.append(matrix[i][left])
             left += 1 # Narrow the limit (Checked all the cells on the left)
         
+        return result
+    
+    '''
+    # Option #3
+    - DFS traversal with direction control
+    - O(m * n)
+    - Extra Space Complexity: O(m * n)
+    - visited matrix: O(m * n)
+    - recursion stack: O(m * n) in worst case
+    - A DFS version is implemented, but since spiral traversal is deterministic and does not require graph exploration, a boundary-based iterative solution is more optimal in Python due to lower overhead and O(1) extra space.
+    '''
+    def spiralOrderDfs(self, matrix: List[List[int]]) -> List[int]:
+
+        result = []
+        m, n = len(matrix), len(matrix[0])
+        # done = set()
+        done = [[False] * n for _ in range(m)]
+        dx, dy = [0, 1, 0, -1], [1, 0, -1, 0]
+        
+        def dfs(x: int, y: int, d: int, final: bool) -> None:
+            # if x < 0 or y < 0 or x >= m or y >=n or (x, y) in done:
+            if x < 0 or y < 0 or x >= m or y >=n or done[x][y]:
+                if final:
+                    return
+                x -= dx[d]
+                y -= dy[d]
+                d = (d + 1) % 4
+                final = True
+            else:
+                final = False
+                # done.add((x, y))
+                done[x][y] = True
+                result.append(matrix[x][y])
+            dfs(x + dx[d], y + dy[d], d, final)
+        
+        dfs(0, 0, 0, False)
         return result
 
 

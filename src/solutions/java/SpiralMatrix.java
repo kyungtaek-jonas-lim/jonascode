@@ -9,7 +9,7 @@ import java.util.List;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Apr 13, 2025
-	- `Answer`: spiralOrder / spiralOrderAdvanced
+	- `Answer`: spiralOrder / spiralOrderAdvanced / spiralOrderDfs
  */
 public class SpiralMatrix {
 
@@ -57,6 +57,7 @@ public class SpiralMatrix {
     	return list;
     }
     
+	
     /*
     # Option #2
     - Narrow the zone(matrix) to be checked
@@ -103,6 +104,46 @@ public class SpiralMatrix {
 		}
 		return result;
 	}
+
+
+	/*
+	# Option #3
+	- DFS traversal with direction control
+	- O(m * n)
+	- Extra Space Complexity: O(m * n)
+	- visited matrix: O(m * n)
+	- recursion stack: O(m * n) in worst case
+	- A DFS version is implemented, but since spiral traversal is deterministic and does not require graph exploration, a boundary-based iterative solution is more optimal in Python due to lower overhead and O(1) extra space.
+	*/
+    boolean[][] done = null;
+    List<Integer> result = new ArrayList<>();
+    int[][] mat = null;
+    int m, n;
+    int[] dx = new int[]{0, 1, 0, -1}, dy = new int[]{1, 0, -1, 0};
+
+    public List<Integer> spiralOrderDfs(int[][] matrix) {
+        this.mat = matrix;
+        this.m = matrix.length;
+        this.n = matrix[0].length;
+        this.done = new boolean[m][n];
+        dfs(0, 0, 0, false);
+        return result;
+    }
+
+    private void dfs(int x, int y, int d, boolean last) {
+        if (x < 0 || y < 0|| x >= this.m || y >= this.n || this.done[x][y]) {
+            if (last) return;
+            last = true;
+            x -= this.dx[d];
+            y -= this.dy[d];
+            d = (d + 1) % 4;
+        } else {
+            last = false;
+            this.done[x][y] = true;
+            result.add(this.mat[x][y]);
+        }
+        dfs(x + dx[d], y + dy[d], d, last);
+    }
     
     public static void main(String[] args) {
     	SpiralMatrix sol = new SpiralMatrix();
