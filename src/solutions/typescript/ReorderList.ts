@@ -62,7 +62,7 @@ function reorderList(head: ListNode | null): void {
 function reorderListAdvanced(head: ListNode | null): void {
     
     let first: ListNode | null = head, second: ListNode | null = head;
-    while (first !== null && first.next != null) {
+    while (first !== null && first.next !== null) {
         first = first.next.next;
         second = second!.next;
     }
