@@ -66,44 +66,42 @@ public class SpiralMatrix {
     - ref: https://www.youtube.com/watch?v=BJnMZNwUk1M
      */
 	public List<Integer> spiralOrderAdvanced(int[][] matrix) {
-		
-		// Set the limit
-		int top = 0, bottom = matrix.length - 1;
-		int left = 0, right = matrix[0].length - 1;
-		
-		// Move
-		List<Integer> result = new ArrayList<>();
-		while (top <= bottom && left <= right) {
-			
-			// Move Left
-			for (int i = left; i <= right; i++) {
-				result.add(matrix[top][i]);
-			}
-			top++; // Narrow the limit (Checked all the cells on the top)
-			
-			// Move Down
-			for (int i = top; i <= bottom; i++) {
-				result.add(matrix[i][right]);
-			}
-			right--; // Narrow the limit (Checked all the cells on the right)
-			
-			// Check the valid limit
-			if (!(top <= bottom && left <= right)) break;
-			
-			// Move Left
-			for (int i = right; i >= left; i--) {
-				result.add(matrix[bottom][i]);
-			}
-			bottom--; // Narrow the limit (Checked all the cells on the bottom)
-			
-			// Move Up
-			for (int i = bottom; i >= top; i--) {
-				result.add(matrix[i][left]);
-			}
-			left++; // Narrow the limit (Checked all the cells on the left)
-		}
-		return result;
-	}
+        
+        int t = 0, b = matrix.length, l = 0, r = matrix[0].length;
+        List<Integer> result = new ArrayList<>();
+
+        while (t < b && l < r) {
+
+            // right
+            for (int j = l; j < r; j++) {
+                result.add(matrix[t][j]);
+            }
+            t++;
+
+            // down
+            for (int i = t; i < b; i++) {
+                result.add(matrix[i][r - 1]);
+            }
+            r--;
+
+            // Check the condition to prevent the duplicates
+            if (!(t < b && l < r)) break;
+
+            // left
+            for (int j = r - 1; j >= l; j--) {
+                result.add(matrix[b - 1][j]);
+            }
+            b--;
+
+            // up
+            for (int i = b - 1; i >= t; i--) {
+                result.add(matrix[i][l]);
+            }
+            l++;
+        }
+
+        return result;
+    }
 
 
 	/*

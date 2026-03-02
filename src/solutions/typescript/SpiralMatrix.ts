@@ -14,35 +14,37 @@
 - O(m * n)
 */
 function spiralOrder(matrix: number[][]): number[] {
-    
-    const m: number = matrix.length, n: number = matrix[0].length;
-    let minHeight: number = 0, maxHeight: number = m - 1;
-    let minWidth: number = 0, maxWidth: number = n - 1;
-
+    let l: number = 0, r: number = matrix[0].length, t: number = 0, b: number = matrix.length;
     const result: number[] = [];
-    while (minHeight <= maxHeight && minWidth <= maxWidth) {
-        
-        for (let j = minWidth; j <= maxWidth; j++) {
-            result.push(matrix[minHeight][j]);
-        }
-        minHeight++;
-        
-        for (let i = minHeight; i <= maxHeight; i++) {
-            result.push(matrix[i][maxWidth]);
-        }
-        maxWidth--;
 
-        if (!(minHeight <= maxHeight && minWidth <= maxWidth)) break;
-        
-        for (let j = maxWidth; j >= minWidth; j--) {
-            result.push(matrix[maxHeight][j]);
+    while (l < r && t < b) {
+
+        // right
+        for (let j = l; j < r; j++) {
+            result.push(matrix[t][j]);
         }
-        maxHeight--;
-        
-        for (let i = maxHeight; i >= minHeight; i--) {
-            result.push(matrix[i][minWidth]);
+        t++;
+
+        // down
+        for (let i = t; i < b; i++) {
+            result.push(matrix[i][r - 1]);
         }
-        minWidth++;
+        r--;
+
+        // Check the condition to prevent the duplicates
+        if (!(l < r && t < b)) break;
+
+        // left
+        for (let j = r - 1; j >= l; j--) {
+            result.push(matrix[b - 1][j]);
+        }
+        b--;
+
+        // up
+        for (let i = b - 1; i >= t; i--) {
+            result.push(matrix[i][l]);
+        }
+        l++;
     }
 
     return result;

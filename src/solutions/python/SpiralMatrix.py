@@ -61,37 +61,35 @@ class Solution:
     '''
     def spiralOrderAdvanced(self, matrix: List[List[int]]) -> List[int]:
         
-        # Set the limit
-        top, bottom = 0, len(matrix) - 1
-        left, right = 0, len(matrix[0]) - 1
-
-        # Move
+        t, b, l, r = 0, len(matrix), 0, len(matrix[0])
         result = []
-        while top <= bottom and left <= right:
+        
+        while t < b and l < r:
+            
+            # right
+            for i in range(l, r):
+                result.append(matrix[t][i])
+            t += 1
 
-            # Move Right
-            for i in range(left, right + 1):
-                result.append(matrix[top][i])
-            top += 1 # Narrow the limit (Checked all the cells on the top)
+            # down
+            for i in range(t, b):
+                result.append(matrix[i][r - 1])
+            r -= 1
 
-            # Move Down
-            for i in range(top, bottom + 1):
-                result.append(matrix[i][right])
-            right -= 1 # Narrow the limit (Checked all the cells on the right)
-
-            if not (top <= bottom and left <= right):
+            # Check the condition to prevent the duplicates
+            if not (t < b and l < r):
                 break
 
-            # Move Left
-            for i in range(right, left - 1, -1):
-                result.append(matrix[bottom][i])
-            bottom -= 1 # Narrow the limit (Checked all the cells on the bottom)
-            
-            # Move Up
-            for i in range(bottom, top - 1, -1):
-                result.append(matrix[i][left])
-            left += 1 # Narrow the limit (Checked all the cells on the left)
-        
+            # left
+            for i in range(r - 1, l - 1, -1):
+                result.append(matrix[b - 1][i])
+            b -= 1
+
+            # up
+            for i in range(b - 1, t - 1, -1):
+                result.append(matrix[i][l])
+            l += 1
+
         return result
     
     '''
