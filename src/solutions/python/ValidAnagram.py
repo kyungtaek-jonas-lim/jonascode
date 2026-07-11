@@ -5,7 +5,7 @@ from collections import Counter
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Feb 24, 2025
- 	- `Answer`: isAnagram / isAnagramBetter / isAnagramAdvanced / isAnagramSimple
+ 	- `Answer`: isAnagram / isAnagramBetter / isAnagramAdvanced / isAnagramSimple / isAnagramBest
  # Reference
  	- Anagrams
  		- Both strings must have the same length.
@@ -76,6 +76,26 @@ class Solution:
             my_dict[t[i]] -= 1
         
         return True
+    
+    '''
+    # Option #5
+    - Best
+    - O(n)
+    '''
+    def isAnagramBest(self, s: str, t: str) -> bool:
+        if len(s) != len(t): return False
+        
+        n, cnt = len(s), [0] * 128
+        for i in range(n):
+            cnt[ord(s[i])] += 1
+            cnt[ord(t[i])] -= 1
+        
+        for c in cnt:
+            if c != 0:
+                return False
+        
+        return True
+
 
 
 if __name__ == "__main__":

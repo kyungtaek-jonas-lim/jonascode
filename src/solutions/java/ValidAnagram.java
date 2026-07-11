@@ -10,7 +10,7 @@ import java.util.Map;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 9, 2025
- 	- `Answer`: isAnagramWorse / isAnagram / isAnagramBetter / isAnagramAdvanced / isAnagramBest
+ 	- `Answer`: isAnagramWorse / isAnagram / isAnagramBetter / isAnagramAdvanced / isAnagramBest / isAnagramBest2
  # Reference
  	- Anagrams
  		- Both strings must have the same length.
@@ -137,6 +137,32 @@ public class ValidAnagram {
     		if(count != 0) return false;
     	}
     	return true;
+    }
+
+	
+	/*
+	 * Option #6
+	 * Best way
+	 * O(n) => Because of the fixed length of array
+	 */
+    public boolean isAnagramBest2(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        final int n = s.length();
+        int[] cnt = new int[128];
+        char[] charsS = s.toCharArray();
+        char[] charsT = t.toCharArray();
+
+        for (int i = 0; i < n; i++) {
+            cnt[(int)charsS[i]]++;
+            cnt[(int)charsT[i]]--;
+        }
+
+        for (int c: cnt) {
+            if (c != 0) return false;
+        }
+
+        return true;
     }
 }
 
