@@ -6,7 +6,7 @@ from collections import Counter
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Mar 25, 2025 (minWindowAdvanced) / Apr 9, 2025 (minWindow)
-	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest / minWindowAdditional
+	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest / minWindowAdditional / minWindowNew
 '''
 
 class Solution:
@@ -292,6 +292,89 @@ class Solution:
         if result == s + t:
             return ""
         return result
+
+
+    '''
+    # Option #5
+    - O(n + m)
+    0 Space: O(1)
+    '''
+    def minWindowNew(self, s: str, t: str) -> str:
+        
+        # 1. Edge
+        len_s, len_t = len(s), len(t)
+        if len_s < len_t:
+            return ""
+        if len_s == len_t:
+            if sorted(s) == sorted(t):
+                return s
+            else:
+                return ""
+        
+        # 2. Collect T
+        t_cnt = [0] * 128
+        t_kind_cnt = 0
+        for c in t:
+            if not t_cnt[ord(c)]:
+                t_kind_cnt += 1
+            t_cnt[ord(c)] += 1
+        
+        # 3. Check S
+        ## 3-1. Find the first start index
+        result, found = s, False
+        start = 0
+        s_cnt = [0] * 128
+        s_kind_cnt = 0
+        exceeded_c = [False] * 128
+
+        for i in range(len_s):
+            c = ord(s[i])
+            if t_cnt[c]:
+                start = i
+                break
+
+        def update_result(x: int, y: int):
+            nonlocal result, found
+            if y - x + 1 < len(result):
+                result = s[x:y + 1]
+            found = True
+
+        ## 3-2. Check S
+        for i in range(start, len_s):
+
+            c = ord(s[i])
+            
+            if t_cnt[c]:
+
+                s_cnt[c] += 1
+
+                if t_cnt[c] == s_cnt[c]:
+                    s_kind_cnt += 1
+                    if t_kind_cnt == s_kind_cnt:
+                        update_result(start, i)
+                    
+                elif t_cnt[c] < s_cnt[c]:
+                    exceeded_c[c] = True
+
+                    for j in range(start, i):
+                        c_temp = ord(s[j])
+                        if t_cnt[c_temp]:
+                            if not exceeded_c[c_temp]:
+                                break
+                            else:
+                                s_cnt[c_temp] -= 1
+                                if t_cnt[c_temp] == s_cnt[c_temp]:
+                                    exceeded_c[c_temp] = False
+                                
+                                start = j + 1
+                                if t_kind_cnt == s_kind_cnt:
+                                    update_result(start, i)
+                        else:
+                            start = j + 1
+                            if t_kind_cnt == s_kind_cnt:
+                                update_result(start, i)
+        
+        return result if found else ""
         
 
 if __name__ == '__main__':

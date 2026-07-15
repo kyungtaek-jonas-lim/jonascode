@@ -6,7 +6,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 2, 2025
-	- `Answer`: minWindow / minWindowAdvanced / minWindowSimpleAndBest / minWindowAdditional
+	- `Answer`: minWindow / minWindowAdvanced / minWindowSimpleAndBest / minWindowAdditional / minWindowNew
 */
 
 /**
@@ -283,4 +283,103 @@ function minWindowAdditional(s: string, t: string): string {
 
 
     return result === s + t ? "" : result;
+};
+
+
+
+/**
+ * Option #6
+ * - Time Complexity: O(n + m)
+ * - New
+ * - July 15, 2026
+ */
+function minWindowNew(s: string, t: string): string {
+    
+    // 1. Edge Case
+    const sLength: number = s.length, tLength: number = t.length;
+    if (sLength === tLength) {
+        if (s.split('').sort().join('') === t.split('').sort().join('')) return s;
+        return "";
+    }
+
+    // 2. Check T
+    const cntT: Array<number> = new Array(128).fill(0);
+    let cntKindT: number = 0;
+    for (let i = 0; i < tLength; i++) {
+        const c: number = t.charCodeAt(i);
+        if (cntT[c] === 0) {
+            cntKindT++;
+        }
+        cntT[c]++;
+    }
+
+    // 3. Check S
+    const cntS: Array<number> = new Array(128).fill(0);
+    const exceededS: Array<boolean> = new Array(128).fill(false);
+    let cntKindS: number = 0;
+    let start: number = 0;
+    let result: string = s;
+    let found: boolean = false;
+
+    for (let i = 0; i < sLength; i++) {
+        if (cntT[s.charCodeAt(i)] !== 0) {
+            start = i;
+            break;
+        }
+    }
+
+    function updateResult(x: number, y: number) {
+        found = true;
+        if (result.length > y - x + 1) {
+            result = s.slice(x, y + 1);
+        }
+    }
+
+    for (let i = start; i < sLength; i++) {
+        const c: number = s.charCodeAt(i);
+        if (cntT[c] != 0) {
+            
+            cntS[c]++;
+
+            if (cntT[c] === cntS[c]) {
+
+                cntKindS++;
+                if (cntKindT === cntKindS) {
+                    updateResult(start, i);
+                }
+
+            } else if (cntT[c] < cntS[c]) {
+
+                exceededS[c] = true;
+
+                for (let j = start; j < i; j++) {
+
+                    const cTemp: number = s.charCodeAt(j);
+                    if (cntT[cTemp] > 0) {
+
+                        if (!exceededS[cTemp]) {
+                            break;
+                        } else {
+
+                            cntS[cTemp]--;
+                            if (cntT[cTemp] == cntS[cTemp]) exceededS[cTemp] = false;
+                            
+                            start = j + 1;
+                            if (cntKindT === cntKindS) {
+                                updateResult(start, i);
+                            }
+                        }
+
+                    } else {
+                        start = j + 1;
+                        if (cntKindT === cntKindS) {
+                            updateResult(start, i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return found ? result : "";
 };

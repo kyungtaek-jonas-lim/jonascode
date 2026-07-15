@@ -10,7 +10,7 @@ import java.util.Map;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: Feb 1, 2025
-	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest / minWindowAdditional
+	- `Answer`: minWindow / minWindowAdvanced / minWindowBest / minWindowSimpleAndBest / minWindowAdditional / minWindowNew
 */
 
 public class MinimumWindowSubstring {
@@ -386,6 +386,120 @@ public class MinimumWindowSubstring {
         }
 
         return result.equals(s + t) ? "" : result;
+    }
+
+
+    
+
+    /**
+	* @option 6
+	* @description New way
+	* @timeComplexity O(n + m)
+	* @date July 15, 2026
+	* @param s
+	* @param t
+	* @return
+	*/
+    boolean found = false;
+
+    public String minWindowNew(String s, String t) {
+
+        // 1. Edge Case        
+        final int sLength = s.length(), tLength = t.length();
+        char[] charsS = s.toCharArray(), charsT = t.toCharArray();
+        if (sLength == tLength) {
+            Arrays.sort(charsS);
+            Arrays.sort(charsT);
+            if (Arrays.equals(charsS, charsT)) return s;
+            return "";
+        }
+        charsS = s.toCharArray();
+        charsT = t.toCharArray();
+        
+        // 2. Check T
+        int[] cntT = new int[128];
+        int cntKindT = 0;
+        for (int i = 0; i < tLength; i++) {
+            int c = (int)charsT[i];
+            if (cntT[c] == 0) {
+                cntKindT++;
+            }
+            cntT[c]++;
+        }
+
+        // 3. Check S
+        int[] cntS = new int[128];
+        int cntKindS = 0;
+        int start = 0;
+        String result = s;
+        boolean[] exceededS = new boolean[128];
+        
+        for (int i = 0; i < sLength; i++) {
+            int c = (int)charsS[i];
+            if (cntT[c] != 0) {
+                start = i;
+                break;
+            }
+        }
+        
+        for (int i = start; i < sLength; i++) {
+            int c = (int)charsS[i];
+
+            if (cntT[c] != 0) {
+                
+                cntS[c]++;
+
+                if (cntT[c] == cntS[c]) {
+                    
+                    cntKindS++;
+                    
+                    if (cntKindT == cntKindS) {
+                        result = this.updateResult(charsS, start, i, result);
+                    }
+                    
+
+                } else if (cntT[c] < cntS[c]) {
+                    
+                    exceededS[c] = true;
+                    
+                    // Shrinking
+                    for (int j = start; j < i; j++) {
+                        int cTemp = (int)charsS[j];
+                        if (cntT[cTemp] != 0) {
+                            
+                            if (!exceededS[cTemp]) {
+                                break;
+                            } else {
+                                cntS[cTemp]--;
+                                if (cntT[cTemp] == cntS[cTemp]) exceededS[cTemp] = false;
+                                
+                                start = j + 1;
+                                if (cntKindT == cntKindS) {
+                                    result = this.updateResult(charsS, start, i, result);
+                                }
+                            }
+                        } else {
+                            start = j + 1;
+                            if (cntKindT == cntKindS) {
+                                result = this.updateResult(charsS, start, i, result);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+        return this.found ? result : "";
+    }
+
+    private String updateResult(char[] charsS, int x, int y, String result) {
+        this.found = true;
+        if (result.length() > y - x + 1) {
+            return new String(charsS, x, y - x + 1);
+        }
+        return result;
     }
 
 }
