@@ -11,33 +11,32 @@ import java.util.Set;
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: wordBreak / wordBreakBetter / wordBreakAdvanced / wordBreakDp
+ 	- `Answer`: wordBreakDfs1 / wordBreakDfs2 / wordBreakDp1 / wordBreakDp2 / wordBreakDp3 / wordBreakDp4
  */
 public class WordBreak {
 
 	public static void main(String[] args) {
 
-	    System.out.println(wordBreak("leetcode", Arrays.asList("leet","code")) == true);
-	    System.out.println(wordBreak("applepenapple", Arrays.asList("apple","pen")) == true);
-	    System.out.println(wordBreak("catsandog", Arrays.asList("cats","dog","sand","and","cat")) == false);
-	    System.out.println(wordBreak("cars", Arrays.asList("car","ca","rs")) == true);
-	    System.out.println(wordBreak("ccbb", Arrays.asList("bc","cb")) == false);
+	    System.out.println(wordBreakDfs1("leetcode", Arrays.asList("leet","code")) == true);
+	    System.out.println(wordBreakDfs1("applepenapple", Arrays.asList("apple","pen")) == true);
+	    System.out.println(wordBreakDfs1("catsandog", Arrays.asList("cats","dog","sand","and","cat")) == false);
+	    System.out.println(wordBreakDfs1("cars", Arrays.asList("car","ca","rs")) == true);
+	    System.out.println(wordBreakDfs1("ccbb", Arrays.asList("bc","cb")) == false);
 	    
 	    System.out.println("---");
-	    System.out.println(wordBreakAdvanced("leetcode", Arrays.asList("leet","code")) == true);
-	    System.out.println(wordBreakAdvanced("applepenapple", Arrays.asList("apple","pen")) == true);
-	    System.out.println(wordBreakAdvanced("catsandog", Arrays.asList("cats","dog","sand","and","cat")) == false);
-	    System.out.println(wordBreakAdvanced("cars", Arrays.asList("car","ca","rs")) == true);
-	    System.out.println(wordBreakAdvanced("ccbb", Arrays.asList("bc","cb")) == false);
+	    System.out.println(wordBreakDp1("leetcode", Arrays.asList("leet","code")) == true);
+	    System.out.println(wordBreakDp1("applepenapple", Arrays.asList("apple","pen")) == true);
+	    System.out.println(wordBreakDp1("catsandog", Arrays.asList("cats","dog","sand","and","cat")) == false);
+	    System.out.println(wordBreakDp1("cars", Arrays.asList("car","ca","rs")) == true);
+	    System.out.println(wordBreakDp1("ccbb", Arrays.asList("bc","cb")) == false);
 	}
 	
 	/*
     # Option #1
-    - Dynamic Programming
     - DFS + Memoization
     - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
 	 */
-    public static boolean wordBreak(String s, List<String> wordDict) {
+    public static boolean wordBreakDfs1(String s, List<String> wordDict) {
         int[] memo = new int[s.length()];
         return dfs(s, wordDict, 0, memo);
     }
@@ -64,12 +63,38 @@ public class WordBreak {
 	
 	/*
     # Option #2
+    - DFS + Memoization
+    - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+	- July 22, 2026
+	 */
+    public boolean wordBreakDfs2(String s, List<String> wordDict) {
+        Set<String> memo = new HashSet<>();
+        return dfs(s, wordDict, memo);
+    }
+
+    private boolean dfs(String x, List<String> wd, Set<String> memo) {
+        if (x.isEmpty()) return true;
+        if (memo.contains(x)) return false;
+
+        for (String w: wd) {
+            if (x.startsWith(w)) {
+                if (dfs(x.substring(w.length()), wd, memo)) return true;
+            }
+        }
+
+        memo.add(x);
+        return false;
+    }
+
+	
+	/*
+    # Option #3
     - Dynamic Programming
     - Optimized Bottom Up
     - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
     - ref: Neetcode (https://www.youtube.com/watch?v=Sx9NNgInc3A)
 	 */
-    public static boolean wordBreakBetter(String s, List<String> wordDict) {
+    public static boolean wordBreakDp1(String s, List<String> wordDict) {
     	/*
         # 1
         Starting from the last index of the string, the code checks whether any word from wordDict matches the substring.
@@ -109,12 +134,12 @@ public class WordBreak {
     }
 	
 	/*
-    # Option #3
+    # Option #4
     - Dynamic Programming
     - Optimized Bottom Up
     - O(n * m) (m: max word Lenth)
 	 */
-    public static boolean wordBreakAdvanced(String s, List<String> wordDict) {
+    public static boolean wordBreakDp2(String s, List<String> wordDict) {
         // Convert the word list into a HashSet for fast lookup (O(1) average time)
     	Set<String> wordSet = new HashSet<>(wordDict);
     	
@@ -150,12 +175,12 @@ public class WordBreak {
     }
 	
 	/*
-	# Option #4
+	# Option #5
 	- Dynamic Programming
 	- O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
 	- Jan 13, 2026
 	 */
-    public boolean wordBreakDp(String s, List<String> wordDict) {
+    public boolean wordBreakDp3(String s, List<String> wordDict) {
         final int n = s.length();
         boolean[] dp = new boolean[n + 1];
         dp[0] = true;
@@ -175,6 +200,28 @@ public class WordBreak {
             }
 
             i++;
+        }
+
+        return dp[n];
+    }
+	
+	/*
+	# Option #6
+	- Dynamic Programming
+	- O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+	- July 22, 2026
+	 */
+    public boolean wordBreakDp4(String s, List<String> wordDict) {
+        final int n = s.length();
+        boolean[] dp = new boolean[n + 1];
+        Arrays.fill(dp, false);
+        dp[0] = true;
+        
+        for (int i = 0; i < n; i++) {
+            if (!dp[i]) continue;
+            for (String w: wordDict) {
+                if (s.substring(i).startsWith(w)) dp[i + w.length()] = true;
+            }
         }
 
         return dp[n];

@@ -6,40 +6,64 @@ from typing import List
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: Apr 6, 2025
- 	- `Answer`: wordBreak / wordBreakBetter/ wordBreakAdvanced / wordBreakDp
+ 	- `Answer`: wordBreakDfs1 / wordBreakDfs2 / wordBreakDp1/ wordBreakDp2 / wordBreakDp3 / wordBreakDp4
 '''
 class Solution:
 
     '''
     # Option #1
-    - Dynamic Programming
     - DFS + Memoization
     - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
     '''
-    class Solution:
-        def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-            
-            n = len(s)
-            memo = [0] * n
+    def wordBreakDfs1(self, s: str, wordDict: List[str]) -> bool:
+        
+        n = len(s)
+        memo = [0] * n
 
-            def dfs(index: int) -> bool:
-                
-                if index == n:
-                    return True
-                if memo[index] != 0:
-                    return True if memo[index] == 1 else False
-                
-                for word in wordDict:
-                    len_word = len(word)
-                    if s[index:index + len_word] == word:
-                        if dfs(index + len_word):
-                            memo[index] = 1
-                            return True
-                
-                memo[index] = -1
+        def dfs(index: int) -> bool:
+            
+            if index == n:
+                return True
+            if memo[index] != 0:
+                return True if memo[index] == 1 else False
+            
+            for word in wordDict:
+                len_word = len(word)
+                if s[index:index + len_word] == word:
+                    if dfs(index + len_word):
+                        memo[index] = 1
+                        return True
+            
+            memo[index] = -1
+            return False
+
+        return dfs(0)
+
+    '''
+    # Option #2
+    - DFS + Memoization
+    - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+    - July 22, 2026
+    '''
+    def wordBreakDfs2(self, s: str, wordDict: List[str]) -> bool:
+        
+        memo = set()
+
+        def dfs(x: str) -> bool:
+            if not x:
+                return True
+            if x in memo:
                 return False
 
-            return dfs(0)
+            for w in wordDict:
+                if x[:len(w)] == w:
+                    if dfs(x[len(w):]):
+                        return True
+
+            memo.add(x)
+            return False
+
+        return dfs(s)
 
     '''
     # Option #2
@@ -48,7 +72,7 @@ class Solution:
     - O(n * k * L) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
     - ref: Neetcode (https://www.youtube.com/watch?v=Sx9NNgInc3A)
     '''
-    def wordBreakBetter(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreakDp1(self, s: str, wordDict: List[str]) -> bool:
 
         '''
         # 1
@@ -89,7 +113,7 @@ class Solution:
     - Optimized Bottom Up
     - O(n * m) (m: max word Lenth)
     '''
-    def wordBreakAdvanced(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreakDp2(self, s: str, wordDict: List[str]) -> bool:
         # Convert the word list to a set for faster lookups (O(1) average case)
         word_set = set(wordDict)
 
@@ -127,7 +151,7 @@ class Solution:
     - O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
     - Jan 13, 2026
     '''
-    def wordBreakDp(self, s: str, wordDict: List[str]) -> bool:
+    def wordBreakDp3(self, s: str, wordDict: List[str]) -> bool:
         n = len(s)
         dp = [False] * (n + 1)
         dp[0] = True
@@ -145,19 +169,41 @@ class Solution:
             i += 1
 
         return dp[n]
+
+
+    '''
+    # Option #5
+    - Dynamic Programming
+    - O(n × k × m) (n = len(s), k = number of words in wordDict, L = average length of the words in wordDict)
+    - July 22, 2026
+    '''
+    def wordBreakDp4(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[0] = True
+
+        for i in range(n):
+            if not dp[i]:
+                continue
+            for w in wordDict:
+                if s[i: i + len(w)] == w:
+                    dp[i + len(w)] = True
+        
+
+        return dp[n]
     
     
 if __name__ == "__main__":
     sol = Solution()
-    print(sol.wordBreak("leetcode", ["leet","code"]) == True)
-    print(sol.wordBreak("applepenapple", ["apple","pen"]) == True)
-    print(sol.wordBreak("catsandog", ["cats","dog","sand","and","cat"]) == False)
-    print(sol.wordBreak("cars", ["car","ca","rs"]) == True)
-    print(sol.wordBreak("ccbb", ["bc","cb"]) == False)
+    print(sol.wordBreakDfs1("leetcode", ["leet","code"]) == True)
+    print(sol.wordBreakDfs1("applepenapple", ["apple","pen"]) == True)
+    print(sol.wordBreakDfs1("catsandog", ["cats","dog","sand","and","cat"]) == False)
+    print(sol.wordBreakDfs1("cars", ["car","ca","rs"]) == True)
+    print(sol.wordBreakDfs1("ccbb", ["bc","cb"]) == False)
 
     print("---")
-    print(sol.wordBreakAdvanced("leetcode", ["leet","code"]) == True)
-    print(sol.wordBreakAdvanced("applepenapple", ["apple","pen"]) == True)
-    print(sol.wordBreakAdvanced("catsandog", ["cats","dog","sand","and","cat"]) == False)
-    print(sol.wordBreakAdvanced("cars", ["car","ca","rs"]) == True)
-    print(sol.wordBreakAdvanced("ccbb", ["bc","cb"]) == False)
+    print(sol.wordBreakDp1("leetcode", ["leet","code"]) == True)
+    print(sol.wordBreakDp1("applepenapple", ["apple","pen"]) == True)
+    print(sol.wordBreakDp1("catsandog", ["cats","dog","sand","and","cat"]) == False)
+    print(sol.wordBreakDp1("cars", ["car","ca","rs"]) == True)
+    print(sol.wordBreakDp1("ccbb", ["bc","cb"]) == False)
