@@ -63,20 +63,21 @@ public class RemoveNthNodeFromEndofList {
     - O(n) (n = the number of nodes)
     - Space: O(n)
 	 */
-    private ListNode nthNode;
-
     public ListNode removeNthFromEndDfs(ListNode head, int n) {
         ListNode result = new ListNode(0, head);
         dfs(result, n);
-        if (nthNode != null) nthNode.next = nthNode.next.next;
         return result.next;
     }
 
     private int dfs(ListNode node, int n) {
-        if (node == null) return 0;
-        int next = dfs(node.next, n);
-        if (next == n) nthNode = node;
-        return next + 1;
+        if (node.next == null) return 1;
+        
+        final int current = dfs(node.next, n);
+        if (current == n) {
+            node.next = node.next.next;
+            return 0;
+        }
+        return current == 0 ? 0 : current + 1;
     }
 
 

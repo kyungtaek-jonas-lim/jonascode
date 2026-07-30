@@ -56,23 +56,16 @@ class Solution:
     '''
     def removeNthFromEndDfs(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         
-        nthNode: ListNode = None
-        result: ListNode = ListNode(next=head)
-        
         def dfs(node: ListNode) -> int:
-            nonlocal nthNode
-            if node == None:
-                return 0
-            
-            next = dfs(node.next)
-            if next == n:
-                nthNode = node
-            return next + 1
+            if not node.next:
+                return 1
+            current = dfs(node.next)
+            if current == n:
+                node.next = node.next.next
+            return current + 1 if current else 0
         
+        result = ListNode(next=head)
         dfs(result)
-        if nthNode:
-            nthNode.next = nthNode.next.next
-
         return result.next
         
         

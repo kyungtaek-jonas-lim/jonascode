@@ -56,18 +56,20 @@ function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
 */
 function removeNthFromEndDfs(head: ListNode | null, n: number): ListNode | null {
     
-    let nthNode: ListNode | null = null;
-    const result: ListNode = new ListNode(0, head);
+    const result: ListNode | null = new ListNode(0, head);
 
-    function dfs(node: ListNode | null): number {
-        if (node === null) return 0;
-        const next: number = dfs(node.next);
-        if (next === n) nthNode = node;
-        return next + 1;
+    function dfs(node: ListNode): number {
+        if (node.next === null) return 1;
+
+        const current = dfs(node.next);
+        if (current === n) {
+            node.next = node.next.next;
+            return 0;
+        }
+        return current === 0 ? current : current + 1;
     }
 
     dfs(result);
-    if (nthNode !== null) nthNode.next = nthNode.next.next;
     return result.next;
 };
 
