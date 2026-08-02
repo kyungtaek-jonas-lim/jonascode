@@ -28,4 +28,18 @@ function rotate(matrix: number[][]): void {
         min++;
         max--;
     }
+
+    // const n: number = matrix.length;
+    // let s: number = 0, e: number = n - 1;
+    // while (s < e) {
+    //     for (let i = s; i < e; i++) {
+    //         const temp: number = matrix[s][i];
+    //         matrix[s][i] = matrix[n - 1 - i][s];
+    //         matrix[n - 1 - i][s] = matrix[e][n - 1 - i];
+    //         matrix[e][n - 1 - i] = matrix[i][e];
+    //         matrix[i][e] = temp;
+    //     }
+    //     s++;
+    //     e--;
+    // }
 };

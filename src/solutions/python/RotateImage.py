@@ -97,6 +97,20 @@ class Solution:
             top_left += 1
             bottom_right -= 1
 
+        # n = len(matrix)
+        # s, e = 0, n - 1
+        # while s < e:
+        #     for i in range(s, e):
+        #         temp = matrix[s][i]
+        #         matrix[s][i] = matrix[n - 1 - i][s]
+        #         matrix[n - 1 - i][s] = matrix[e][n - 1 - i]
+        #         matrix[e][n - 1 - i] = matrix[i][e]
+        #         matrix[i][e] = temp
+
+        #     s += 1
+        #     e -= 1
+
+
 
 if __name__ == "__main__":
     sol = Solution()

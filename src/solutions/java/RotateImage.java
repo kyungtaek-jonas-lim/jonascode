@@ -105,5 +105,19 @@ public class RotateImage {
     		top_left++;
     		bottom_right--;
     	}
+		
+        // int s = 0, e = matrix.length - 1, n = matrix.length - 1;
+        // while (s < e) {
+        //     for (int i = s; i < e; i++) {
+        //         int temp = matrix[s][i];
+        //         matrix[s][i] = matrix[n - i][s];
+        //         matrix[n - i][s] = matrix[e][n - i];
+        //         matrix[e][n - i] = matrix[i][e];
+        //         matrix[i][e] = temp;
+        //     }
+
+        //     s++;
+        //     e--;
+        // }
     }
 }
