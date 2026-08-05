@@ -73,44 +73,33 @@ public class MeetingRoomsII {
 	- O(n log n)
 	- ref: https://www.youtube.com/watch?v=FdzJmTCVyJU
 	 */
-    public int minMeetingRoomLineSweep(Interval[] intervals) {
-    	
-    	/*
-    	 * Collects starts and ends separately and sort them in ascending.
-    	 * If the start[i] < end[j], i++ and currentMeetingCnt++
-    	 * Else, j++ and  currentMeetingCnt--
-    	 */
-    	
-    	// Edge
-    	int intervalsLength = intervals.length;
-    	if (intervalsLength <= 1) return intervalsLength;
-    	
-    	int[] starts = new int[intervalsLength];
-    	int[] ends = new int[intervalsLength];
-    	
-    	for (int i = 0; i < intervalsLength; i++) {
-    		Interval interval = intervals[i];
-    		starts[i] = interval.start;
-    		ends[i] = interval.end;
-    	}
-    	
-    	Arrays.sort(starts);
-    	Arrays.sort(ends);
-    	
-    	int startsIndex = 0, endsIndex = 0;
-    	int result = 0, currentDesireMeetingRooms = 0;
-    	
-    	while (startsIndex < intervalsLength) {
-    		if (starts[startsIndex] < ends[endsIndex]) {
-    			currentDesireMeetingRooms++;
-    			startsIndex++;
-    			result = Math.max(result, currentDesireMeetingRooms);
-    		} else {
-    			endsIndex++;
-    			currentDesireMeetingRooms--;
-    		}
-    	}
-    	return result;
+    public int minMeetingRoomLineSweep(List<Interval> intervals) {
+        final int n = intervals.size();
+        if (n <= 1) return n;
+
+        List<Integer> starts = new ArrayList<>();
+        List<Integer> ends = new ArrayList<>();
+
+        for (Interval i: intervals) {
+            starts.add(i.start);
+            ends.add(i.end);
+        }
+
+        starts.sort((a, b) -> a - b);
+        ends.sort((a, b) -> a - b);
+
+        int i = 0, j = 0, current = 0, result = 1;
+        while (i < n) {
+            if (starts.get(i) >= ends.get(j)) {
+                current--;
+                j++;
+            } else {
+                current++;
+                i++;
+                result = Math.max(result, current);
+            }
+        }
+        return result;
     }
 	
 	/*

@@ -7,7 +7,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 13, 2025
-	- `Answer`: minMeetingRooms / minMeetingRoomsAdvanced
+	- `Answer`: minMeetingRooms / minMeetingRoomsAdvanced / minMeetingRoomsBest
  */
 
 export class Interval {
@@ -82,7 +82,7 @@ export class Solution {
     while (startIndex < n) {
       if (starts[startIndex] < ends[endIndex]) {
         startIndex++;
-        result = Math.max(result, 1 + endIndex - startIndex);
+        result = Math.max(result, startIndex - endIndex);
       } else {
         endIndex++;
       }
@@ -93,3 +93,40 @@ export class Solution {
 }
 
 
+
+/*
+# Option #3
+- O(n log n)
+- Pointers with two separate arrays (starts, ends)
+- August 5, 2026
+*/
+function minMeetingRoomsBest(intervals: Interval[]): number {
+    
+    const n: number = intervals.length;
+    if (n <= 1) return n;
+
+    // const starts: number[] = intervals.map(i => i.start).sort((a, b) => a - b);
+    // const ends: number[] = intervals.map(i => i.end).sort((a, b) => a - b);
+    const starts: number[] = [], ends: number[] = [];
+    for (const i of intervals) {
+        starts.push(i.start);
+        ends.push(i.end);
+    }
+    starts.sort((a, b) => a - b);
+    ends.sort((a, b) => a - b);
+
+    let i: number = 0, j: number = 0, current: number = 0, result: number = 1;
+
+    while (i < n) {
+        if (ends[j] <= starts[i]) {
+            current--;
+            j++;
+        } else {
+            current++;
+            result = Math.max(result, current);
+            i++;
+        }
+    }
+
+    return result;
+}

@@ -64,29 +64,49 @@ class Solution:
         * Else, j++ and  currentMeetingCnt--
         """
 
-        intervals_length = len(intervals)
-        if intervals_length <= 1:
-            return intervals_length
+        # intervals_length = len(intervals)
+        # if intervals_length <= 1:
+        #     return intervals_length
 
-        starts = [interval.start for interval in intervals]
-        ends = [interval.end for interval in intervals]
+        # starts = [interval.start for interval in intervals]
+        # ends = [interval.end for interval in intervals]
 
-        starts.sort()
-        ends.sort()
+        # starts.sort()
+        # ends.sort()
 
-        starts_index = 0
-        ends_index = 0
-        result = 0
-        current_desire_meeting_rooms = 0
+        # starts_index = 0
+        # ends_index = 0
+        # result = 0
+        # current_desire_meeting_rooms = 0
 
-        while starts_index < intervals_length:
-            if starts[starts_index] < ends[ends_index]:
-                current_desire_meeting_rooms += 1
-                starts_index += 1
-                result = max(result, current_desire_meeting_rooms)
+        # while starts_index < intervals_length:
+        #     if starts[starts_index] < ends[ends_index]:
+        #         current_desire_meeting_rooms += 1
+        #         starts_index += 1
+        #         result = max(result, current_desire_meeting_rooms)
+        #     else:
+        #         ends_index += 1
+        #         current_desire_meeting_rooms -= 1
+
+        # return result
+
+        n = len(intervals)
+        if n <= 1:
+            return n
+
+        starts = [i.start for i in intervals]
+        ends = [i.end for i in intervals]
+
+        i, j, current, result = 0, 0, 0, 1
+
+        while i < n:
+            if starts[i] >= ends[j]:
+                j += 1
+                current -= 1
             else:
-                ends_index += 1
-                current_desire_meeting_rooms -= 1
+                i += 1
+                current += 1
+                result = max(result, current)
 
         return result
 
