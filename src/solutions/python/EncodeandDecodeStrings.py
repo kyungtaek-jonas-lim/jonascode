@@ -16,21 +16,20 @@ class Solution:
     - Using Header (metadata in it)
     '''
     def encode(self, strs: List[str]) -> str:
-        encoded = []
-        for s in strs:
-            encoded.append(f"{str(len(s))}#{s}")
-        return "".join(encoded)
-
-
-    def decode(self, s: str) -> List[str]:
         result = []
-        n = len(s)
-        curr, next, length = 0, 0, 0
-        while curr < n:
-            next = s.find('#', curr)
-            if next == -1:
-                break
-            length = int(s[curr:next])
-            curr = next + length + 1
-            result.append(s[next + 1:curr])
+        for s in strs:
+            result.extend(str(len(s)), '#', s)
+            
+        return ''.join(result)
+
+    def decode(self, str: str) -> List[str]:
+        result = []
+        start, n = 0, len(str)
+
+        while start < n:
+            sharp = str.find('#', start)
+            count = int(str[start:sharp])
+            start = sharp + 1 + count
+            result.append(str[sharp + 1: start])
+        
         return result
