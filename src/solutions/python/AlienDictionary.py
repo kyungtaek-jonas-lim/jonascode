@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 '''
 # Problem
@@ -8,7 +8,7 @@ from typing import List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 20
-	- `Answer`: alienOrder
+	- `Answer`: alienOrder / alien_order
 '''
 
 class Solution:
@@ -75,3 +75,88 @@ class Solution:
         # Step 5: Return the reversed string
         result.reverse()
         return "".join(result)
+
+
+    """
+	# Option #2
+	- Recursive DFS
+	- O(n * m + k + e) (n = words.length, m = the average length of words, k = total number of unique characters, e = number of edges)
+    - August 11, 2026
+    """
+    def alien_order(self, words: List[str]) -> str:
+
+        n: int = len(words)
+        if n == 0:
+            return ""
+
+
+        # Find rules
+        graph: Dict[str, Set[str]] = {}
+        for i in range(n):
+            for j in range(len(words[i])):
+                if words[i][j] in graph:
+                    continue
+                graph[words[i][j]] = set()
+                
+
+        for i in range(1, n):
+            if words[i].startswith(words[i - 1]):
+                continue
+            if words[i - 1].startswith(words[i]):
+                return ""
+
+            m: int = min(len(words[i - 1]), len(words[i]))
+            for j in range(m):
+                if words[i - 1][j] != words[i][j]:
+                    graph[words[i][j]].add(words[i - 1][j])
+                    break
+
+
+        # Make string
+        memo: Dict[str, bool] = {}
+        def dfs(curr: str) -> str:
+
+            if curr in memo:
+                if memo[curr]:
+                    return "#"
+                return ""
+
+            memo[curr] = True
+
+            res = ""
+            for s in graph[curr]:
+                pre = dfs(s)
+                if pre == '#':
+                    return '#'
+                res += pre
+
+            memo[curr] = False
+
+            return res + curr
+        
+        result = ""
+        for key in graph.keys():
+            prefix = dfs(key)
+            if prefix == '#':
+                return ""
+            result += prefix
+        return result
+
+
+
+
+if __name__ == '__main__':
+
+    solution = Solution()
+    print(solution.alien_order(["wrt","wrf","er","ett","rftt"]))
+    print(solution.alien_order(["z","x"]))
+    print(solution.alien_order(["abc", "ab"]))
+    print(solution.alien_order(["z", "x", "z"]))
+    print(solution.alien_order(["wrt", "wrf", "er", "ett", "rftt"]))
+    print(solution.alien_order(["abc", "abd"]))
+    print(solution.alien_order( ["za", "zb", "ca", "cb"]))
+    print(solution.alien_order(["abc", "abd", "acd"]))
+    print(solution.alien_order(["cbb", "cab", "cac", "cca"]))
+    print(solution.alien_order( ["wrt", "wrf", "er", "ett", "rftt"]))
+    print(solution.alien_order( ["cac", "caa", "caa"]))
+    print(solution.alien_order(["cca"]))

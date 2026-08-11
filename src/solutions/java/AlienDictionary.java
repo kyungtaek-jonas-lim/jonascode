@@ -12,7 +12,7 @@ import java.util.Set;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 26
-	- `Answer`: alienOrder
+	- `Answer`: alienOrder / alien_order
  */
 public class AlienDictionary {
 	
@@ -88,6 +88,74 @@ public class AlienDictionary {
     	return false;
     }
     
+
+
+
+	
+	/*
+	# Option #2
+	- Recursive DFS
+	- O(n * m + k + e) (n = words.length, m = the average length of words, k = total number of unique characters, e = number of edges)
+	- August 11, 2026
+	 */    
+    public String alien_order(String[] words) {
+        final int n = words.length;
+        if (n == 0) return "";
+
+        // Make Graph
+        Map<Character, Set<Character>> graph = new HashMap<>();
+        for (String word: words) {
+            for (int i = 0; i < word.length(); i++) {
+                if (graph.containsKey(word.charAt(i))) continue;
+                graph.put(word.charAt(i), new HashSet<>());
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            if (words[i].startsWith(words[i - 1])) continue;
+            if (words[i - 1].startsWith(words[i])) return "";
+
+            final int minLen = Math.min(words[i - 1].length(), words[i].length());
+            for (int j = 0; j < minLen; j++) {
+                if (words[i - 1].charAt(j) != words[i].charAt(j)) {
+                    graph.get(words[i].charAt(j)).add(words[i - 1].charAt(j));
+                    break;
+                }
+            }
+        }
+
+        // Make String
+        Map<Character, Boolean> memo = new HashMap<>();
+        StringBuilder result = new StringBuilder();
+        for (char c: graph.keySet()) {
+            String prefix = dfs(graph, c, memo);
+            if (prefix.equals("#")) return "";
+            result.append(prefix);
+        }
+        return result.toString();
+    }
+
+    private String dfs(Map<Character, Set<Character>> graph, char curr, Map<Character, Boolean> memo) {
+        if (memo.containsKey(curr)) {
+            if (memo.get(curr)) return "";
+            return "#";
+        }
+        memo.put(curr, false);
+        
+        StringBuilder res = new StringBuilder();
+        for (char c: graph.get(curr)) {
+            String pre = dfs(graph, c, memo);
+            if (pre.equals("#")) return "#";
+            res.append(pre);
+        }
+        
+        memo.put(curr, true);
+        return res.append(curr).toString();
+    }
+
+
+
+
+    
     public static void main(String[] args) {
 		AlienDictionary alienDictionary = new AlienDictionary();
 		String result = alienDictionary.alienOrder(new String[] {"wrt","wrf","er","ett","rftt"});
@@ -98,5 +166,21 @@ public class AlienDictionary {
 		
 		result = alienDictionary.alienOrder(new String[] {"abc", "bcd"});
 		System.out.println(result);
+
+        
+        AlienDictionary solutions = new AlienDictionary();
+        System.out.println(solutions.alien_order(new String[] {"cbb", "cab", "cac", "cca"}));
+        System.out.println(solutions.alien_order(new String[] {"wrt","wrf","er","ett","rftt"}));
+        System.out.println(solutions.alien_order(new String[] {"z","x"}));
+        System.out.println(solutions.alien_order(new String[] {"abc", "ab"}));
+        System.out.println(solutions.alien_order(new String[] {"z", "x", "z"}));
+        System.out.println(solutions.alien_order(new String[] {"wrt", "wrf", "er", "ett", "rftt"}));
+        System.out.println(solutions.alien_order(new String[] {"abc", "abd"}));
+        System.out.println(solutions.alien_order(new String[] {"za", "zb", "ca", "cb"}));
+        System.out.println(solutions.alien_order(new String[] {"abc", "abd", "acd"}));
+        System.out.println(solutions.alien_order(new String[] {"cbb", "cab", "cac", "cca"}));
+        System.out.println(solutions.alien_order(new String[] {"wrt", "wrf", "er", "ett", "rftt"}));
+        System.out.println(solutions.alien_order(new String[] {"cac", "caa", "caa"}));
+        System.out.println(solutions.alien_order(new String[] {"cca"}));
 	}
 }

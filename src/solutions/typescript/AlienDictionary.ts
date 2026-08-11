@@ -7,7 +7,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 14, 2025
-	- `Answer`: alienOrder
+	- `Answer`: alienOrder / alien_order
 */
 
 /*
@@ -47,7 +47,7 @@ function alienOrder(words: string[]): string {
     }
 
     // Make string (DFS)
-    const result = [];
+    const result: string[] = [];
     const visited: Map<string, boolean> = new Map();
     for (const c of map.keys()) {
         if (!dfs(map, c, visited, result)) return "";
@@ -71,3 +71,85 @@ function dfs(map: Map<string, Set<string>>, curr: string, visited: Map<string, b
     result.push(curr);
     return true;
 }
+
+
+
+/*
+# Option #2
+- Recursive DFS
+- O(n * m + k + e) (n = words.length, m = the average length of words, k = total number of unique characters, e = number of edges)
+- August 11, 2026
+*/
+function alien_order(words: string[]): string {
+    
+    const n: number = words.length;
+    if (n === 0) return "";
+
+    // Make Graph
+    const graph: Map<string, Set<string>> = new Map();
+    for (const word of words) {
+        for (let i = 0; i < word.length; i++) {
+            if (graph.has(word[i])) continue;
+            graph.set(word[i], new Set());
+        }
+    }
+
+    for (let i = 1; i < n; i++) {
+        if (words[i].startsWith(words[i - 1])) continue;
+        if (words[i - 1].startsWith(words[i])) return "";
+        
+        const minLen: number = Math.min(words[i - 1].length, words[i].length);
+        for (let j = 0; j < minLen; j++) {
+            if (words[i - 1][j] !== words[i][j]) {
+                graph.get(words[i][j])!.add(words[i - 1][j]);
+                break;
+            }
+        }
+    }
+
+    // Make String
+    const memo: Map<string, boolean> = new Map();
+    function dfs(curr: string): string {
+        if (memo.has(curr)) {
+            if (memo.get(curr)) return "";
+            return "#";
+        }
+        memo.set(curr, false);
+
+        let res: string = "";
+        for (const s of graph.get(curr)!) {
+            const pre: string = dfs(s);
+            if (pre === "#") return "#";
+            res += pre;
+        }
+
+        memo.set(curr, true);
+        return res + curr;
+    };
+
+    let result: string = "";
+    for (const s of graph.keys()) {
+        const prefix: string = dfs(s);
+        if (prefix === '#') return "";
+        result += prefix;
+    }
+    return result;
+};
+
+
+
+
+
+console.log(alienOrder(["cbb", "cab", "cac", "cca"]));
+console.log(alienOrder(["wrt","wrf","er","ett","rftt"]));
+console.log(alienOrder(["z","x"]))
+console.log(alienOrder(["abc", "ab"]))
+console.log(alienOrder(["z", "x", "z"]))
+console.log(alienOrder(["wrt", "wrf", "er", "ett", "rftt"]))
+console.log(alienOrder(["abc", "abd"]))
+console.log(alienOrder( ["za", "zb", "ca", "cb"]))
+console.log(alienOrder(["abc", "abd", "acd"]))
+console.log(alienOrder(["cbb", "cab", "cac", "cca"]))
+console.log(alienOrder( ["wrt", "wrf", "er", "ett", "rftt"]))
+console.log(alienOrder( ["cac", "caa", "caa"]))
+console.log(alienOrder(["cca"]))
