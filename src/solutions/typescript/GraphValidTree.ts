@@ -141,7 +141,7 @@ function validTreeUnionFind(n: number, edges: number[][]): boolean {
     for (let i = 0; i < n; i++) parents[i] = i;
 
     function find(curr: number): number { // Find the parent
-        while (curr != parents[curr]) {
+        while (curr !== parents[curr]) {
             parents[curr] = parents[parents[curr]];
             curr = parents[curr];
         }
