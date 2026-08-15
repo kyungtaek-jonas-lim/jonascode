@@ -7,7 +7,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 14, 2025
-	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsAdvanced
+	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsUnionFind / countComponentsUnionFind2
 */
 
 // 1 <= n <= 2000
@@ -112,46 +112,76 @@ function dfs(map: Map<number, Set<number>>, curr: number, visited: Set<number>):
 - O(n + e)
 - https://www.youtube.com/watch?v=8f1XPm4WOUc
 */
-function countComponentsAdvanced(n: number, edges: number[][]): number {
-	
-	// Put every number
-	const parents: number[] = [];
-	const size: number[] = new Array<number>().fill(1);
-	for (let i = 0; i < n; i++) {
-		parents[i] = i;
-	}
+function countComponentsUnionFind(n: number, edges: number[][]): number {
+    
+    
+    const parents: Array<number> = new Array(n);
+    const ranks: Array<number> = new Array(n).fill(1);
+    for (let i = 0; i < n; i++) parents[i] = i;
 
-	// Union-Find
-	let result: number = n;
-	for (const edge of edges) {
-		result -= union(parents, size, edge[0], edge[1]);
-	}
-	return result;
-}
+    function find(curr: number): number {
+        while (curr !== parents[curr]) {
+            parents[curr] = parents[parents[curr]];
+            curr = parents[curr];
+        }
+        return curr;
+    }
+
+    function union(a: number, b: number): number {
+        a = find(a);
+        b = find(b);
+        if (a === b) return 0;
+        if (ranks[a] < ranks[b]) {
+            parents[a] = b;
+            ranks[b]++;
+        } else {
+            parents[b] = a;
+            ranks[a]++;
+        }
+        return 1;
+    }
+
+    let result: number = n;
+    for (const e of edges) {
+        result -= union(e[0], e[1]);
+    }
+    return result;
+};
 
 
-function union(parents: number[], size: number[], n1: number, n2: number): number { // Return 1 if there's union else return 0
-	// Find parents of each
-	const p1: number = find(parents, n1), p2: number = find(parents, n2);
 
-	if (p1 === p2) return 0; // If it's already merged, return 0
+/*
+# Option #4
+- Union-Find (Option #3 is better)
+- O((n+e)·log n)
+- August 15, 2026
+*/
+function countComponentsUnionFind2(n: number, edges: number[][]): number {
+    
+    const parents: Array<number> = new Array(n);
+    for (let i = 0; i < n; i++) parents[i] = i;
 
-	if (size[p1] >= size[p2]) { // The less score number is merged into the bigger one ("rank" is for this condition)
-		parents[p2] = p1;
-		size[p1] += size[p2];
-	} else {
-		parents[p1] = p2;
-		size[p2] += size[p1];
-	}
+    function find(curr: number): number {
+        while (curr !== parents[curr]) {
+            parents[curr] = parents[parents[curr]];
+            curr = parents[curr];
+        }
+        return curr;
+    }
 
-	return 1;
-}
+    function union(a: number, b: number): void {
+        a = find(a);
+        b = find(b);
+        
+        if (a < b) parents[b] = a;
+        else parents[a] = b;
+    }
 
-function find(parents: number[], child: number): number {
-	let parent = child;
-	while (parent !== parents[parent]) { // Find the root parents
-		parents[parent] = parents[parents[parent]];
-		parent = parents[parent];
-	}
-	return parent;
-}
+    for (const e of edges) {
+        union(e[0], e[1]);
+    }
+
+    const result: Set<number> = new Set();
+    for (let i = 0; i < n; i++) result.add(find(i));
+    return result.size;
+};

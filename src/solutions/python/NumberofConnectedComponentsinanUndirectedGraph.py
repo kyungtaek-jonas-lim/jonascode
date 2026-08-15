@@ -9,7 +9,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 23
-	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsAdvanced
+	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsUnionFind / countComponentsUnionFind2
 '''
 
 
@@ -88,7 +88,7 @@ class Solution:
     - O(n + e)
     - https://www.youtube.com/watch?v=8f1XPm4WOUc
     """
-    def countComponentsAdvanced(self, n: int, edges: List[List[int]]) -> int:
+    def countComponentsUnionFind(self, n: int, edges: List[List[int]]) -> int:
         parent = [ i for i in range(n) ] # Parent(Root) Node (parent[1] = the root node of 1)
         size = [1] * n # If a node merged, the root node gets +1
 
@@ -121,3 +121,34 @@ class Solution:
         for n1, n2 in edges:
             result -= union(n1, n2) # If union performed, decrement result 
         return result
+
+
+    """
+    # Option #4
+    - Union-Find (Option #3 is better)
+    - O((n+e)·log n)
+    - August 15, 2026
+    """
+    def countComponentsUnionFind2(self, n: int, edges: List[List[int]]) -> int:
+
+        parents: List[int] = [i for i in range(n)]
+        def find(curr: int) -> int:
+            while curr != parents[curr]:
+                parents[curr] = parents[parents[curr]]
+                curr = parents[curr]
+            return curr
+
+        def union(a: int, b: int) -> None:
+            a, b = find(a), find(b)
+            if a < b:
+                parents[b] = a
+            else:
+                parents[a] = b
+
+        for e in edges:
+            union(e[0], e[1])
+
+        result = set()
+        for i in range(n):
+            result.add(find(i))
+        return len(result)

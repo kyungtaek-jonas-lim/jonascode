@@ -16,7 +16,7 @@ import java.util.Set;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: June 30
-	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsAdvanced
+	- `Answer`: countComponentsBfs / countComponentsDfs / countComponentsUnionFind / countComponentsUnionFind2
  */
 public class NumberofConnectedComponentsinanUndirectedGraph {
 	
@@ -116,7 +116,7 @@ public class NumberofConnectedComponentsinanUndirectedGraph {
     - O(n + e)
     - https://www.youtube.com/watch?v=8f1XPm4WOUc
 	 */
-    public int countComponentsAdvanced(int n, int[][] edges) {
+    public int countComponentsUnionFind(int n, int[][] edges) {
         
         // Parents
         int[] parents = new int[n];
@@ -157,5 +157,37 @@ public class NumberofConnectedComponentsinanUndirectedGraph {
             size[p1] += size[p2];
         }
         return 1;
+    }
+
+
+    /*
+    # Option #4
+    - Union-Find (Option #3 is better)
+    - O((n+e)·log n)
+    - August 15, 2026
+    */
+    public int countComponentsUnionFind2(int n, int[][] edges) {
+
+        int[] parents = new int[n];
+        for (int i = 0; i < n; i++) parents[i] = i;
+
+        for (int[] e: edges) {
+            union(parents, e[0], e[1]);
+        }
+
+        Set<Integer> result = new HashSet<>();
+        for (int i = 0; i < n; i++) result.add(find(parents, i));
+        return result.size();
+    }
+
+    private void union(int[] parents, int a, int b) {
+        a = find(parents, a);
+        b = find(parents, b);
+        
+        if (a < b) {
+            parents[b] = a;
+        } else {
+            parents[a] = b;
+        }
     }
 }
