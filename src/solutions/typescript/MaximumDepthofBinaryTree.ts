@@ -24,27 +24,46 @@ class TreeNode {
 - BFS(FIFO)
 - O(n)
 */
-function maxDepthBfs(root: TreeNode | null): number {
+// function maxDepthBfs(root: TreeNode | null): number {
 
-    if (root === null) return 0;
+//     if (root === null) return 0;
     
-    const deque: Array<[(TreeNode | null), number]> = [];
-    deque.push([root, 1]);
-    let result: number = 1;
+//     const deque: Array<[(TreeNode | null), number]> = [];
+//     deque.push([root, 1]);
+//     let result: number = 1;
 
-    while (deque.length !== 0) {
-        const [node, depth] = deque.shift()!;
-        if (node === null || node === undefined) continue;
+//     while (deque.length !== 0) {
+//         const [node, depth] = deque.shift()!;
+//         if (node === null || node === undefined) continue;
 
-        result = Math.max(result, depth);
+//         result = Math.max(result, depth);
 
-        deque.push([node.left, depth + 1]);
-        deque.push([node.right, depth + 1]);
+//         deque.push([node.left, depth + 1]);
+//         deque.push([node.right, depth + 1]);
+//     }
+
+//     return result;
+// };
+function maxDepthBfs(root: TreeNode | null): number {
+    
+    if (root === null) return 0;
+    let queue: TreeNode[] = [root];
+
+    let result: number = 0;
+    while (queue.length > 0) {
+        const next: TreeNode[] = [];
+        
+        for (let i = 0; i < queue.length; i++) {
+            const node: TreeNode = queue[i];
+            if (node.left !== null) next.push(node.left);
+            if (node.right !== null) next.push(node.right);
+        }
+        
+        result++;
+        queue = next;
     }
-
     return result;
 };
-
 
 /*
 # Option #2
