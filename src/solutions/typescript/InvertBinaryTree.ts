@@ -24,21 +24,44 @@ class TreeNode {
 - BFS(FIFO)
 - O(n)
 */
+// function invertTreeBfs(root: TreeNode | null): TreeNode | null {
+//     if (root === null) return null;
+
+//     const deque: (TreeNode | null)[] = [];
+//     deque.push(root);
+
+//     while (deque.length !== 0) {
+//         const node: (TreeNode | null) = deque.shift()!;
+//         if (node === null || node === undefined) continue;
+//         const temp: (TreeNode | null) = node.left;
+//         node.left = node.right;
+//         node.right = temp;
+
+//         deque.push(node.left);
+//         deque.push(node.right);
+//     }
+
+//     return root;
+// };
 function invertTreeBfs(root: TreeNode | null): TreeNode | null {
-    if (root === null) return null;
+    let queue: Array<TreeNode | null> = [root];
 
-    const deque: (TreeNode | null)[] = [];
-    deque.push(root);
+    while (queue.length > 0) {
+        const next: Array<TreeNode | null> = [];
+        const n: number = queue.length;
 
-    while (deque.length !== 0) {
-        const node: (TreeNode | null) = deque.shift()!;
-        if (node === null || node === undefined) continue;
-        const temp: (TreeNode | null) = node.left;
-        node.left = node.right;
-        node.right = temp;
+        for (let i = 0; i < n; i++) {
+            const node: TreeNode | null = queue[i];
+            if (node === null) continue;
+            
+            const left: TreeNode | null = node.left;
+            node.left = node.right;
+            node.right = left;
 
-        deque.push(node.left);
-        deque.push(node.right);
+            next.push(node.left);
+            next.push(node.right);
+        }
+        queue = next;
     }
 
     return root;

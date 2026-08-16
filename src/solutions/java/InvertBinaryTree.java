@@ -41,8 +41,6 @@ public class InvertBinaryTree {
     	
     	while (!deque.isEmpty()) {
     		TreeNode node = deque.pollFirst();
-    		if (node == null) continue;
-    		
             TreeNode temp = node.left;
             node.left = node.right;
             node.right = temp;
