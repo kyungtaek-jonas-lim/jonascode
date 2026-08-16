@@ -24,19 +24,40 @@ class TreeNode {
 - BFS(FIFO)
 - O(n)
 */
+// function isSameTreeBfs(p: TreeNode | null, q: TreeNode | null): boolean {
+
+//     const deque: Array<[(TreeNode | null), (TreeNode | null)]> = [];
+//     deque.push([p, q]);
+
+//     while (deque.length !== 0) {
+//         const [n1, n2] = deque.shift()!;
+//         if (n1 === null && n2 === null) continue;
+//         if (n1 === null || n2 === null) return false;
+//         if (n1.val !== n2.val) return false;
+
+//         deque.push([n1.left, n2.left]);
+//         deque.push([n1.right, n2.right]);
+//     }
+
+//     return true;
+// };
 function isSameTreeBfs(p: TreeNode | null, q: TreeNode | null): boolean {
+    
+    let queue: Array<[TreeNode | null, TreeNode | null]> = [[p, q]]
 
-    const deque: Array<[(TreeNode | null), (TreeNode | null)]> = [];
-    deque.push([p, q]);
+    while (queue.length > 0) {
+        const next: Array<[TreeNode | null, TreeNode | null]> = [];
+        const n: number = queue.length;
 
-    while (deque.length !== 0) {
-        const [n1, n2] = deque.shift()!;
-        if (n1 === null && n2 === null) continue;
-        if (n1 === null || n2 === null) return false;
-        if (n1.val !== n2.val) return false;
+        for (let i = 0; i < n; i++) {
+            const [n1, n2]: [TreeNode | null, TreeNode | null] = queue[i];
+            if (n1 === null && n2 === null) continue;
+            if (n1 === null || n2 === null || n1.val !== n2.val) return false;
+            next.push([n1.left!, n2.left!]);
+            next.push([n1.right!, n2.right!]);
+        }
 
-        deque.push([n1.left, n2.left]);
-        deque.push([n1.right, n2.right]);
+        queue = next;
     }
 
     return true;

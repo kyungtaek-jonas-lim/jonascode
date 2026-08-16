@@ -49,9 +49,7 @@ class Solution:
         if not q or not p or p.val != q.val:
             return False
         
-        if not self.isSameTree(p.left, q.left): return False
-        if not self.isSameTree(p.right, q.right): return False
-        return True
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
     
 
     '''
