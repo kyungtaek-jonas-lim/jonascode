@@ -1,11 +1,11 @@
-from typing import List
+from typing import List, Dict, Set
 '''
  # Problem
  	- `Link`: https://leetcode.com/problems/number-of-provinces/
  # Solution
  	- `Author`: Kyungtaek Lim (Jonas)
  	- `Date`: July 1, 2025
- 	- `Answer`: findCircleNum
+ 	- `Answer`: findCircleNumUnionFind / findCircleNumDfs
 '''
 
 class Solution:
@@ -15,7 +15,7 @@ class Solution:
 	- Union-find
 	- O(n^2)
     '''
-    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+    def findCircleNumUnionFind(self, isConnected: List[List[int]]) -> int:
 
         n: int = len(isConnected)
         parents: List[int] = [i for i in range(n)]
@@ -48,4 +48,36 @@ class Solution:
                 if isConnected[i][j]:
                     result -= union(i, j)
 
+        return result
+
+
+
+    '''
+	# Option #2
+	- DFS 'Option #1(Union-find)' is faster
+	- O(n^2)
+    - August 16, 2026
+    '''
+    def findCircleNumDfs(self, isConnected: List[List[int]]) -> int:
+        n: int = len(isConnected)
+        graph: Dict[int, List[int]] = {i: [] for i in range(n)}
+        for i in range(n):
+            for j in range(i + 1, n):
+                if isConnected[i][j]:
+                    graph[i].append(j)
+                    graph[j].append(i)
+
+        visited: Set[int] = set()
+        def dfs(curr: int) -> None:
+            if curr in visited:
+                return
+            visited.add(curr)
+            for nei in graph[curr]:
+                dfs(nei)
+
+        result: int = 0
+        for i in range(n):
+            if i not in visited:
+                result += 1
+                dfs(i)
         return result
