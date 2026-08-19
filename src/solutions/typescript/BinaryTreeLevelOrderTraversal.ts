@@ -24,30 +24,51 @@ class TreeNode {
 - BFS
 - O(n)
 */
-function levelOrder(root: TreeNode | null): number[][] {
+// function levelOrder(root: TreeNode | null): number[][] {
 
-    if (root === null) return [];
+//     if (root === null) return [];
     
-    const deque: Array<TreeNode | null> = [root];
-    const result: number[][] = [];
-    let pointer: number = 0;
+//     const deque: Array<TreeNode | null> = [root];
+//     const result: number[][] = [];
+//     let pointer: number = 0;
     
-    while (deque.length - pointer !== 0) {
+//     while (deque.length - pointer !== 0) {
 
-        const existingSize = deque.length;
-        const item: number[] = []
+//         const existingSize = deque.length;
+//         const item: number[] = []
 
-        while (existingSize - pointer !== 0) {
+//         while (existingSize - pointer !== 0) {
 
-            const node: TreeNode | null = deque[pointer++];
-            if (node === null) continue;
-            item.push(node.val);
+//             const node: TreeNode | null = deque[pointer++];
+//             if (node === null) continue;
+//             item.push(node.val);
             
-            deque.push(node.left);
-            deque.push(node.right);
+//             deque.push(node.left);
+//             deque.push(node.right);
+//         }
+
+//         if (item.length !== 0) result.push(item);
+//     }
+//     return result;
+// };
+function levelOrder(root: TreeNode | null): number[][] {
+    const result: Array<Array<number>> = [];
+    if (root === null) return result;
+
+    let deque: TreeNode[] = [root];
+    while (deque.length !== 0) {
+        const n: number = deque.length;
+        const item: Array<number> = [];
+        const next: TreeNode[] = [];
+
+        for (let i = 0; i < n; i++) {
+            item.push(deque[i].val);
+            if (deque[i].left !== null) next.push(deque[i].left!);
+            if (deque[i].right !== null) next.push(deque[i].right!);
         }
 
-        if (item.length !== 0) result.push(item);
+        result.push(item);
+        deque = next;
     }
     return result;
 };
