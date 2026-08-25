@@ -199,7 +199,7 @@
 58. Invert Binary Tree (226)
 	- [Problem](https://leetcode.com/problems/invert-binary-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/InvertBinaryTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/InvertBinaryTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/InvertBinaryTree.ts))
-59. Binary Tree Maximum Path Sum (124) (**)
+59. Binary Tree Maximum Path Sum (124) (*)
 	- [Problem](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/BinaryTreeMaximumPathSum.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/BinaryTreeMaximumPathSum.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/BinaryTreeMaximumPathSum.ts))
 60. Binary Tree Level Order Traversal (102)

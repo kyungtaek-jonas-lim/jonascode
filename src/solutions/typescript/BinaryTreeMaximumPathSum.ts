@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 17, 2025
-	- `Answer`: maxPathSumRecursiveDfs
+	- `Answer`: maxPathSumRecursiveDfs / maxPathSumWorstButWorks
 */
 
 class TreeNode {
@@ -37,4 +37,34 @@ function maxPathSumRecursiveDfs(root: TreeNode | null): number {
     }
     dfs(root);  
     return result;
+};
+
+
+/*
+# Option #2
+- DFS - Worst but it works
+- O(n)
+- August 22, 2026
+*/
+function maxPathSumWorstButWorks(root: TreeNode | null): number {
+    
+    let maxResult: number = root!.val;
+    function dfs(node: TreeNode | null): number {
+        if (node === null) return -1001;
+        const leftVal: number = dfs(node.left), rightVal: number = dfs(node.right);
+
+        let res: number = node.val;
+        if (leftVal >= 0 && rightVal >= 0) {
+            maxResult = Math.max(maxResult, node.val + leftVal + rightVal);
+            res = Math.max(node.val + leftVal, node.val + rightVal);
+        } else if (leftVal >= 0) {
+            res = node.val + leftVal;
+        } else if (rightVal >= 0) {
+            res = node.val + rightVal;
+        }
+        maxResult = Math.max(maxResult, res);
+        return res;
+    }
+    dfs(root);
+    return maxResult;
 };

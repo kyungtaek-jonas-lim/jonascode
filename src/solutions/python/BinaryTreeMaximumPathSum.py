@@ -6,8 +6,8 @@ import collections
  	- `Link`: https://leetcode.com/problems/binary-tree-maximum-path-sum/
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
-	- `Date`: June 24
-	- `Answer`: maxPathSumRecursiveDfs / maxPathSumIterativeDfs / maxPathSumAdvancedDFS
+	- `Date`: June 24, 2025
+	- `Answer`: maxPathSumRecursiveDfs / maxPathSumIterativeDfs / maxPathSumAdvancedDFS / maxPathSumWorstButWorks
 '''
 
 class TreeNode:
@@ -116,3 +116,37 @@ class Solution:
 
         dfs(root)
         return result[0]
+
+
+    '''
+    # Option #4
+    - DFS - Worst but it works
+    - O(n)
+    - August 22, 2026
+	'''
+    def maxPathSumWorstButWorks(self, root: Optional[TreeNode]) -> int:
+        
+        maxResult = root.val
+
+        def dfs(node: TreeNode) -> int:
+            
+            nonlocal maxResult
+            if not node:
+                return -1001
+            
+            leftVal, rightVal = dfs(node.left), dfs(node.right)
+            res = node.val
+            
+            if leftVal >= 0 and rightVal >= 0:
+                maxResult = max(maxResult, node.val + leftVal + rightVal)
+                res = node.val + max(leftVal, rightVal)
+            elif leftVal >= 0:
+                res = leftVal + node.val
+            elif rightVal >= 0:
+                res = rightVal + node.val
+            
+            maxResult = max(maxResult, res)
+            return res
+
+        dfs(root)
+        return maxResult
