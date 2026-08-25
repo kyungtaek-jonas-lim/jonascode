@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 import collections
 
 '''
@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 3, 2025
-	- `Answer`: (serializeBfs, deserializeBfs) / (serializeDfsRecursive, deserializeDfsRecursive)
+	- `Answer`: (serializeBfs, deserializeBfs) / (serializeBfsDifferent, deserializeBfsDifferent) / (serializeDfsRecursive, deserializeDfsRecursive) / (serializeDfsBetter, deserializeDfsBetter)
 '''
 
 class TreeNode(object):
@@ -72,6 +72,55 @@ class Codec:
     
     '''
     # Option #2
+    - BFS Different
+    - O(n)
+    - August 25, 2026
+    '''
+    def serializeBfsDifferent(self, root: Optional[TreeNode]) -> str:
+        if not root:
+            return "null"
+        
+        queue = collections.deque([root])
+        result: List[str] = []
+        while queue:
+            n = len(queue)
+            for i in range(n):
+                node = queue.popleft()
+                if not node:
+                    result.append("null")
+                else:
+                    result.append(str(node.val))
+                    queue.append(node.left)
+                    queue.append(node.right)
+        return ",".join(result)
+
+
+    def deserializeBfsDifferent(self, data: str) -> Optional[TreeNode]:
+        if data == "null":
+            return None
+
+        strings: List[str] = data.split(",")
+        root: Optional[TreeNode] = TreeNode(int(strings[0]))
+        queue = [root]
+        head = 0
+        
+        for i in range(1, len(strings)):
+            node: Optional[TreeNode] = None
+            if strings[i] != "null":
+                node = TreeNode(int(strings[i]))
+                queue.append(node)
+            
+            if i % 2 == 1:
+                queue[head].left = node
+            else:
+                queue[head].right = node
+                head += 1
+        
+        return root
+            
+    
+    '''
+    # Option #3
     - DFS Recursive
     - O(n)
     '''
@@ -107,7 +156,44 @@ class Codec:
             return node
 
         return dfs()
+            
 
+    
+    '''
+    # Option #4
+    - DFS Recursive Better
+    - O(n)
+    - August 25, 2026
+    '''
+    def serializeDfsBetter(self, root: Optional[TreeNode]) -> str:
+        if not root:
+            return "null"
+        left, right = self.serializeDfsBetter(root.left), self.serializeDfsBetter(root.right)
+        return f"{root.val},{left},{right}"
+        
+
+    def deserializeDfsBetter(self, data: str) -> Optional[TreeNode]:
+        if data == "null":
+            return None
+        strings = data.split(",")
+        i = [0]
+
+        def dfs() -> Optional[TreeNode]:
+            if i[0] >= len(strings):
+                return None
+
+            if strings[i[0]] == "null":
+                i[0] += 1
+                return None
+
+            node = TreeNode(int(strings[i[0]]))
+            i[0] += 1
+            node.left = dfs()
+            node.right = dfs()
+            return node
+
+        return dfs()
+        
         
 
 # Your Codec object will be instantiated and called as such:

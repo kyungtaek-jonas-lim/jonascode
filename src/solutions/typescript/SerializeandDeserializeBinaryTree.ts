@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 17, 2025
-	- `Answer`: (serializeBfs, deserializeBfs) / (serializeDfsRecursive, deserializeDfsRecursive)
+	- `Answer`: (serializeBfs, deserializeBfs) / (serializeBfsBetter, deserializeBfsBetter) / (serializeDfsRecursive, deserializeDfsRecursive) / (serializeDfsDifferent, deserializeDfsDifferent)
 */
 
 class TreeNode {
@@ -105,6 +105,70 @@ function deserializeBfs(data: string): TreeNode | null {
 /*
 ============================================================================
 # Option #2
+- BFS Better
+- O(n)
+- August 25, 2026
+*/
+
+/*
+ * Encodes a tree to a single string.
+ */
+function serializeBfsBetter(root: TreeNode | null): string {
+    if (root === null) return "null";
+    
+    const result: string[] = [];
+    let queue: Array<TreeNode | null> = [root];
+    while (queue.length > 0) {
+        const next: Array<TreeNode | null> = [];
+        for (let i = 0; i < queue.length; i++) {
+            if (queue[i] !== null) {
+                result.push(String(queue[i]!.val));
+                next.push(queue[i]!.left);
+                next.push(queue[i]!.right);
+            } else {
+                result.push("null");
+            }
+        }
+        queue = next;
+    }
+
+    return result.join(",");
+};
+
+/*
+ * Decodes your encoded data to tree.
+ */
+function deserializeBfsBetter(data: string): TreeNode | null {
+    const strings: string[] = data.split(",");
+    if (strings.length === 1) return null;
+
+    let root: TreeNode | null = new TreeNode(Number(strings[0]));
+    let queue: Array<TreeNode | null> = [root];
+    let head: number = 0;
+    
+    for (let i = 1; i < strings.length; i++) {
+
+        let node: TreeNode | null = null;
+        if (strings[i] !== "null") {
+            node = new TreeNode(Number(strings[i]));
+            queue.push(node);
+        }
+
+        if (i % 2 === 1) {
+            queue[head]!.left = node;
+        } else {
+            queue[head++]!.right = node;
+        }
+    }
+
+    return root;
+};
+
+
+
+/*
+============================================================================
+# Option #3
 - DFS Recursive
 - O(n)
 */
@@ -159,3 +223,45 @@ function dfsForDeserializing(prevNode: TreeNode, array: string[], index: number)
 
     return index;
 }
+
+
+
+/*
+============================================================================
+# Option #4
+- DFS Recursive Different
+- O(n)
+- August 25, 2026
+*/
+
+/*
+ * Encodes a tree to a single string.
+ */
+function serializeDfsDifferent(root: TreeNode | null): string {
+    if (root === null) return "null";
+    const left: string = serializeDfsDifferent(root.left);
+    const right: string = serializeDfsDifferent(root.right);
+    return root.val + "," + left + "," + right;
+};
+
+/*
+ * Decodes your encoded data to tree.
+ */
+function deserializeDfsDifferent(data: string): TreeNode | null {
+    if (data === "null") return null;
+    const strings: string[] = data.split(",");
+    let i: number = 0;
+
+    function dfs(): TreeNode | null {
+        if (i >= strings.length) return null;
+        if (strings[i] === "null") {
+            i++;
+            return null;
+        }
+        const current: TreeNode | null = new TreeNode(Number(strings[i++]));
+        current.left = dfs();
+        current.right = dfs();
+        return current;
+    }
+    return dfs();
+};

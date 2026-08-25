@@ -1,7 +1,9 @@
 package solutions.java;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 /*
 # Problem
@@ -9,7 +11,7 @@ import java.util.Deque;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 8, 2025
-	- `Answer`: (serializeBfs, deserializeBfs) / (serializeDfsRecursive, deserializeDfsRecursive)
+	- `Answer`: (serializeBfs, deserializeBfs) / (serializeBfsBetter, deserializeBfsBetter) / (serializeDfsRecursive, deserializeDfsRecursive) / (serializeDfsBetter, deserializeDfsBetter)
  */
 public class SerializeandDeserializeBinaryTree {
 	
@@ -91,6 +93,69 @@ public class SerializeandDeserializeBinaryTree {
 		/*
 		 * =================================================================
 	    # Option #2
+	    - Bfs Better
+	    - O(n)
+		- August 25, 2026
+		 */
+		// Encodes a tree to a single string.
+		public String serializeBfsBetter(TreeNode root) {
+			if (root == null) return "null";
+			
+			Deque<Object> deque = new ArrayDeque<>();
+			deque.offer(root);
+			List<String> result = new ArrayList<>();
+
+			while (!deque.isEmpty()) {
+				int n = deque.size();
+				for (int i = 0; i < n; i++) {
+					Object obj = deque.pollFirst();
+					if (obj instanceof Integer) {
+						result.add("null");
+					} else {
+						TreeNode node = (TreeNode)obj;
+						result.add("" + node.val);
+						deque.offer(node.left == null ? 0 : node.left);
+						deque.offer(node.right == null ? 0 : node.right);
+					}
+				}
+			}
+
+			return String.join(",", result);
+		}
+
+		// Decodes your encoded data to tree.
+		public TreeNode deserializeBfsBetter(String data) {
+			if (data.equals("null")) return null;
+			
+			String[] strings = data.split(",");
+			List<TreeNode> list = new ArrayList<>();
+			TreeNode root = new TreeNode(Integer.valueOf(strings[0]));
+			list.add(root);
+			int head = 0;
+
+			for (int i = 1; i < strings.length; i++) {
+
+				TreeNode node = null;
+				if (!strings[i].equals("null")) {
+					node = new TreeNode(Integer.valueOf(strings[i]));
+					list.add(node);
+				}
+				
+				if (i % 2 == 1) {
+					list.get(head).left = node;
+				} else {
+					list.get(head++).right = node;
+				}
+			}
+
+			return root;
+		}
+
+
+		
+		/*
+		 * =================================================================
+	    # Option #3
 	    - DFS
 	    - O(n)
 		 */
@@ -129,6 +194,43 @@ public class SerializeandDeserializeBinaryTree {
 	    	node.right = dfsForDeserializing(nodes);
 	    	return node;
 	    }
+
+
+		
+		/*
+		 * =================================================================
+	    # Option #4
+	    - DFS Better
+	    - O(n)
+		 */
+		// Encodes a tree to a single string.
+		public String serializeDfsBetter(TreeNode root) {
+			if (root == null) return "null";
+			String left = serializeDfsBetter(root.left);
+			String right = serializeDfsBetter(root.right);
+			return root.val + "," + left + "," + right;
+		}
+
+		// Decodes your encoded data to tree.
+		public TreeNode deserializeDfsBetter(String data) {
+			if (data.equals("null")) return null;
+			String[] strings = data.split(",");
+			int[] i = new int[] {0};
+			return dfs(strings, i);
+		}
+
+		private TreeNode dfs(String[] strings, int[] i) {
+			if (i[0] >= strings.length) return null;
+			if (strings[i[0]].equals("null")) {
+				i[0]++;
+				return null;
+			}
+			TreeNode node = new TreeNode(Integer.valueOf(strings[i[0]]));
+			i[0]++;
+			node.left = dfs(strings, i);
+			node.right = dfs(strings, i);
+			return node;
+		}
 	}
 
 	public static void main(String[] args) {
