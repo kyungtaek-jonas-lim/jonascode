@@ -9,7 +9,7 @@ import java.util.Deque;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 8, 2025
-	- `Answer`: isSubtreeBfs / isSubtreeDfsRecursive
+	- `Answer`: isSubtreeBfs / isSubtreeBfsAndDfs / isSubtreeDfs
  */
 public class SubtreeofAnotherTree {
 	
@@ -76,7 +76,7 @@ public class SubtreeofAnotherTree {
     - DFS Recursive
     - O(m * n) (m = the number of root nodes, n = the number of subRoot nodes) 
 	 */
-    public boolean isSubtreeDfsRecursive(TreeNode root, TreeNode subRoot) {
+    public boolean isSubtreeBfsAndDfs(TreeNode root, TreeNode subRoot) {
 
         if (root == null && subRoot == null) return true;
         else if (root == null || subRoot == null) return false;
@@ -98,6 +98,32 @@ public class SubtreeofAnotherTree {
         if (node == null || subNode == null) return false;
         if (node.val != subNode.val) return false;
         return dfs(node.left, subNode.left) && dfs(node.right, subNode.right);
+    }
+	
+	
+	/*
+    # Option #3
+    - DFS Recursive
+    - O(m * n) (m = the number of root nodes, n = the number of subRoot nodes) 
+    - August 26, 2026
+	 */
+    public boolean isSubtreeDfs(TreeNode root, TreeNode subRoot) {
+        return dfs2(root, subRoot);
+    }
+
+    private boolean dfs2(TreeNode node, TreeNode subRoot) {
+        if (node == null) return false;
+        if (isSame(node, subRoot)) return true;
+        return dfs2(node.left, subRoot) || dfs2(node.right, subRoot);
+    }
+
+    private boolean isSame(TreeNode n1, TreeNode n2) {
+        if (n1 == null && n2 == null) return true;
+        if (n1 == null || n2 == null) return false;
+        if (n1.val == n2.val) {
+            if (isSame(n1.left, n2.left) && isSame(n1.right, n2.right)) return true;
+        }
+        return false;
     }
     
 }

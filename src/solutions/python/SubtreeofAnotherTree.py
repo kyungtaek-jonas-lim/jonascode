@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 3, 2025
-	- `Answer`: isSubtreeBfs / isSubtreeDfsRecursive
+	- `Answer`: isSubtreeBfs / isSubtreeDfs / isSubtreeBfsAndDfs
 '''
 
 class TreeNode:
@@ -64,7 +64,7 @@ class Solution:
     - DFS Recursive
     - O(m * n) (m = the number of root nodes, n = the number of subRoot nodes)
     '''
-    def isSubtreeDfsRecursive(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+    def isSubtreeDfs(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         
         def isSame(n1: TreeNode, n2: TreeNode) -> bool:
             if not n1 and not n2: return True
@@ -85,3 +85,39 @@ class Solution:
             return False
 
         return dfs(root)
+
+    '''
+    # Option #3
+    - BFS and DFS
+    - O(m * n) (m = the number of root nodes, n = the number of subRoot nodes)
+    - August 26, 2026
+    '''
+    def isSubtreeBfsAndDfs(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        
+        def dfs(n1: Optional[TreeNode], n2: Optional[TreeNode]) -> bool:
+
+            if not n1 and not n2:
+                return True
+            
+            if not n1 or not n2:
+                return False
+
+            if n1.val == n2.val:
+                left = dfs(n1.left, n2.left)
+                right = dfs(n1.right, n2.right)
+                if left and right:
+                    return True
+
+            return False
+
+        q = collections.deque([root])
+
+        while q:
+            node = q.popleft()
+            if dfs(node, subRoot):
+                return True
+            if node:
+                q.append(node.left)
+                q.append(node.right)
+        
+        return False
