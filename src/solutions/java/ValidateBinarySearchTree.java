@@ -28,16 +28,15 @@ public class ValidateBinarySearchTree {
     # Option #1
     - DFS
     - O(n)
+	- August 29, 2026
 	 */
     public boolean isValidBST(TreeNode root) {
-        if (root == null) return false;
         return dfs(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    private boolean dfs(TreeNode node, long shouldBeBiggerThanThis, long shouldBeSmallerThanThis) {
+    private boolean dfs(TreeNode node, long low, long high) {
         if (node == null) return true;
-        if (node.val <= shouldBeBiggerThanThis || node.val >= shouldBeSmallerThanThis) return false;
-        return dfs(node.left, shouldBeBiggerThanThis, Math.min(node.val, shouldBeSmallerThanThis))
-            && dfs(node.right, Math.max(shouldBeBiggerThanThis, node.val), shouldBeSmallerThanThis);
+        if (node.val <= low || node.val >= high) return false;
+        return dfs(node.left, low, node.val) && dfs(node.right, node.val, high);
     }
 }

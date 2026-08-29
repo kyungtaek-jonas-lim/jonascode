@@ -21,31 +21,20 @@ class Solution:
     # Option #1
     - DFS
     - O(n)
+    - August 29, 2026
     '''
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
 
-        if not root: return True
-        
-        def dfs(node: TreeNode, higher: int, lower: int) -> bool:
-            
+        def dfs(node: Optional[TreeNode], low: int, high: int) -> bool:
             if not node:
                 return True
-
-            if node.val >= higher or node.val <= lower:
-                return False
-
-            # if (node.left and node.val <= node.left.val) or node.right and node.val >= node.right.val:
-            #     return False
             
-            if not dfs(node.left, node.val, lower):
+            if not (low < node.val < high):
                 return False
-
-            if not dfs(node.right, higher, node.val):
-                return False
-
-            return True
+            
+            return dfs(node.left, low, node.val) and dfs(node.right, node.val, high)
         
-        return dfs(root, float('inf'), float('-inf'))
+        return dfs(root, float('-inf'), float('inf'))
     
 
 if __name__ == "__main__":

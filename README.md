@@ -214,7 +214,7 @@
 63. Construct Binary Tree from Preorder and Inorder Traversal (105) (**)
 	- [Problem](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ConstructBinaryTreefromPreorderandInorderTraversal.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ConstructBinaryTreefromPreorderandInorderTraversal.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ConstructBinaryTreefromPreorderandInorderTraversal.ts))
-64. Validate Binary Search Tree (98) (*)
+64. Validate Binary Search Tree (98) (**)
 	- [Problem](https://leetcode.com/problems/validate-binary-search-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidateBinarySearchTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidateBinarySearchTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ValidateBinarySearchTree.ts))
 65. Kth Smallest Element in a BST (230) (**)

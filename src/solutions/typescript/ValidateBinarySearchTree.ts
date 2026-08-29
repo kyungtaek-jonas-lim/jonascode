@@ -24,18 +24,14 @@ class TreeNode {
 # Option #1
 - DFS
 - O(n)
+- August 29, 2026
 */
 function isValidBST(root: TreeNode | null): boolean {
-    if (root === null) return true;
     
-    function dfs(node: TreeNode | null, maxAmongSmaller: number, minAmongBigger): boolean {
+    function dfs(node: TreeNode | null, low: number, high: number): boolean {
         if (node === null) return true;
-        if (node.val <= maxAmongSmaller || node.val >= minAmongBigger) return false;
-        // return dfs(node.left, maxAmongSmaller, Math.min(minAmongBigger, node.val)) &&
-        //     dfs(node.right, Math.max(maxAmongSmaller, node.val), minAmongBigger);
-        return dfs(node.left, maxAmongSmaller, node.val) &&
-            dfs(node.right, node.val, minAmongBigger);
-    }
-
-    return dfs(root.left, -Infinity, root.val) && dfs(root.right, root.val, Infinity);
+        if (node.val <= low || node.val >= high) return false;
+        return dfs(node.left, low, node.val) && dfs(node.right, node.val, high);
+    };
+    return dfs(root, -Infinity, Infinity);
 };
