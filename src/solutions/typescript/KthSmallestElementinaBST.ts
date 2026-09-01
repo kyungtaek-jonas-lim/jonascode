@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 18, 2025
-	- `Answer`: kthSmallest
+	- `Answer`: kthSmallestDfsRecursive / kthSmallestDfsRecursive2 / kthSmallestDfsIterative
 */
 
 class TreeNode {
@@ -24,7 +24,7 @@ class TreeNode {
 - DFS Recursive - Find the smallest and gets bigger
 - O(H + k) (H = the height of the tree)
 */
-function kthSmallest(root: TreeNode | null, k: number): number {
+function kthSmallestDfsRecursive(root: TreeNode | null, k: number): number {
     
     let result: number = root!.val;
     let cnt: number = 0;
@@ -47,4 +47,56 @@ function kthSmallest(root: TreeNode | null, k: number): number {
 
     dfs(root);
     return result;
+};
+
+/*
+# Option #2
+- DFS Recursive - Find the smallest and gets bigger
+- O(H + k) (H = the height of the tree)
+*/
+function kthSmallestDfsRecursive2(root: TreeNode | null, k: number): number {
+
+    let result: number = 0;
+    
+    function dfs(node: TreeNode | null, curr: number): number {
+        if (node === null) return curr;
+        let res: number = dfs(node.left, curr) + 1;
+        if (res === 0) return -1;
+        if (res === k) {
+            result = node.val;
+            return -1;
+        }
+
+        res = dfs(node.right, res);
+        if (res === -1) return -1;
+        if (res === k) {
+            result = node.val;
+            return -1;
+        }
+        return res;
+    }
+
+    dfs(root, 0);
+    return result;
+};
+
+/*
+# Option #3
+- DFS Iterative - Find the smallest and gets bigger
+- O(H + k) (H = the height of the tree)
+*/
+function kthSmallestDfsIterative(root: TreeNode | null, k: number): number {
+    const stack: TreeNode[] = [];
+    let node: TreeNode | null = root;
+    
+    while (node !== null || stack.length !== 0) {
+        while (node !== null) {
+            stack.push(node);
+            node = node.left;
+        }
+        node = stack.pop()!;
+        if (--k === 0) return node.val;
+        node = node.right;
+    }
+    return -1;
 };

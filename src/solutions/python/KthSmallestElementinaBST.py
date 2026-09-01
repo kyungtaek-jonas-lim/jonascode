@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 4, 2025
-	- `Answer`: kthSmallestBfs / kthSmallestDfsRecursive / kthSmallestDfsIterative
+	- `Answer`: kthSmallestBfs / kthSmallestDfsRecursive / kthSmallestDfsRecursive2 / kthSmallestDfsIterative
 '''
 
 class TreeNode:
@@ -67,10 +67,44 @@ class Solution:
         dfs(root)
         # return result[k - 1]
         return result
-    
+
 
     '''
     # Option #3
+    - DFS Recursive - Find the smallest and gets bigger
+    - O(H + k) (H = the height of the tree)
+    '''
+    def kthSmallestDfsRecursive2(self, root: Optional[TreeNode], k: int) -> int:
+
+        result: List[int] = [-1]
+        def dfs(node: Optional[TreeNode], curr: int) -> int:
+            if not node:
+                return curr
+            
+            res: int = dfs(node.left, curr) + 1
+            if res == 0:
+                return -1
+
+            if res == k:
+                result[0] = node.val
+                return -1
+
+            res = dfs(node.right, res)
+            if res == -1:
+                return -1
+
+            if res == k:
+                result[0] = node.val
+                return -1
+
+            return res
+
+        dfs(root, 0)
+        return result[0]
+    
+
+    '''
+    # Option #4
     - DFS Iterative - Find the smallest and gets bigger
     - O(H + k) (H = the height of the tree)
     '''

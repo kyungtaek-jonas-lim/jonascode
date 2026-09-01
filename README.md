@@ -217,7 +217,7 @@
 64. Validate Binary Search Tree (98) (**)
 	- [Problem](https://leetcode.com/problems/validate-binary-search-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ValidateBinarySearchTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ValidateBinarySearchTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ValidateBinarySearchTree.ts))
-65. Kth Smallest Element in a BST (230) (**)
+65. Kth Smallest Element in a BST (230) (*)
 	- [Problem](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/KthSmallestElementinaBST.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/KthSmallestElementinaBST.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/KthSmallestElementinaBST.ts))
 66. Lowest Common Ancestor of a Binary Search Tree (235) (*)

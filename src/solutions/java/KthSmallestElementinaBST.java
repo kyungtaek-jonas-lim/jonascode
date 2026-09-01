@@ -9,7 +9,7 @@ import java.util.Deque;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 8, 2025
-	- `Answer`: kthSmallest
+	- `Answer`: kthSmallestDfsIterative / kthSmallestDfsRecursive
  */
 public class KthSmallestElementinaBST {
 	
@@ -31,7 +31,7 @@ public class KthSmallestElementinaBST {
     - DFS Iterative - Find the smallest and gets bigger
     - O(H + k) (H = the height of the tree)
 	 */
-    public int kthSmallest(TreeNode root, int k) {
+    public int kthSmallestDfsIterative(TreeNode root, int k) {
 
         Deque<TreeNode> deque = new ArrayDeque<>();
         
@@ -52,5 +52,36 @@ public class KthSmallestElementinaBST {
         }
 
         return -1;
+    }
+
+	
+
+    /*
+    # Option #2
+    - DFS Recursive - Find the smallest and gets bigger
+    - O(H + k) (H = the height of the tree)
+     */
+    public int kthSmallestDfsRecursive(TreeNode root, int k) {
+        int[] result = new int[] {-1};
+        dfs(root, k, 0, result);
+        return result[0];
+    }
+    
+    private int dfs(TreeNode node, int k, int curr, int[] result) {
+        if (node == null) return curr;
+        int res = dfs(node.left, k, curr, result) + 1;
+        if (res == 0) return -1;
+        if (res == k) {
+            result[0] = node.val;
+            return -1;
+        }
+
+        res = dfs(node.right, k, res, result);
+        if (res == -1) return -1;
+        if (res == k) {
+            result[0] = node.val;
+            return -1;
+        }
+        return res;
     }
 }
