@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 18, 2025
-	- `Answer`: buildTree
+	- `Answer`: buildTreeUsingInorderRangeAndIncreasingPreorderIndex / buildTreeSimple
 */
 
 class TreeNode {
@@ -21,10 +21,10 @@ class TreeNode {
 
 /*
 # Option 1
-- DFS
+- DFS Recurisve Using Inorder Range & Increasing Preorder Index
 - O(n)
 */
-function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
+function buildTreeUsingInorderRangeAndIncreasingPreorderIndex(preorder: number[], inorder: number[]): TreeNode | null {
     
     // Preorder: center -> left -> right
     // Inorder: left -> center -> right
@@ -51,4 +51,21 @@ function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
     }
 
     return dfs(0, n);
+};
+
+
+
+/*
+# Option 2
+- DFS Recurisve
+- O(n^2)
+- https://www.youtube.com/watch?v=ihj4IQGZ2zc
+*/
+function buildTreeSimple(preorder: number[], inorder: number[]): TreeNode | null {
+    if (preorder.length === 0 || inorder.length === 0) return null;
+    const node: TreeNode = new TreeNode(preorder[0]);
+    const mid: number = inorder.indexOf(preorder[0]);
+    node.left = buildTreeSimple(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+    node.right = buildTreeSimple(preorder.slice(mid + 1), inorder.slice(mid + 1));
+    return node;
 };

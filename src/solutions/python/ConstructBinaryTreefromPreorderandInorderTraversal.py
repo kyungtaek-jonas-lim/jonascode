@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Final, Dict
 
 '''
 # Problem
@@ -6,7 +6,7 @@ from typing import Optional, List
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 4, 2025
-	- `Answer`: buildTree / buildTreeAdvanced
+	- `Answer`: buildTreeSimple / buildTreeUsingInorderRangeAndIncreasingPreorderIndex
 '''
 
 class TreeNode:
@@ -24,38 +24,35 @@ class Solution:
     - O(n^2)
     - https://www.youtube.com/watch?v=ihj4IQGZ2zc
     '''
-    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+    def buildTreeSimple(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
         if not preorder or not inorder:
             return None
         root = TreeNode(preorder[0])
         mid = inorder.index(root.val)
-        root.left = self.buildTree(preorder[1:mid + 1], inorder[:mid])
-        root.right = self.buildTree(preorder[mid + 1:], inorder[mid + 1:])
+        root.left = self.buildTreeSimple(preorder[1:mid + 1], inorder[:mid])
+        root.right = self.buildTreeSimple(preorder[mid + 1:], inorder[mid + 1:])
         return root
 
     '''
     # Option 2
-    - Advanced
-    - O(n)
-    '''
-    def buildTreeAdvanced(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        n: int = len(preorder)
-        inorder_map: dict = {inorder[i]: i for i in range(n)}
-        curr_preorder_index = 0
-
+	- DFS Recurisve Using Inorder Range & Increasing Preorder Index
+	- O(n)
+    '''            
+    def buildTreeUsingInorderRangeAndIncreasingPreorderIndex(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        n: Final[int] = len(preorder)
+        inorderIndexDict: Final[Dict[int, int]] = {inorder[i]: i for i in range(n)}
+        
+        currentPreorderIndex: List[int] = [0]
         def dfs(left: int, right: int) -> Optional[TreeNode]:
-            nonlocal curr_preorder_index
-            if left > right:
+            if left >= right:
                 return None
             
-            root = TreeNode(preorder[curr_preorder_index])
-            curr_preorder_index += 1
-            index = inorder_map[root.val]
+            node: Final[TreeNode] = TreeNode(preorder[currentPreorderIndex[0]])
+            currentPreorderIndex[0] += 1
+            mid: Final[int] = inorderIndexDict[node.val]
 
-            root.left = dfs(left, index - 1)
-            root.right = dfs(index + 1, right)
-            return root
-        
-        return dfs(0, n - 1)
+            node.left = dfs(left, mid)
+            node.right = dfs(mid + 1, right)
+            return node
 
-            
+        return dfs(0, n)

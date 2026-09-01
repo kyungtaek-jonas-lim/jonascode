@@ -1,5 +1,6 @@
 package solutions.java;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 8, 2025
-	- `Answer`: buildTree
+	- `Answer`: buildTreeSimple / buildTreeUsingInorderRangeAndIncreasingPreorderIndex
  */
 public class ConstructBinaryTreefromPreorderandInorderTraversal {
 	
@@ -30,59 +31,61 @@ public class ConstructBinaryTreefromPreorderandInorderTraversal {
 	static class Solution {
 	
 		/*
-	    # Option 1
-	    - DFS Recurisve
-	    - O(n)
+		# Option 1
+		- DFS Recurisve
+		- O(n^2)
+		- https://www.youtube.com/watch?v=ihj4IQGZ2zc
 		 */
-	    private int[] preorder = null;
-	    private Map<Integer, Integer> preIndex = new HashMap<>(), inIndex = new HashMap<>();
-	    private int n = -1;
-	
-	    public TreeNode buildTree(int[] preorder, int[] inorder) {
-	        
-	        this.n = preorder.length;
-	        this.preorder = preorder;
-	
-	        for (int i = 0; i < n; i++) {
-	            preIndex.put(preorder[i], i);
-	            inIndex.put(inorder[i], i);
-	        }
-	
-	        return dfs(0, n, 0, n);
-	    }
-	
-	    public TreeNode dfs(int pStart, int pEnd, int iStart, int iEnd) {
-	        if (pStart < 0 || iStart < 0 || pEnd > n || iEnd > n) return null;
-	        if (pStart >= pEnd || iStart >= iEnd) return null;
-	        
-	        int nodeValue = preorder[pStart];
-	        TreeNode node = new TreeNode(nodeValue);
-	        
-	        
-	        int iMid = inIndex.get(nodeValue);
-	        
-	        
-	        // No need to do it cause now we know the left Size
-//	        int rightStart = pStart;
-//	        for (int i = pStart + 1; i < pEnd; i++) {
-//	            int index = inIndex.get(preorder[i]);
-//	            if (index > iMid && index < iEnd) {
-//	                rightStart = i;
-//	                break;
-//	            }
-//	        }
-	        int leftSize = iMid - iStart;
-	        int rightStart = pStart + 1 + leftSize;
-	
-	        node.left = dfs(pStart + 1, pEnd, iStart, iMid);
-	        node.right = dfs(rightStart, pEnd, iMid + 1, iEnd);
-	        return node;
-	    }
+		public TreeNode buildTreeSimple(int[] preorder, int[] inorder) {
+			if (preorder.length == 0 || inorder.length == 0) return null;
+			TreeNode root = new TreeNode(preorder[0]);
+			int mid = 0;
+			for (int i = 0; i < inorder.length; i++) {
+				if (preorder[0] == inorder[i]) {
+					mid = i;
+					break;
+				}
+			}
+			
+			root.left = buildTreeSimple(Arrays.copyOfRange(preorder, 1, mid + 1), Arrays.copyOfRange(inorder, 0, mid));
+			root.right = buildTreeSimple(Arrays.copyOfRange(preorder, mid + 1, preorder.length), Arrays.copyOfRange(inorder, mid + 1, inorder.length));
+			return root;
+		}
+
+		
+		/*
+		# Option 2
+		- DFS Recurisve Using Inorder Range & Increasing Preorder Index
+		- O(n)
+		*/
+		private int currentPreorderIndex = 0;
+
+		public TreeNode buildTreeUsingInorderRangeAndIncreasingPreorderIndex(int[] preorder, int[] inorder) {
+			
+			final int n = preorder.length;
+			Map<Integer, Integer> inorderIndexMap = new HashMap<>();
+			for (int i = 0; i < n; i++) {
+				inorderIndexMap.put(inorder[i], i);
+			}
+
+			return dfs(preorder, inorderIndexMap, 0, n);
+		}
+
+		private TreeNode dfs(int[] preorder, Map<Integer, Integer> inorder, int left, int right) {
+			if (left >= right) return null;
+			
+			TreeNode node = new TreeNode(preorder[this.currentPreorderIndex++]);
+			final int mid = inorder.get(node.val);
+			
+			node.left = dfs(preorder, inorder, left, mid);
+			node.right = dfs(preorder, inorder, mid + 1, right);
+			return node;
+		}
 	    
 	}
     
     public static void main(String[] args) {
     	Solution sol = new Solution();
-    	sol.buildTree(new int[] {3,9,20,15,7}, new int[] {9,3,15,20,7});
+    	sol.buildTreeSimple(new int[] {3,9,20,15,7}, new int[] {9,3,15,20,7});
 	}
 }
