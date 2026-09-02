@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 5, 2025
-	- `Answer`: lowestCommonAncestorDfsRecursive / lowestCommonAncestorSearch
+	- `Answer`: lowestCommonAncestorDfsRecursive / lowestCommonAncestorDfsRecursive2 / lowestCommonAncestorSearch / lowestCommonAncestorSearch2
 '''
 
 class TreeNode:
@@ -44,10 +44,26 @@ class Solution:
 
         dfs(root)
         return result
-    
 
     '''
     # Option #2
+    - DFS
+    - O(log N) ~ O(N)
+    - September 2, 2026
+    '''
+    def lowestCommonAncestorDfsRecursive2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return None
+        
+        if (root.val <= p.val and root.val >= q.val) or (root.val >= p.val and root.val <= q.val):
+            return root
+        if root.val < p.val and root.val < q.val:
+            return self.lowestCommonAncestorDfsRecursive2(root.right, p, q)
+        return self.lowestCommonAncestorDfsRecursive2(root.left, p, q)
+    
+
+    '''
+    # Option #3
     - Search
     - O(log N) ~ O(N)
     '''
@@ -61,4 +77,20 @@ class Solution:
             else:
                 break
 
+        return root
+    
+
+    '''
+    # Option #4
+    - Search
+    - September 2, 2026
+    '''
+    def lowestCommonAncestorSearch2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        while root:
+            if (root.val <= p.val and root.val >= q.val) or (root.val >= p.val and root.val <= q.val):
+                return root
+            if root.val < p.val and root.val < q.val:
+                root = root.right
+            else:
+                root = root.left
         return root

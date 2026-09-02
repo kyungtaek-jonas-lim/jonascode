@@ -5,7 +5,7 @@
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 18, 2025
-	- `Answer`: lowestCommonAncestorDfsRecursiveAdvanced / lowestCommonAncestorDfsRecursive / lowestCommonAncestorSearch
+	- `Answer`: lowestCommonAncestorDfsRecursiveAdvanced / lowestCommonAncestorDfsRecursive / lowestCommonAncestorDfsRecursive2 / lowestCommonAncestorSearch / lowestCommonAncestorSearch2
 */
 
 
@@ -76,6 +76,22 @@ function lowestCommonAncestorDfsRecursiveAdvanced(root: TreeNode | null, p: Tree
 
 /*
 # Option #3
+- DFS Recursive
+- O(log N) ~ O(N)
+- September 2, 2026
+*/
+function lowestCommonAncestorDfsRecursive2(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+	if (root === null) return null;
+    if ((root.val >= p!.val && root.val <= q!.val) || (root.val <= p!.val && root.val >= q!.val)) return root;
+    
+    if (root.val < p!.val && root.val < q!.val) return lowestCommonAncestorDfsRecursive2(root.right, p, q);
+    return lowestCommonAncestorDfsRecursive2(root.left, p, q);
+};
+
+
+
+/*
+# Option #4
 - Search
 - O(log N) ~ O(N)
 */
@@ -98,4 +114,22 @@ function lowestCommonAncestorSearch(root: TreeNode | null, p: TreeNode | null, q
     }
     
     return result;
+};
+
+
+
+/*
+# Option #5
+- Search
+- O(log N) ~ O(N)
+- September 2, 2026
+*/
+function lowestCommonAncestorSearch2(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
+	while (root !== null) {
+        if ((root.val >= p!.val && root.val <= q!.val) || (root.val <= p!.val && root.val >= q!.val)) return root;
+        
+        if (root.val < p!.val && root.val < q!.val) root = root.right;
+        else root = root.left;
+    }
+    return root;
 };

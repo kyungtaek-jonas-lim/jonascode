@@ -6,7 +6,7 @@ package solutions.java;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 8, 2025
-	- `Answer`: lowestCommonAncestorDfsRecursive / lowestCommonAncestorDfsRecursiveSimple / lowestCommonAncestorSearch
+	- `Answer`: lowestCommonAncestorDfsRecursive / lowestCommonAncestorDfsRecursive2 / lowestCommonAncestorDfsRecursiveSimple / lowestCommonAncestorSearch / lowestCommonAncestorSearch2
  */
 public class LowestCommonAncestorofaBinarySearchTree {
 	
@@ -34,11 +34,24 @@ public class LowestCommonAncestorofaBinarySearchTree {
             else return lowestCommonAncestorDfsRecursive(root.left, p, q);
         }
     }
+
+	/*
+    # Option #2
+    - DFS Recursive
+    - O(H) (H = The height of the tree) (O(log n) - O(n))
+	- September 2, 2026
+	 */
+    public TreeNode lowestCommonAncestorDfsRecursive2(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return null;
+        if ((root.val <= q.val && root.val >= p.val) || (root.val >= q.val && root.val <= p.val)) return root;
+        if (root.val < q.val && root.val < p.val) return lowestCommonAncestorDfsRecursive2(root.right, p, q);
+        return lowestCommonAncestorDfsRecursive2(root.left, p, q);
+    }
     
 
 
 	/*
-    # Option #2
+    # Option #3
     - DFS Recursive Simple
     - O(H) (H = The height of the tree) (O(log n) - O(n))
 	 */
@@ -55,7 +68,7 @@ public class LowestCommonAncestorofaBinarySearchTree {
     
 
 	/*
-    # Option #3
+    # Option #4
     - Search
     - O(H) (H = The height of the tree) (O(log n) - O(n))
 	 */
@@ -73,5 +86,21 @@ public class LowestCommonAncestorofaBinarySearchTree {
     		}
     	}
     	return root;
+    }
+    
+
+	/*
+    # Option #5
+    - Search
+    - O(H) (H = The height of the tree) (O(log n) - O(n))
+	- September 2, 2026
+	 */
+    public TreeNode lowestCommonAncestorSearch2(TreeNode root, TreeNode p, TreeNode q) {
+        while (root != null) {
+            if ((root.val <= q.val && root.val >= p.val) || (root.val >= q.val && root.val <= p.val)) return root;
+            if (root.val < q.val && root.val < p.val) root = root.right;
+            else root = root.left;
+        }
+        return root;
     }
 }
