@@ -223,7 +223,7 @@
 66. Lowest Common Ancestor of a Binary Search Tree (235)
 	- [Problem](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/LowestCommonAncestorofaBinarySearchTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/LowestCommonAncestorofaBinarySearchTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/LowestCommonAncestorofaBinarySearchTree.ts))
-67. Implement Trie (Prefix Tree) (208)
+67. Implement Trie (Prefix Tree) (208) (*)
 	- [Problem](https://leetcode.com/problems/implement-trie-prefix-tree/)
 	- Solution ([Java](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/java/ImplementTriePrefixTree.java), [Python](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/python/ImplementTriePrefixTree.py), [TypeScript](https://github.com/kyungtaek-jonas-lim/jonascode/blob/main/src/solutions/typescript/ImplementTriePrefixTree.ts))
 68. Design Add and Search Words Data Structure (211) (*)

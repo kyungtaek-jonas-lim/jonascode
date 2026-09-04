@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 import collections
 
 '''
@@ -14,7 +14,7 @@ import collections
 '''
 # Option #1
 - dict, set
-- O(K), O(1), O(1)
+- O(K^2), O(1), O(1)
 '''
 class Trie:
     def __init__(self):
@@ -83,6 +83,125 @@ class TriePrefixTree:
             curr = curr.children[c]
         return True
 
+
+
+
+'''
+# Option #3
+- Trie (Prefix Tree)
+- O(L), O(W·L), O(W·L) (L = length of the word/prefix you're searching for, W = number of stored words that start with the same first letter as your query (worst case))
+- Slower because the root has all the words even though they start with the same alphabet (e.g., 'app' and 'apple' have separate nodes not even partially.)
+- September 4, 2026
+'''
+
+class Node:
+    def __init__(self, val: str, next: Node):
+        self.val = val
+        self.next = next
+
+class Trie:
+
+    def __init__(self):
+        self.map: Dict[str, List[Node]] = {}
+
+    def insert(self, word: str) -> None:
+        n: int = len(word)
+        node: Optional[Node] = None
+        for i in range(n - 1, -1, -1):
+            node = Node(word[i], node)
+            
+        if word[0] not in self.map:
+            self.map[word[0]] = []
+        self.map[word[0]].append(node)
+            
+
+    def search(self, word: str) -> bool:
+        if word[0] not in self.map:
+            return False
+        n: int = len(word)
+        for node in self.map[word[0]]:
+            node = node.next
+            success: bool = True
+            for i in range(1, n):
+                if not node or node.val != word[i]:
+                    success = False
+                    break
+                node = node.next
+            if success and node == None:
+                return True
+        return False
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        if prefix[0] not in self.map:
+            return False
+        n: int = len(prefix)
+        for node in self.map[prefix[0]]:
+            node = node.next
+            success: bool = True
+            for i in range(1, n):
+                if not node or node.val != prefix[i]:
+                    success = False
+                    break
+                node = node.next
+            if success:
+                return True
+        return False
+
+
+
+
+'''
+# Option #4
+- Trie (Prefix Tree) - The same as Option #2
+- O(L), O(L), O(P) (L = The length of the words, P = the length of the prefixes)
+- September 4, 2026
+'''
+class Node:
+    def __init__(self):
+        self.next: Dict[str, Node] = {}
+        self.end: bool = False
+
+class Trie:
+
+    def __init__(self):
+        self.root: Dict[str, Node] = {}
+
+    def insert(self, word: str) -> None:
+        n: int = len(word)
+        if word[0] not in self.root:
+            self.root[word[0]] = Node()
+        node: Node = self.root[word[0]]
+
+        for c in word[1:]:
+            if c not in node.next.keys():
+                node.next[c] = Node()
+            node = node.next[c]
+            
+        node.end = True
+
+    def search(self, word: str) -> bool:
+        if word[0] not in self.root:
+            return False
+            
+        node = self.root[word[0]]
+        for c in word[1:]:
+            if c not in node.next.keys():
+                return False
+            node = node.next[c]
+        return node.end
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        if prefix[0] not in self.root:
+            return False
+            
+        node = self.root[prefix[0]]
+        for c in prefix[1:]:
+            if c not in node.next.keys():
+                return False
+            node = node.next[c]
+        return True
 
     
 if __name__ == '__main__':
