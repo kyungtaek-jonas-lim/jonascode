@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 import collections
 
 '''
@@ -7,7 +7,7 @@ import collections
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 6, 2025
-	- `Answer`: Solution / SolutionPrefixNode
+	- `Answer`: Solution / SolutionPrefixNode / SolutionPrefixNode2
 '''
     
 class Solution:
@@ -125,6 +125,80 @@ class SolutionPrefixNode:
             for j in range(n):
                 dfs(i, j, root, set(), [])
         return list(result)
+    
+
+'''
+# Option #3
+- Prefix Node (Trie)
+- O((W * L) + m * n * 4^L) (W = The length of words list, L = the longest length of all the words)
+- September 6, 2026
+'''
+class TreeNode:
+    def __init__(self):
+        self.children: Dict[str, TreeNode] = {}
+        self.word: Optional[str] = None
+
+class SolutionPrefixNode2:
+    def __init__(self):
+        self.root: Dict[str, TreeNode] = {}
+        self.result: List[str] = []
+
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+
+        def addWord(word: str) -> None:
+            if word[0] not in self.root:
+                self.root[word[0]] = TreeNode()
+            node: TreeNode = self.root[word[0]]
+            
+            for c in word[1:]:
+                if c not in node.children:
+                    node.children[c] = TreeNode()
+                node = node.children[c]
+            
+            node.word = word
+        
+        for w in words:
+            addWord(w)
+        
+
+        m: int = len(board)
+        n: int = len(board[0])
+
+        def dfs(x: int, y: int, node: TreeNode) -> None:
+            if x < 0 or y < 0 or x >= m or y >= n or board[x][y] not in node.children:
+                return
+
+            node = node.children[board[x][y]]
+            if node.word:
+                self.result.append(node.word)
+                node.word = None
+
+            temp: str = board[x][y]
+            board[x][y] = '#'
+            dfs(x + 1, y, node)
+            dfs(x - 1, y, node)
+            dfs(x, y + 1, node)
+            dfs(x, y - 1, node)
+            board[x][y] = temp
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] not in self.root:
+                    continue
+                node = self.root[board[i][j]]
+                if node.word:
+                    self.result.append(node.word)
+                    node.word = None
+                temp: str = board[i][j]
+                board[i][j] = '#'
+                dfs(i + 1, j, node)
+                dfs(i - 1, j, node)
+                dfs(i, j + 1, node)
+                dfs(i, j - 1, node)
+                board[i][j] = temp
+        
+        return self.result
+
 
 
 

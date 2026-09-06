@@ -11,7 +11,7 @@ import java.util.Map;
 # Solution
 	- `Author`: Kyungtaek Lim (Jonas)
 	- `Date`: July 9, 2025
-	- `Answer`: Solution
+	- `Answer`: findWords / findWordsTrie
  */
 public class WordSearchII {
 	
@@ -88,4 +88,75 @@ public class WordSearchII {
 	        this.board[x][y] = c;
 	    }
 	}
+	
+
+	/*
+	# Option #2
+	- Prefix Node (Trie)
+	- O((W * L) + m * n * 4^L) (W = The length of words list, L = the longest length of all the words)
+	- September 6, 2026
+	 */
+    Map<Character, TreeNode> root;
+    List<String> result;
+
+    WordSearchII() {
+        this.root = new HashMap<>();
+        this.result = new ArrayList<>();
+    }
+
+    public List<String> findWordsTrie(char[][] board, String[] words) {
+
+        for (String word: words) addWord(word);
+
+        final int m = board.length, n = board[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (this.root.containsKey(board[i][j])) {
+                    TreeNode node = this.root.get(board[i][j]);
+                    if (node.word != null) {
+                        this.result.add(node.word);
+                        node.word = null;
+                    }
+                    char temp = board[i][j];
+                    board[i][j] = '#';
+                    dfs(board, i + 1, j, node);
+                    dfs(board, i - 1, j, node);
+                    dfs(board, i, j + 1, node);
+                    dfs(board, i, j - 1, node);
+                    board[i][j] = temp;
+                }
+            }
+        }
+
+        return this.result;
+    }
+
+    private void addWord(String word) {
+        char[] chars = word.toCharArray();
+        final int n = chars.length;
+        if (!this.root.containsKey(chars[0])) this.root.put(chars[0], new TreeNode());
+        TreeNode node = this.root.get(chars[0]);
+        for (int i = 1; i < n; i++) {
+            if (!node.children.containsKey(chars[i])) node.children.put(chars[i], new TreeNode());
+            node = node.children.get(chars[i]);
+        }
+        node.word = word;
+    }
+
+    private void dfs(char[][] board, int x, int y, TreeNode node) {
+        if (x < 0 || y < 0 || x >= board.length || y >= board[0].length || !node.children.containsKey(board[x][y])) return;
+
+        node = node.children.get(board[x][y]);
+        if (node.word != null) {
+            this.result.add(node.word);
+            node.word = null;
+        }
+        char temp = board[x][y];
+        board[x][y] = '#';
+        dfs(board, x + 1, y, node);
+        dfs(board, x - 1, y, node);
+        dfs(board, x, y + 1, node);
+        dfs(board, x, y - 1, node);
+        board[x][y] = temp;
+    }
 }
